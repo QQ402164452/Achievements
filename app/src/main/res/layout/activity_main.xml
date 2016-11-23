@@ -1,17 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jason.achievements.MainActivity">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/MainActivity_radioGroup"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="6dp">
+
+        <customView.MyRadioButton
+            android:id="@+id/MainActivity_btn_personal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="@dimen/MainActivity_Bottom_textSize"
+            android:textColor="@color/tab_text_color"
+            android:text="消息"
+            android:gravity="center_horizontal"
+            android:drawablePadding="@dimen/MainActivity_Bottom_drawablePadding"
+            android:clickable="true"
+            custom:drawableTop="@drawable/tab_icon_personal"
+            custom:drawableSizes="@dimen/MainActivity_Bottom_drawableSizes"
+            />
+
+        <customView.MyRadioButton
+            android:id="@+id/MainActivity_btn_social"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="@dimen/MainActivity_Bottom_textSize"
+            android:textColor="@color/tab_text_color"
+            android:text="圈子"
+            android:gravity="center_horizontal"
+            android:drawablePadding="@dimen/MainActivity_Bottom_drawablePadding"
+            android:clickable="true"
+            custom:drawableTop="@drawable/tab_icon_social"
+            custom:drawableSizes="@dimen/MainActivity_Bottom_drawableSizes"
+            />
+
+        <customView.MyRadioButton
+            android:id="@+id/MainActivity_btn_app"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="@dimen/MainActivity_Bottom_textSize"
+            android:textColor="@color/tab_text_color"
+            android:text="应用"
+            android:gravity="center_horizontal"
+            android:drawablePadding="@dimen/MainActivity_Bottom_drawablePadding"
+            android:clickable="true"
+            custom:drawableTop="@drawable/tab_icon_app"
+            custom:drawableSizes="@dimen/MainActivity_Bottom_drawableSizes" />
+
+        <customView.MyRadioButton
+            android:id="@+id/MainActivity_btn_contact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="@dimen/MainActivity_Bottom_textSize"
+            android:textColor="@color/tab_text_color"
+            android:text="通讯录"
+            android:gravity="center_horizontal"
+            android:drawablePadding="@dimen/MainActivity_Bottom_drawablePadding"
+            android:clickable="true"
+            custom:drawableTop="@drawable/tab_icon_contact"
+            custom:drawableSizes="@dimen/MainActivity_Bottom_drawableSizes" />
+
+        <customView.MyRadioButton
+            android:id="@+id/MainActivity_btn_center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="@dimen/MainActivity_Bottom_textSize"
+            android:textColor="@color/tab_text_color"
+            android:text="我"
+            android:gravity="center_horizontal"
+            android:drawablePadding="@dimen/MainActivity_Bottom_drawablePadding"
+            android:clickable="true"
+            custom:drawableTop="@drawable/tab_icon_center"
+            custom:drawableSizes="@dimen/MainActivity_Bottom_drawableSizes"
+            />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/MainActivity_fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/MainActivity_radioGroup"
+        android:background="@color/default_background"/>
+
 </RelativeLayout>

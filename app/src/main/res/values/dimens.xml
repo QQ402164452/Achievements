@@ -2,4 +2,16 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--MainActivity-->
+    <dimen name="MainActivity_Bottom_textSize">13sp</dimen>
+    <dimen name="MainActivity_Bottom_drawableSizes">25dp</dimen>
+    <dimen name="MainActivity_Bottom_drawablePadding">2dp</dimen>
+    <dimen name="Toolbar_textSize">20sp</dimen>
+    <dimen name="fitsSystemWindows_height">76dp</dimen>
+    <dimen name="CenterFragment_divider_height">30dp</dimen>
+    <dimen name="CenterFragment_item_height">60dp</dimen>
+
+    <!--CenterFragment-->
+    <dimen name="CenterFragemnt_ListView_marginLeft">20dp</dimen>
 </resources>
