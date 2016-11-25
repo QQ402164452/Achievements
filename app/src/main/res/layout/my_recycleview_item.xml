@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/MyActivity_RecyclerView_title"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="简介"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/MyActivity_default_textSize"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="@dimen/MyActivity_item_default_maginTopBottom"
+        android:layout_marginBottom="@dimen/MyActivity_item_default_maginTopBottom"
+        />
+
+    <TextView
+        android:id="@+id/MyActivity_RecyclerView_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/MyActivity_RecyclerView_title"
+        android:layout_marginRight="20dp"
+        android:text=""
+        android:maxLines="2"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="@dimen/MyActivity_default_textSize" />
+
+</RelativeLayout>

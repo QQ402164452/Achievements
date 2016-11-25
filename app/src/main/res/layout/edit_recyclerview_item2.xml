@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    >
+
+    <TextView
+        android:id="@+id/EditActivity_item2_title"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="姓名"
+        android:textColor="@android:color/black"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/EditActivity_item_marginLeft"
+        android:layout_marginRight="@dimen/EditActivity_item_marginRight"
+        android:layout_marginTop="@dimen/MyActivity_item_default_maginTopBottom"
+        android:layout_marginBottom="@dimen/MyActivity_item_default_maginTopBottom"
+        android:textSize="@dimen/EditActivity_item_textSize"/>
+
+    <EditText
+        android:id="@+id/EditActivity_item2_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/EditActivity_item2_title"
+        android:background="@null"
+        android:textSize="@dimen/EditActivity_item_textSize"
+        android:layout_marginRight="@dimen/EditActivity_item_marginLeft"
+        android:hint="请输入姓名"
+        android:textColor="@color/text_grey"
+        android:textColorHint="@color/text_grey"
+        android:maxLength="10"
+        android:lines="1"
+        />
+
+
+</RelativeLayout>

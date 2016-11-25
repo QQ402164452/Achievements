@@ -14,4 +14,12 @@
 
     <!--CenterFragment-->
     <dimen name="CenterFragemnt_ListView_marginLeft">20dp</dimen>
+    <dimen name="LoginActivity_img_sizes">25dp</dimen>
+    <dimen name="LoginActivity_item_padding">15dp</dimen>
+    <dimen name="LoginActivity_item_textSize">16sp</dimen>
+    <dimen name="MyActivity_default_textSize">14sp</dimen>
+    <dimen name="EditActivity_item_marginLeft">20dp</dimen>
+    <dimen name="EditActivity_item_marginRight">20dp</dimen>
+    <dimen name="EditActivity_item_textSize">14sp</dimen>
+    <dimen name="MyActivity_item_default_maginTopBottom">15dp</dimen>
 </resources>

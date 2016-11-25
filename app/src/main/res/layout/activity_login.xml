@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background">
+    
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LoginActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textSize="@dimen/Toolbar_textSize"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/LoginActivity_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:showDividers="middle|end|beginning"
+        android:divider="@drawable/linearlayout_divider">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/LoginActivity_item_padding">
+
+            <ImageView
+                android:id="@+id/LoginActivity_phone_img"
+                android:layout_width="@dimen/LoginActivity_img_sizes"
+                android:layout_height="@dimen/LoginActivity_img_sizes"
+                android:src="@drawable/company_phone"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/LoginActivity_phone_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/LoginActivity_item_padding"
+                android:layout_marginRight="@dimen/LoginActivity_item_padding"
+                android:layout_toRightOf="@id/LoginActivity_phone_img"
+                android:hint="请输入手机号码"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:background="@null"
+                android:textSize="@dimen/LoginActivity_item_textSize"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/LoginActivity_item_padding">
+
+            <ImageView
+                android:id="@+id/LoginActivity_yzcode_img"
+                android:layout_width="@dimen/LoginActivity_img_sizes"
+                android:layout_height="@dimen/LoginActivity_img_sizes"
+                android:src="@drawable/company_yzcode"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/LoginActivity_password_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/LoginActivity_item_padding"
+                android:layout_marginRight="@dimen/LoginActivity_item_padding"
+                android:layout_toRightOf="@id/LoginActivity_yzcode_img"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                android:background="@null"
+                android:textSize="@dimen/LoginActivity_item_textSize"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/LoginActivity_Login_Btn"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/LoginActivity_item_padding"
+        android:layout_marginRight="@dimen/LoginActivity_item_padding"
+        android:layout_height="45dp"
+        android:text="登录"
+        android:textSize="@dimen/LoginActivity_item_textSize"
+        android:textColor="@android:color/white"
+        android:background="@drawable/loginactivity_button_shape"/>
+
+
+    <TextView
+        android:id="@+id/LoginActivity_Register_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="没有账号？点击注册"
+        android:drawableRight="@drawable/right_arrow"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/LoginActivity_item_padding"
+        android:layout_marginRight="@dimen/LoginActivity_item_padding"/>
+
+
+</LinearLayout>

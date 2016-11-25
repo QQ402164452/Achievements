@@ -13,14 +13,14 @@ import com.example.jason.achievements.R;
  * 引导页
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanced){
+    public void onCreate(Bundle savedInstanced){
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        super.onCreate(savedInstanced);
         setContentView(R.layout.activity_splash);
+        super.onCreate(savedInstanced);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -30,5 +30,20 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         },3000);
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

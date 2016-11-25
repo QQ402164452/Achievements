@@ -21,7 +21,7 @@ import fragment.SocialFragment;
  * Created by Jason on 2016/11/22.
  */
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends BaseActivity{
     private RadioButton mAppBtn;
     private Fragment mContent;
     private FragmentManager mFragmentManager;
@@ -34,20 +34,18 @@ public class MainActivity extends AppCompatActivity{
     private ContactFragment mContactFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstancedState){
-        super.onCreate(savedInstancedState);
+    public void onCreate(Bundle savedInstancedState){
         setContentView(R.layout.activity_main);
+        super.onCreate(savedInstancedState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        initView();
-        initData();
     }
 
-    private void initView(){
+    public void initView(){
         mAppBtn= (RadioButton) findViewById(R.id.MainActivity_btn_app);
         mRadioGroup= (RadioGroup) findViewById(R.id.MainActivity_radioGroup);
     }
 
-    private void initData(){
+    public void initData(){
         mFragmentManager=getSupportFragmentManager();
         mAppFragment=new AppFragment();
         mCenterFragment=new CenterFragment();
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity{
         mAppBtn.setChecked(true);
     }
 
-    private void initListener(){
+    public void initListener(){
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

@@ -8,7 +8,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/fitsSystemWindows_height"
-        android:fitsSystemWindows="true"
         android:background="@color/colorPrimary">
 
         <android.support.v7.widget.Toolbar
@@ -30,10 +29,61 @@
 
     </RelativeLayout>
 
+    <include
+        layout="@layout/center_listview_item_divider"/>
+
+    <RelativeLayout
+        android:id="@+id/centerFragment_user"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/centerFragment_user_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="@dimen/CenterFragemnt_ListView_marginLeft"
+            android:layout_marginRight="@dimen/CenterFragemnt_ListView_marginLeft"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/centerFragment_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/centerFragment_user_img"
+            android:layout_toRightOf="@id/centerFragment_user_img"
+            android:text="某某某"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/centerFragment_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/centerFragment_user_name"
+            android:layout_toRightOf="@id/centerFragment_user_img"
+            android:text="KK号:123456" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/CenterFragemnt_ListView_marginLeft"
+            android:src="@drawable/right_arrow" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/center_listview_item_divider"/>
+
     <ListView
         android:id="@+id/centerFragment_ListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
 </LinearLayout>

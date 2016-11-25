@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    >
+
+    <TextView
+        android:id="@+id/EditActivity_item3_title"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="头像"
+        android:textColor="@android:color/black"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/EditActivity_item_marginLeft"
+        android:layout_marginRight="@dimen/EditActivity_item_marginRight"
+        android:layout_marginTop="@dimen/MyActivity_item_default_maginTopBottom"
+        android:layout_marginBottom="@dimen/MyActivity_item_default_maginTopBottom"
+        android:textSize="@dimen/EditActivity_item_textSize"/>
+
+
+    <ImageView
+        android:id="@+id/EditActivity_item3_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/right_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/EditActivity_item_marginLeft"/>
+
+    <TextView
+        android:id="@+id/EditActivity_item3_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/EditActivity_item3_title"
+        android:layout_toLeftOf="@id/EditActivity_item3_right"
+        android:background="@null"
+        android:textSize="@dimen/EditActivity_item_textSize"
+        android:text="请输入姓名"
+        android:textColor="@color/text_grey"
+        android:maxLength="10"
+        android:lines="1"
+        />
+
+</RelativeLayout>
