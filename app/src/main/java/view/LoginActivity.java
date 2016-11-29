@@ -16,6 +16,7 @@ import com.example.jason.achievements.R;
 import bean.ErrorBean;
 import interfaces.Ilogin;
 import presenter.Plogin;
+import utils.ErrorUtil;
 
 /**
  * Created by Jason on 2016/11/23.
@@ -74,8 +75,12 @@ public class LoginActivity extends BaseActivity implements Ilogin{
             Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
             this.finish();
         }else{
-            ErrorBean error= JSON.parseObject(result,ErrorBean.class);
-            Toast.makeText(this,error.getError(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ErrorUtil.getErrorMessage(result),Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
 }

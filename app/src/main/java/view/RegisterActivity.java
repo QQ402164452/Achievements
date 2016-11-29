@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -42,8 +43,6 @@ public class RegisterActivity extends BaseActivity implements Iregister{
         mNameText= (EditText) findViewById(R.id.RegisterActivity_account_text);
         mCodeText= (EditText) findViewById(R.id.RegisterActivity_yzcode_text);
         mRegister= (Button) findViewById(R.id.RegisterActivity_Btn);
-
-        mPregister=new Pregister(this);
     }
 
     public void initListener(){
@@ -60,7 +59,7 @@ public class RegisterActivity extends BaseActivity implements Iregister{
 
     @Override
     public void initData() {
-
+        mPregister=new Pregister(this);
     }
 
     @Override
@@ -74,4 +73,10 @@ public class RegisterActivity extends BaseActivity implements Iregister{
             this.finish();
         }
     }
+
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+    }
+
 }

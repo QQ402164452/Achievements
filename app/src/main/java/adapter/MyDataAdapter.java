@@ -58,6 +58,7 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolder h=(viewHolder)holder;
                 h.title.setText(mList.get(position).getTitle());
                 h.content.setText(mList.get(position).getContent());
+                h.content.setHint("暂无信息");
                 break;
             case 0:
             default:

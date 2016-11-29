@@ -40,8 +40,8 @@
 
             <ImageView
                 android:id="@+id/MyCardActivity_user_img"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_below="@id/MyCardActivity_toolbar"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/dayhr_userphoto_def"/>
@@ -53,6 +53,8 @@
                 android:layout_below="@id/MyCardActivity_user_img"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
+                android:drawableRight="@drawable/content_icon_female_def"
+                android:drawablePadding="5dp"
                 android:textSize="@dimen/Toolbar_textSize"
                 android:textColor="@android:color/white"
                 android:text="陈嘉生"/>
@@ -101,6 +103,7 @@
             android:src="@drawable/list_icon_phone_def"/>
 
         <TextView
+            android:id="@+id/MyCardActivity_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/MyCardActivity_phone_img"
@@ -128,7 +131,7 @@
             android:src="@drawable/list_icon_email_def"/>
 
         <TextView
-            android:id="@+id/centerFragment_item_title"
+            android:id="@+id/MyCardActivity_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/MyCardActivity_email_img"

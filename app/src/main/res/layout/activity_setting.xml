@@ -2,8 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:showDividers="middle|end"
-    android:divider="@drawable/linearlayout_divider"
     android:background="@color/default_background">
 
     <android.support.v7.widget.Toolbar
@@ -32,19 +30,18 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <View
-        android:id="@+id/SettingActivity_divider_view"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+    <include
+        layout="@layout/center_listview_item_divider"/>
 
-    <TextView
+    <Button
         android:id="@+id/SettingActivity_loginOut"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/CenterFragment_item_height"
-        android:background="@android:color/white"
-        android:gravity="center"
+        android:layout_marginLeft="@dimen/LoginActivity_item_padding"
+        android:layout_marginRight="@dimen/LoginActivity_item_padding"
+        android:layout_height="45dp"
         android:text="退出账号"
-        android:textSize="16sp"
-        android:textColor="@android:color/holo_red_light"/>
+        android:textSize="@dimen/LoginActivity_item_textSize"
+        android:textColor="@android:color/white"
+        android:background="@drawable/loginactivity_button_shape"/>
 
 </LinearLayout>

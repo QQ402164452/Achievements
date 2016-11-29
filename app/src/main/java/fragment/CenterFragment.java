@@ -12,18 +12,26 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetDataCallback;
+import com.bumptech.glide.Glide;
 import com.example.jason.achievements.R;
 
 import java.util.ArrayList;
 
 import adapter.CenterListAdapter;
 import bean.CenterListBean;
+import customView.GlideCircleTransform;
+import view.AccountActivity;
 import view.LoginActivity;
 import view.MyActivity;
 import view.MyCardActivity;
 import view.SettingActivity;
+import view.SuggestActivity;
 
 /**
  * Created by Jason on 2016/11/23.
@@ -85,12 +93,13 @@ public class CenterFragment extends Fragment {
                 Intent intent;
                 switch (position) {
                     case 0:
-                        intent = new Intent(getActivity(), MyCardActivity.class);
-                        getActivity().startActivity(intent);
+                        toNext(MyCardActivity.class);
                         break;
                     case 1:
+                        toNext(AccountActivity.class);
                         break;
                     case 3:
+                        toNext(SuggestActivity.class);
                         break;
                     case 4:
                         intent = new Intent(getActivity(), SettingActivity.class);
@@ -111,10 +120,29 @@ public class CenterFragment extends Fragment {
             }else{
                 mUserId.setText(String.format("员工ID:%s",user.get("employeeId").toString()));
             }
+            AVFile file=user.getAVFile("portrait");
+            if(file!=null){
+                Glide.with(getActivity()).load(file.getUrl())
+                        .centerCrop()
+                        .transform(new GlideCircleTransform(getActivity()))
+                        .dontAnimate()
+                        .placeholder(R.drawable.dayhr_userphoto_def)
+                        .into(mUserImg);
+            }
         } else {
             mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
             mUserName.setText("未登录");
             mUserId.setText("点击登录");
         }
     }
+
+    public void toNext(Class nextActivty){
+        if(AVUser.getCurrentUser()!=null){
+            Intent intent=new Intent(getActivity(),nextActivty);
+            getActivity().startActivity(intent);
+        }else {
+            Toast.makeText(getActivity(),"用户未登录",Toast.LENGTH_SHORT);
+        }
+    }
+
 }

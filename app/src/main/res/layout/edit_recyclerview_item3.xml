@@ -39,8 +39,8 @@
         android:textSize="@dimen/EditActivity_item_textSize"
         android:text="请输入姓名"
         android:textColor="@color/text_grey"
-        android:maxLength="10"
-        android:lines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
         />
 
 </RelativeLayout>

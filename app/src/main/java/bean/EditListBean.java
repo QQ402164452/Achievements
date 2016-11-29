@@ -7,21 +7,27 @@ package bean;
 public class EditListBean {
     private int type;
     private String key;
-    private String value;
-    private String hint;
+    private Object value;
+    private String hint="";
 
     public EditListBean(int type){
-        this(type,"","");
+        this(type,"",null);
     }
 
-    public EditListBean(int type,String key,String value){
-        this(type,key,value,"");
-    }
-
-    public EditListBean(int type,String key,String value,String hint){
+    public EditListBean(int type,String key,Object value){
         this.type=type;
         this.key=key;
         this.value=value;
+    }
+
+    public EditListBean(int type,String key,Object value,String hint){
+        this.type=type;
+        this.key=key;
+        if(value==null){
+            this.value="";
+        }else{
+            this.value=value;
+        }
         this.hint=hint;
     }
 
@@ -41,11 +47,11 @@ public class EditListBean {
         this.key = key;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 

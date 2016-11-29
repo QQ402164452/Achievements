@@ -21,5 +21,8 @@
     <dimen name="EditActivity_item_marginLeft">20dp</dimen>
     <dimen name="EditActivity_item_marginRight">20dp</dimen>
     <dimen name="EditActivity_item_textSize">14sp</dimen>
+    <dimen name="EditActivity_popup_padding">15dp</dimen>
     <dimen name="MyActivity_item_default_maginTopBottom">15dp</dimen>
+    <dimen name="PasswordActivity_margin_lr">20dp</dimen>
+    <dimen name="PasswordActivity_margin_tb">20dp</dimen>
 </resources>

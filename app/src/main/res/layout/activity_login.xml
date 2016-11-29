@@ -110,5 +110,4 @@
         android:layout_marginTop="@dimen/LoginActivity_item_padding"
         android:layout_marginRight="@dimen/LoginActivity_item_padding"/>
 
-
 </LinearLayout>

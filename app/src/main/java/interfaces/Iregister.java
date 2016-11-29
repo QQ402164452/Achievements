@@ -6,4 +6,5 @@ package interfaces;
 
 public interface Iregister {
     public void onResult(boolean isSuccess,String result);
+    void showToast(String str);
 }

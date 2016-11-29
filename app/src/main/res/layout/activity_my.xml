@@ -41,8 +41,8 @@
 
             <ImageView
                 android:id="@+id/MyActivity_user_img"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_below="@id/MyActivity_toolbar"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/dayhr_userphoto_def"/>
@@ -57,7 +57,8 @@
                 android:textSize="@dimen/Toolbar_textSize"
                 android:textColor="@android:color/white"
                 android:text="陈嘉生"
-                android:drawableRight="@drawable/content_icon_female_def"/>
+                android:drawableRight="@drawable/content_icon_female_def"
+                android:drawablePadding="5dp"/>
 
         </RelativeLayout>
 

@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.ArrayList;
 
+import bean.CityBean;
 import bean.EditListBean;
 
 /**
@@ -10,4 +11,7 @@ import bean.EditListBean;
 
 public interface Iedit {
     void setDataSource(ArrayList<EditListBean> list);
+    void updateRecyclerView(int pos);
+    void showToast(String str);
+    void onSaveResult(boolean isSuccess,String str);
 }

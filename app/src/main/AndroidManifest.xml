@@ -53,9 +53,36 @@
                 android:value="view.MainActivity"/>
         </activity>
 
-        <activity android:name="view.EditActivity">
+        <activity android:name="view.EditActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value="view.MyActivity"/>
+        </activity>
+
+        <activity android:name="view.IntroductionActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.EditActivity"/>
+        </activity>
+
+        <activity android:name="view.AccountActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.MainActivity"/>
+        </activity>
+
+        <activity android:name="view.PasswordActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.AccountActivity"/>
+        </activity>
+
+        <activity android:name="view.VerifyActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.AccountActivity"/>
+        </activity>
+
+        <activity android:name="view.SuggestActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.MainActivity"/>
         </activity>
 
     </application>

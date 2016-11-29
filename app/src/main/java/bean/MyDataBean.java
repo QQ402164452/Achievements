@@ -12,7 +12,11 @@ public class MyDataBean {
     public MyDataBean(int type,String title,String content){
         this.type=type;
         this.title=title;
-        this.content=content;
+        if(content==null){
+            this.content="暂无信息";
+        }else{
+            this.content=content;
+        }
     }
 
     public MyDataBean(int type){

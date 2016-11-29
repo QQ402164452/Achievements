@@ -9,6 +9,7 @@ import com.avos.avoscloud.AVOSCloud;
  */
 
 public class MyApplication extends Application {
+    private static MyApplication myApplication;
 
     @Override
     public void onCreate(){
@@ -16,5 +17,10 @@ public class MyApplication extends Application {
 
         //leanCloud初始化 context,AppId,Appkey
         AVOSCloud.initialize(this,"SlkhUxnoe7XS4QszPExfRI6b-gzGzoHsz","71Nb0mUa2mGd5Nn8T1Umr6Jj");
+        myApplication=this;
+    }
+
+    public static MyApplication getInstance(){
+        return myApplication;
     }
 }

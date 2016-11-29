@@ -11,6 +11,8 @@ import com.example.jason.achievements.R;
 
 import java.util.ArrayList;
 
+import interfaces.onCustomItemClickListener;
+
 /**
  * Created by Jason on 2016/11/25.
  */
@@ -19,14 +21,16 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
     private Context mContext;
     private ArrayList<String> mList;
     private LayoutInflater mInflater;
+    private onCustomItemClickListener onClickListener;
 
-    public SettingListAdapter(Context context){
+    public SettingListAdapter(Context context,ArrayList<String> list){
         this.mContext=context;
-        mList=new ArrayList<>();
-        mList.add("新消息通知");
-        mList.add("检查版本更新");
-        mList.add("关于我们");
+        this.mList=list;
         mInflater=LayoutInflater.from(mContext);
+    }
+
+    public void setOnClickListener(onCustomItemClickListener onClickListener){
+        this.onClickListener=onClickListener;
     }
 
     @Override
@@ -36,8 +40,16 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(SviewHolder holder, int position) {
+    public void onBindViewHolder(final SviewHolder holder, final int position) {
         holder.title.setText(mList.get(position));
+        if(onClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.onItemClickListener(holder.itemView,position);
+                }
+            });
+        }
     }
 
     @Override
