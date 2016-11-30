@@ -14,4 +14,5 @@ public interface Iedit {
     void updateRecyclerView(int pos);
     void showToast(String str);
     void onSaveResult(boolean isSuccess,String str);
+    void showLoading();
 }

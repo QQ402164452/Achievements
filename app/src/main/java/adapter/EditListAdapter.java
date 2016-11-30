@@ -104,8 +104,8 @@ public class EditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 load((byte[]) mList.get(position).getValue()).
                                 centerCrop().
                                 transform(new GlideCircleTransform(mContext)).
-                                placeholder(R.drawable.dayhr_userphoto_def).
                                 dontAnimate().
+                                placeholder(R.drawable.dayhr_userphoto_def).
                                 into(holder1.img);
                     }
                     if(object instanceof String){
@@ -113,8 +113,8 @@ public class EditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 load((String) mList.get(position).getValue()).
                                 centerCrop().
                                 transform(new GlideCircleTransform(mContext)).
-                                placeholder(R.drawable.dayhr_userphoto_def).
                                 dontAnimate().
+                                placeholder(R.drawable.dayhr_userphoto_def).
                                 into(holder1.img);
                     }
                 }

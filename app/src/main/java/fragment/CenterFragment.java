@@ -37,7 +37,7 @@ import view.SuggestActivity;
  * Created by Jason on 2016/11/23.
  */
 
-public class CenterFragment extends Fragment {
+public class CenterFragment extends BaseFragment {
     private ListView mListView;
     private CenterListAdapter mAdapter;
     private ImageView mUserImg;
@@ -48,7 +48,7 @@ public class CenterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_center, container, false);
-        initView(view);
+        init(view);
         return view;
     }
 
@@ -63,7 +63,7 @@ public class CenterFragment extends Fragment {
         initData();
     }
 
-    private void initView(View view) {
+    public void initView(View view) {
         mListView = (ListView) view.findViewById(R.id.centerFragment_ListView);
         mUserImg = (ImageView) view.findViewById(R.id.centerFragment_user_img);
         mUserName = (TextView) view.findViewById(R.id.centerFragment_user_name);
@@ -72,7 +72,36 @@ public class CenterFragment extends Fragment {
 
         mAdapter = new CenterListAdapter(getActivity());
         mListView.setAdapter(mAdapter);
+    }
 
+    public void initData() {
+        AVUser user = AVUser.getCurrentUser();
+        if (user != null) {
+            mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
+            mUserName.setText(user.get("name").toString());
+            if(user.get("portrait")!=null){
+
+            }else{
+                mUserId.setText(String.format("员工ID:%s",user.get("employeeId").toString()));
+            }
+            AVFile file=user.getAVFile("portrait");
+            if(file!=null){
+                Glide.with(getActivity()).load(file.getUrl())
+                        .centerCrop()
+                        .transform(new GlideCircleTransform(getActivity()))
+                        .dontAnimate()
+                        .placeholder(R.drawable.dayhr_userphoto_def)
+                        .into(mUserImg);
+            }
+        } else {
+            mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
+            mUserName.setText("未登录");
+            mUserId.setText("点击登录");
+        }
+    }
+
+    @Override
+    public void initListener() {
         mUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,32 +137,6 @@ public class CenterFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private void initData() {
-        AVUser user = AVUser.getCurrentUser();
-        if (user != null) {
-            mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
-            mUserName.setText(user.get("name").toString());
-            if(user.get("portrait")!=null){
-
-            }else{
-                mUserId.setText(String.format("员工ID:%s",user.get("employeeId").toString()));
-            }
-            AVFile file=user.getAVFile("portrait");
-            if(file!=null){
-                Glide.with(getActivity()).load(file.getUrl())
-                        .centerCrop()
-                        .transform(new GlideCircleTransform(getActivity()))
-                        .dontAnimate()
-                        .placeholder(R.drawable.dayhr_userphoto_def)
-                        .into(mUserImg);
-            }
-        } else {
-            mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
-            mUserName.setText("未登录");
-            mUserId.setText("点击登录");
-        }
     }
 
     public void toNext(Class nextActivty){

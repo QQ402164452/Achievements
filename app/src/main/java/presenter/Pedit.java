@@ -64,6 +64,7 @@ public class Pedit {
 
     public void saveUser(){
         if(NetworkUtil.isNewWorkAvailable()){
+            editView.showLoading();
             try {
                 final AVUser user=AVUser.getCurrentUser();
                 if(mImgByte!=null){

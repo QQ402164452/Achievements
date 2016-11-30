@@ -58,8 +58,7 @@ public class PasswordActivity extends BaseActivity implements Ipassword{
         mVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mPpw.getVerifyCode();
-                showProgress(mNew);
+                mPpw.getVerifyCode();
             }
         });
     }

@@ -4,20 +4,40 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:background="@drawable/loading_popupwindow_bg"
         android:layout_width="150dp"
         android:layout_height="150dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:src="@drawable/loading_popupwindow_bg"/>
+
+        <ProgressBar
+            android:id="@+id/Loading_popupwindow_progressbar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="dasdad"
+            android:layout_below="@id/Loading_popupwindow_progressbar"
+            android:textSize="16sp"
+            android:text="请稍后..."
             android:textColor="@android:color/white"
-            android:layout_centerInParent="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/Loading_popupwindow_close"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pop_icon_close_def"/>
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>

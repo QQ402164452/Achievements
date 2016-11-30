@@ -1,5 +1,6 @@
 package view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import adapter.SettingListAdapter;
 import customView.DividerItemDecoration;
 import customView.DividerItemExceptLastDecoration;
+import interfaces.onCustomItemClickListener;
 
 /**
  * Created by Jason on 2016/11/24.
@@ -25,6 +27,7 @@ import customView.DividerItemExceptLastDecoration;
 public class SettingActivity extends BaseActivity {
     private Button mLoginOut;
     private RecyclerView mRecyclerView;
+    private SettingListAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -65,6 +68,22 @@ public class SettingActivity extends BaseActivity {
                 }
             }
         });
+        mAdapter.setOnClickListener(new onCustomItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+                Intent intent;
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        intent=new Intent(SettingActivity.this,AboutActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -73,6 +92,7 @@ public class SettingActivity extends BaseActivity {
         mList.add("新消息通知");
         mList.add("检查版本更新");
         mList.add("关于我们");
-        mRecyclerView.setAdapter(new SettingListAdapter(this,mList));
+        mAdapter=new SettingListAdapter(this,mList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

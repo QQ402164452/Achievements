@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/chat_marginLeftRight"
+    android:layout_marginLeft="@dimen/chat_marginLeftRight"
+    android:layout_marginTop="@dimen/chat_marginTopBottom"
+    android:layout_marginBottom="@dimen/chat_marginTopBottom">
+
+    <ImageView
+        android:id="@+id/Chat_me_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/dayhr_userphoto_def"
+        />
+
+    <TextView
+        android:id="@+id/Chat_me_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:background="@drawable/chat_sender_bg_me_def"
+        android:text=" #英首相致电特朗普#中新网11月30日电 据外媒报道,英国首相特雷莎·梅和美国侯任总统特朗普同意,应在美国政权交接时期努力建立关系,并尽早进行会面。 　　据报道,英国首相办公室在声明中说,特雷莎·梅29日和特朗普通电话,以建立定期对话。 "
+        android:layout_toLeftOf="@id/Chat_me_img"
+        android:layout_alignTop="@id/Chat_me_img"
+        android:paddingLeft="@dimen/chat_padding"
+        android:paddingRight="@dimen/chat_padding_sp"
+        android:paddingTop="@dimen/chat_padding"
+        android:paddingBottom="@dimen/chat_padding"
+        android:layout_marginRight="@dimen/chat_margin"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/Chat_me_error_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:visibility="gone"
+        android:src="@drawable/msg_state_fail_resend_pressed"
+        android:layout_toLeftOf="@id/Chat_me_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/chat_margin"/>
+
+</RelativeLayout>

@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,17 @@ public class EditActivity extends BaseActivity implements Iedit{
             return true;
         }
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onKeyDown(int KeyCode,KeyEvent e){
+        if(KeyCode==KeyEvent.KEYCODE_BACK){
+            if(mPopupWindow!=null&&mPopupWindow.isShowing()){
+                mPopupWindow.dismiss();
+                return true;
+            }
+        }
+        return super.onKeyDown(KeyCode,e);
     }
 
     public void initListener(){
@@ -225,12 +237,18 @@ public class EditActivity extends BaseActivity implements Iedit{
 
     @Override
     public void onSaveResult(boolean isSuccess, String str) {
+        hideLoading();
         if(isSuccess){
             showToast(str);
             finish();
         }else {
             showToast(ErrorUtil.getErrorMessage(str));
         }
+    }
+
+    @Override
+    public void showLoading() {
+        showLoading(mRecyclerView);
     }
 
     public boolean dispatchTouchEvent(MotionEvent event){

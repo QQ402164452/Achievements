@@ -25,4 +25,13 @@
     <dimen name="MyActivity_item_default_maginTopBottom">15dp</dimen>
     <dimen name="PasswordActivity_margin_lr">20dp</dimen>
     <dimen name="PasswordActivity_margin_tb">20dp</dimen>
+
+    <dimen name="chat_marginTopBottom">10dp</dimen>
+    <dimen name="chat_marginLeftRight">20dp</dimen>
+    <dimen name="chat_margin">10dp</dimen>
+    <dimen name="chat_textSize">16sp</dimen>
+    <dimen name="chat_padding">10dp</dimen>
+    <dimen name="chat_padding_sp">15dp</dimen>
+
+    <dimen name="chat_input_marginLR">10dp</dimen>
 </resources>

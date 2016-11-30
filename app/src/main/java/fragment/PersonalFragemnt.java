@@ -12,7 +12,7 @@ import com.example.jason.achievements.R;
  * Created by Jason on 2016/11/23.
  */
 
-public class PersonalFragemnt extends Fragment {
+public class PersonalFragemnt extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
@@ -23,5 +23,20 @@ public class PersonalFragemnt extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initView(View view) {
+
     }
 }
