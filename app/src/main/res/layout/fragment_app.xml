@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_background">
+    android:background="@color/default_background"
+    android:showDividers="end|middle"
+    android:divider="@drawable/list_divider_bg">
 
     <ImageView
         android:layout_width="match_parent"

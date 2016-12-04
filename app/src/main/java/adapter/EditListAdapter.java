@@ -1,11 +1,9 @@
 package adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +11,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.DrawableRequestBuilder;
-import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.jason.achievements.R;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import bean.EditListBean;
 import customView.GlideCircleTransform;
-import interfaces.onCustomItemClickListener;
+import interfaces.OnCustomItemClickListener;
 import interfaces.onTextChangeListener;
 
 /**
@@ -37,7 +29,7 @@ public class EditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<EditListBean> mList;
-    private onCustomItemClickListener mListener;
+    private OnCustomItemClickListener mListener;
     private onTextChangeListener mTextListener;
 
     public EditListAdapter(Context context, ArrayList<EditListBean> list){
@@ -51,7 +43,7 @@ public class EditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         mInflater=LayoutInflater.from(mContext);
     }
 
-    public void setOnItemClickListener(onCustomItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnCustomItemClickListener onItemClickListener){
         this.mListener=onItemClickListener;
     }
 

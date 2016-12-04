@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/SignActivity_topGroup"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/content_bg_morning_def"
+        android:fitsSystemWindows="true">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/SignActivity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/Toolbar_textSize"
+                android:layout_gravity="center"
+                android:text="签到"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/SignActivity_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016-12-01"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/SignActivity_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/SignActivity_time"
+            android:text="星期四"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/SignActivity_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/SignActivity_topGroup">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_below="@id/SignActivity_topGroup"
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:background="#C0C0C0"
+        android:layout_marginLeft="24dp"/>
+
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/sign_rootview_bg"/>
+
+    <Button
+        android:id="@+id/SignActivity_sign_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sign_button_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

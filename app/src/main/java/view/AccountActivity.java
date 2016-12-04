@@ -1,16 +1,11 @@
 package view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVUser;
@@ -20,7 +15,7 @@ import java.util.ArrayList;
 
 import adapter.SettingListAdapter;
 import customView.DividerItemExceptLastDecoration;
-import interfaces.onCustomItemClickListener;
+import interfaces.OnCustomItemClickListener;
 
 /**
  * Created by Jason on 2016/11/28.
@@ -48,7 +43,7 @@ public class AccountActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        mAdapter.setOnClickListener(new onCustomItemClickListener() {
+        mAdapter.setOnClickListener(new OnCustomItemClickListener() {
             @Override
             public void onItemClickListener(View view, int position) {
                 Intent intent;

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import com.example.jason.achievements.R;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    protected PopupWindow mLoading;
+    protected PopupWindow mBasePopup;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -38,38 +39,45 @@ public abstract class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.tab_icon_back);
     }
 
-    public void showLoading(View root){
-        if(mLoading==null||!mLoading.isShowing()){
-            setWindow(0.5f);
-            View view= getLayoutInflater().inflate(R.layout.base_loading_popupwindow,null);
-            ImageView close= (ImageView) view.findViewById(R.id.Loading_popupwindow_close);
-            mLoading=new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,true);
-            mLoading.setFocusable(false);
-            mLoading.setOutsideTouchable(false);
-            mLoading.showAtLocation(root, Gravity.CENTER,0,0);
-            close.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mLoading.dismiss();
-                }
-            });
-            mLoading.setOnDismissListener(new PopupWindow.OnDismissListener() {
+    public void showBasePopup(View view,View parent,
+                              int layoutWidth,int layoutHeight,
+                              int gravity,int x,int y){
+        if(mBasePopup==null||!mBasePopup.isShowing()){
+            setWindowAlpha(0.5f);
+            mBasePopup=new PopupWindow(view,layoutWidth,
+                    layoutHeight,true);
+            mBasePopup.setFocusable(false);
+            mBasePopup.setOutsideTouchable(false);
+            mBasePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
-                    setWindow(1.0f);
+                    setWindowAlpha(1.0f);
                 }
             });
+            mBasePopup.showAtLocation(parent, gravity,x,y);
         }
     }
 
-    public void hideLoading(){
-        if(mLoading!=null&&mLoading.isShowing()){
-            mLoading.dismiss();
+    public void hideBasePopup(){
+        if(mBasePopup!=null&&mBasePopup.isShowing()){
+            mBasePopup.dismiss();
         }
     }
 
-    public void setWindow(float alpha){
+    public void showLoading(View root){
+        View view= getLayoutInflater().inflate(R.layout.base_loading_popupwindow,null);
+        ImageView close= (ImageView) view.findViewById(R.id.Loading_popupwindow_close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBasePopup.dismiss();
+            }
+        });
+        showBasePopup(view,root,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER,0,0);
+    }
+
+    public void setWindowAlpha(float alpha){
         WindowManager.LayoutParams layoutParams=getWindow().getAttributes();
         layoutParams.alpha=alpha;
         getWindow().setAttributes(layoutParams);
@@ -77,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent e){
-        if(mLoading!=null&&mLoading.isShowing()){
+        if(mBasePopup!=null&&mBasePopup.isShowing()){
             return false;
         }
         return super.dispatchTouchEvent(e);
@@ -86,12 +94,25 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if(keyCode==KeyEvent.KEYCODE_BACK){
-            if(mLoading!=null&&mLoading.isShowing()){
-                mLoading.dismiss();
+            if(mBasePopup!=null&&mBasePopup.isShowing()){
+                mBasePopup.dismiss();
                 return true;
             }
         }
         return super.onKeyDown(keyCode,event);
+    }
+
+    //拦截toolbar 返回事件
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // TODO Auto-generated method stub
+        if(item.getItemId() == android.R.id.home)
+        {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

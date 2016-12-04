@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ReportActivity_popup_select_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/white_circle_corner_bg"
+        />
+
+    <Button
+        android:id="@+id/ReportActivity_popup_select_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="取消"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/write_report_text_size"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@drawable/white_circle_corner_bg"/>
+
+
+</LinearLayout>

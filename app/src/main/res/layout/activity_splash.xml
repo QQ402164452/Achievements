@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/splash_wallpaper">
+    android:layout_height="match_parent">
+
 
     <ImageView
+        android:id="@+id/SplashActivity_bottom"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:src="@drawable/splash_bottom"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_above="@id/SplashActivity_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/wallpaper"
         android:scaleType="centerCrop"/>
 
 
-</FrameLayout>
+</RelativeLayout>

@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVUser;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import adapter.SettingListAdapter;
 import customView.DividerItemDecoration;
 import customView.DividerItemExceptLastDecoration;
-import interfaces.onCustomItemClickListener;
+import interfaces.OnCustomItemClickListener;
 
 /**
  * Created by Jason on 2016/11/24.
@@ -68,7 +67,7 @@ public class SettingActivity extends BaseActivity {
                 }
             }
         });
-        mAdapter.setOnClickListener(new onCustomItemClickListener() {
+        mAdapter.setOnClickListener(new OnCustomItemClickListener() {
             @Override
             public void onItemClickListener(View view, int position) {
                 Intent intent;

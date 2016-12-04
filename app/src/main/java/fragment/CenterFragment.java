@@ -77,12 +77,11 @@ public class CenterFragment extends BaseFragment {
     public void initData() {
         AVUser user = AVUser.getCurrentUser();
         if (user != null) {
-            mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
             mUserName.setText(user.get("name").toString());
-            if(user.get("portrait")!=null){
-
-            }else{
+            if(user.get("employeeId")!=null){
                 mUserId.setText(String.format("员工ID:%s",user.get("employeeId").toString()));
+            }else{
+                mUserId.setText("员工ID:暂无");
             }
             AVFile file=user.getAVFile("portrait");
             if(file!=null){

@@ -11,13 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +31,7 @@ import bean.CityBean;
 import bean.EditListBean;
 import customView.DividerItemDecoration;
 import interfaces.Iedit;
-import interfaces.onCustomItemClickListener;
+import interfaces.OnCustomItemClickListener;
 import interfaces.onTextChangeListener;
 import presenter.Pedit;
 import utils.ErrorUtil;
@@ -49,7 +45,6 @@ public class EditActivity extends BaseActivity implements Iedit{
     private Pedit mPedit;
     private RecyclerView mRecyclerView;
     private EditListAdapter mAdapter;
-    private PopupWindow mPopupWindow;
     private CityBean mCitys;
     private ArrayList<String> mGender;
 
@@ -76,25 +71,6 @@ public class EditActivity extends BaseActivity implements Iedit{
         mPedit=new Pedit(this);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        if(mPopupWindow.isShowing()){
-            return true;
-        }
-        return super.onTouchEvent(event);
-    }
-
-    @Override
-    public boolean onKeyDown(int KeyCode,KeyEvent e){
-        if(KeyCode==KeyEvent.KEYCODE_BACK){
-            if(mPopupWindow!=null&&mPopupWindow.isShowing()){
-                mPopupWindow.dismiss();
-                return true;
-            }
-        }
-        return super.onKeyDown(KeyCode,e);
-    }
-
     public void initListener(){
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +78,7 @@ public class EditActivity extends BaseActivity implements Iedit{
                 mPedit.saveUser();
             }
         });
-        mAdapter.setOnItemClickListener(new onCustomItemClickListener(){
+        mAdapter.setOnItemClickListener(new OnCustomItemClickListener(){
             @Override
             public void onItemClickListener(View view, int position) {
                 Intent intent;
@@ -150,21 +126,9 @@ public class EditActivity extends BaseActivity implements Iedit{
     }
 
     public void showPopupWindow(View view){
-        if(mPopupWindow==null||!mPopupWindow.isShowing()){
-            clearFocus();
-            mPopupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,true);
-            mPopupWindow.setFocusable(false);
-            mPopupWindow.setOutsideTouchable(false);
-            setBackgroundAlpha(0.4f);
-            mPopupWindow.showAtLocation(findViewById(R.id.EditActivity_rootView), Gravity.BOTTOM,0,0);
-            mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    setBackgroundAlpha(1f);
-                }
-            });
-        }
+        clearFocus();
+        showBasePopup(view,mRecyclerView,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT,
+                Gravity.BOTTOM,0,0);
     }
 
     public void setCityPopup() {
@@ -178,8 +142,8 @@ public class EditActivity extends BaseActivity implements Iedit{
         View.OnClickListener clickListener=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mPopupWindow.isShowing()){
-                    mPopupWindow.dismiss();
+                if(mBasePopup.isShowing()){
+                    mBasePopup.dismiss();
                 }
                 switch (v.getId()){
                     case R.id.EditActivity_popup_double_confirm:
@@ -211,8 +175,8 @@ public class EditActivity extends BaseActivity implements Iedit{
         View.OnClickListener clickListener=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mPopupWindow.isShowing()){
-                    mPopupWindow.dismiss();
+                if(mBasePopup.isShowing()){
+                    mBasePopup.dismiss();
                 }
                 switch (v.getId()){
                     case R.id.EditActivity_popup_single_confirm:
@@ -237,7 +201,7 @@ public class EditActivity extends BaseActivity implements Iedit{
 
     @Override
     public void onSaveResult(boolean isSuccess, String str) {
-        hideLoading();
+        hideBasePopup();
         if(isSuccess){
             showToast(str);
             finish();
@@ -248,23 +212,7 @@ public class EditActivity extends BaseActivity implements Iedit{
 
     @Override
     public void showLoading() {
-        showLoading(mRecyclerView);
-    }
-
-    public boolean dispatchTouchEvent(MotionEvent event){
-        if(mPopupWindow!=null&&mPopupWindow.isShowing()){
-            return false;
-        }
-        return super.dispatchTouchEvent(event);
-    }
-
-    /**
-     * 改变屏幕的背景透明度
-     */
-    public void setBackgroundAlpha(float alpha){
-        WindowManager.LayoutParams layoutParams=getWindow().getAttributes();
-        layoutParams.alpha=alpha;//0.0-1.0
-        getWindow().setAttributes(layoutParams);
+        super.showLoading(mRecyclerView);
     }
 
     @Override
@@ -288,7 +236,6 @@ public class EditActivity extends BaseActivity implements Iedit{
             }
         }
     }
-
 
     public void clearFocus(){
         mRecyclerView.clearFocus();//清除ViewGroup中的焦点

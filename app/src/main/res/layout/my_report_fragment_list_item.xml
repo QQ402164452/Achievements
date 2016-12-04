@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:divider="@drawable/linearlayout_divider"
+        android:background="@drawable/white_circle_corner_bg"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/MyReportFragment_list_item_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/dayhr_userphoto_def"/>
+
+            <TextView
+                android:id="@+id/MyReportFragment_list_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="马云"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_toRightOf="@id/MyReportFragment_list_item_img"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/MyReportFragment_list_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日报(12/3 周六)"
+                android:textSize="13sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/MyReportFragment_list_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:text="今日工作总结：\n "
+                android:textSize="13sp"
+                android:textColor="@android:color/black"
+                android:maxLines="4"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/MyReportFragment_list_item_upTime"
+                android:layout_below="@id/MyReportFragment_list_item_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:text="2016-12-06 20:48"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:showDividers="end|middle"
+    android:divider="@drawable/linearlayout_divider"
+    android:background="@color/default_background">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/WriteReportActivity_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/WriteReportActivity_btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:text="完成"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:paddingRight="20dp"
+            android:textSize="@dimen/MyActivity_default_textSize"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/Toolbar_textSize"
+            android:text="写日报"
+            android:layout_gravity="center"
+            android:id="@+id/WriteReportActivity_title" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/WriteReportActivity_select_time_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/write_report_padding"
+        android:background="@android:color/white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="汇报日期"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/write_report_text_size" />
+
+
+        <TextView
+            android:id="@+id/WriteReportActivity_select_time_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12/2 周五"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/right_arrow"
+            />
+    </RelativeLayout>
+
+    <include
+        layout="@layout/center_listview_item_divider"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@android:color/white"
+        android:padding="@dimen/write_report_padding">
+
+        <TextView
+            android:id="@+id/ReportActivity_summary_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/write_report_text_size"
+            android:text="工作总结"
+            />
+
+        <EditText
+            android:id="@+id/ReportActivity_summary_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:gravity="top"
+            android:ellipsize="end"
+            android:background="@null"
+            android:textSize="@dimen/write_report_text_size"
+            android:maxLines="8"/>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/center_listview_item_divider"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@android:color/white"
+        android:padding="@dimen/write_report_padding">
+
+        <TextView
+            android:id="@+id/ReportActivity_plan_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/write_report_text_size"
+            android:text="工作计划" />
+
+        <EditText
+            android:id="@+id/ReportActivity_plan_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:gravity="top"
+            android:background="@null"
+            android:ellipsize="end"
+            android:textSize="@dimen/write_report_text_size"
+            android:maxLines="8"/>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/center_listview_item_divider"/>
+
+    <RelativeLayout
+        android:id="@+id/WriteReportActivity_btn_selectContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="@dimen/write_report_padding">
+
+        <TextView
+            android:id="@+id/WriteReportActivity_bottom_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="汇报对象:"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/write_report_text_size" />
+
+        <LinearLayout
+            android:id="@+id/WriteReportActivity_bottom_group"
+            android:layout_toRightOf="@id/WriteReportActivity_bottom_title"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/WriteReportActivity_bottom_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/dayhr_userphoto_def" />
+
+            <TextView
+                android:id="@+id/WriteReportActivity_bottom_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="陈嘉生"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

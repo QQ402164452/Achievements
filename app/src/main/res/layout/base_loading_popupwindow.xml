@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/pop_icon_close_def"/>
+            android:src="@drawable/list_icon_back_def"/>
 
     </RelativeLayout>
 

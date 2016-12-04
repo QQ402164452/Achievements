@@ -3,6 +3,7 @@ package application;
 import android.app.Application;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVUser;
 
 /**
  * Created by Jason on 2016/11/23.
