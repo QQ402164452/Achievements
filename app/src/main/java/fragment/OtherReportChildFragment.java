@@ -30,7 +30,7 @@ import view.ReportDetailActivity;
  * Created by Jason on 2016/12/4.
  */
 
-public class OtherReportChildFragment extends LazyFragment {
+public class OtherReportChildFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private ReportAdapter mAdapter;
     private List<AVObject> mList;
@@ -47,26 +47,7 @@ public class OtherReportChildFragment extends LazyFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View view=inflater.inflate(R.layout.fragment_other_report_child,parent,false);
         init(view);
-        isPrepared=true;
-        lazyLoad();
         return view;
-    }
-
-    @Override
-    protected void lazyLoad() {
-        if(isPrepared&&isVisible&&isFirst){
-            switch (mType){
-                case 0:
-                    setAdapterData(0);
-                    break;
-                case 1:
-                    setAdapterData(1);
-                    break;
-                case 2:
-                    setAdapterData(2);
-                    break;
-            }
-        }
     }
 
     @Override
@@ -85,6 +66,21 @@ public class OtherReportChildFragment extends LazyFragment {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void initData() {
+        switch (mType){
+            case 0:
+                setAdapterData(0);
+                break;
+            case 1:
+                setAdapterData(1);
+                break;
+            case 2:
+                setAdapterData(2);
+                break;
+        }
     }
 
     @Override
@@ -107,7 +103,6 @@ public class OtherReportChildFragment extends LazyFragment {
                         mList=list;
                         mAdapter.setDataSource(list);
                         mAdapter.notifyDataSetChanged();
-                        isFirst=false;
                         if(mList.size()==0){
                             showEmptyView(true);
                         }else{
