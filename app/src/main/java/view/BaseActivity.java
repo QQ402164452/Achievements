@@ -14,15 +14,21 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.example.jason.achievements.R;
+
+import bean.ErrorBean;
+import interfaces.Ibase;
 
 /**
  * Created by Jason on 2016/11/24.
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    protected PopupWindow mBasePopup;
+    public PopupWindow mBasePopup;
+    public View mBase;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -115,6 +121,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void showToast(String str) {
+        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+    }
+
+    public void onError(String error) {
+        ErrorBean errorBean= JSON.parseObject(error,ErrorBean.class);
+        showToast(errorBean.getError());
+    }
+
+    public void showLoading(){
+        showLoading(mBase);
+    }
 
     public abstract void initView();
     public abstract void initListener();

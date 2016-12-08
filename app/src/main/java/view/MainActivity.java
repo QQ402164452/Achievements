@@ -5,9 +5,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.jason.achievements.R;
 
@@ -33,6 +39,8 @@ public class MainActivity extends BaseActivity{
     private SocialFragment mSocialFragment;
     private ContactFragment mContactFragment;
 
+    private boolean isShowConfirn=false;//标志位 判断是否确认退出
+
     @Override
     public void onCreate(Bundle savedInstancedState){
         setContentView(R.layout.activity_main);
@@ -52,9 +60,6 @@ public class MainActivity extends BaseActivity{
         mPersonalFragment=new PersonalFragemnt();
         mSocialFragment=new SocialFragment();
         mContactFragment=new ContactFragment();
-
-        initListener();
-        mAppBtn.setChecked(true);
     }
 
     public void initListener(){
@@ -82,6 +87,7 @@ public class MainActivity extends BaseActivity{
                 }
             }
         });
+        mAppBtn.setChecked(true);
     }
 
     public void switchContent(Fragment to){
@@ -97,5 +103,47 @@ public class MainActivity extends BaseActivity{
             transaction.add(R.id.MainActivity_fragmentContainer,to).commit();
             mContent=to;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            if(!isShowConfirn){
+                showConfirm();
+                return true;
+            }else {
+                isShowConfirn=false;
+                return super.onKeyDown(keyCode,event);
+            }
+        }
+        return super.onKeyDown(keyCode,event);
+    }
+
+    public void showConfirm(){
+        View view=getLayoutInflater().inflate(R.layout.popup__confirm,null);
+        Button confirm= (Button) view.findViewById(R.id.popup_Warn_Confirm);
+        Button cancel= (Button) view.findViewById(R.id.popup_Warn_Cancel);
+        TextView title= (TextView) view.findViewById(R.id.popup_Warn_title);
+        title.setText("确认要退出APP吗？");
+        View.OnClickListener onClickListener=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.popup_Warn_Confirm:
+                        hideBasePopup();
+                        finish();
+                        break;
+                    case R.id.popup_Warn_Cancel:
+                        hideBasePopup();
+                        isShowConfirn=false;
+                        break;
+                }
+            }
+        };
+        confirm.setOnClickListener(onClickListener);
+        cancel.setOnClickListener(onClickListener);
+        showBasePopup(view,mAppBtn, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                , Gravity.CENTER,0,0);
+        isShowConfirn=true;
     }
 }

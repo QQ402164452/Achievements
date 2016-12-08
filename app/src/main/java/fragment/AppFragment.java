@@ -17,6 +17,8 @@ import adapter.AppAdapter;
 import bean.AppBean;
 import customView.DividerGridItemDecoration;
 import interfaces.OnCustomItemClickListener;
+import view.CheckActivity;
+import view.ExamineActivity;
 import view.ReportActivity;
 import view.SignActivity;
 
@@ -71,8 +73,12 @@ public class AppFragment extends BaseFragment {
 
                         break;
                     case 2:
+                        intent=new Intent(getActivity(), ExamineActivity.class);
+                        startActivity(intent);
                         break;
                     case 3:
+                        intent=new Intent(getActivity(), CheckActivity.class);
+                        startActivity(intent);
                         break;
                     case 4:
                         intent=new Intent(getActivity(), ReportActivity.class);

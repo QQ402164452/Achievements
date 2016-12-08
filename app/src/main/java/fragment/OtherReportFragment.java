@@ -35,6 +35,7 @@ public class OtherReportFragment extends LazyFragment {
         init(view);
         isPrepared = true;
         lazyLoad();
+        mDay.setChecked(true);
         return view;
     }
 
@@ -61,7 +62,6 @@ public class OtherReportFragment extends LazyFragment {
     @Override
     protected void lazyLoad() {
         if(isVisible&&isPrepared){
-            mDay.setChecked(true);
         }
     }
 

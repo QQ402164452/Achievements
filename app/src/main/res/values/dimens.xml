@@ -40,4 +40,9 @@
 
     <dimen name="write_report_text_size">14sp</dimen>
     <dimen name="write_report_padding">15dp</dimen>
+
+    <dimen name="check_fragment_padding">15dp</dimen>
+    <dimen name="check_fragment_textSize">14sp</dimen>
+
+    <dimen name="examine_fragment_item_padding">15dp</dimen>
 </resources>

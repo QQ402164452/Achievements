@@ -210,6 +210,7 @@ public class WriteReportActivity extends BaseActivity implements Iwritereport{
 
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK){
             if(data!=null){
                 mBottomGroup.setVisibility(View.VISIBLE);
@@ -237,18 +238,6 @@ public class WriteReportActivity extends BaseActivity implements Iwritereport{
                 }
             }
         }
-    }
-
-
-    @Override
-    public void showToast(String str) {
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onError(String error) {
-        ErrorBean errorBean= JSON.parseObject(error,ErrorBean.class);
-        showToast(errorBean.getError());
     }
 
     @Override

@@ -91,6 +91,8 @@ public class CenterFragment extends BaseFragment {
                         .dontAnimate()
                         .placeholder(R.drawable.dayhr_userphoto_def)
                         .into(mUserImg);
+            }else {
+                mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
             }
         } else {
             mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);

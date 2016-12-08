@@ -52,31 +52,40 @@ public class ContactSelectAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    }
+
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position,List payloads) {
         final ContactHolder contact= (ContactHolder) holder;
-        AVUser user=mList.get(position);
-        contact.userName.setText(user.getString("name"));
-        contact.userId.setText(String.format("工号ID:%d",user.getInt("employeeId")));
-        AVFile img=user.getAVFile("portrait");
-        if(img!=null){
-            Glide.with(mContext).load(img.getUrl())
-                    .centerCrop()
-                    .transform(new GlideCircleTransform(mContext))
-                    .dontAnimate()
-                    .placeholder(R.drawable.dayhr_userphoto_def)
-                    .into(contact.userImg);
+        if(payloads.isEmpty()){
+            AVUser user=mList.get(position);
+            contact.userName.setText(user.getString("name"));
+            contact.userId.setText(String.format("工号ID:%d",user.getInt("employeeId")));
+            AVFile img=user.getAVFile("portrait");
+            if(img!=null){
+                Glide.with(mContext).load(img.getUrl())
+                        .centerCrop()
+                        .transform(new GlideCircleTransform(mContext))
+                        .dontAnimate()
+                        .placeholder(R.drawable.dayhr_userphoto_def)
+                        .into(contact.userImg);
+            }else{
+                contact.userImg.setImageResource(R.drawable.dayhr_userphoto_def);
+            }
+            contact.checkBox.setChecked(mSelectedPos==position);
         }else{
-            contact.userImg.setImageResource(R.drawable.dayhr_userphoto_def);
+            contact.checkBox.setChecked(mSelectedPos==position);
         }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mSelectedPos!=position){
-                    ContactHolder pre= (ContactHolder) mRv.findViewHolderForLayoutPosition(mSelectedPos);//定向刷新方法
-                    if(pre!=null){
-                        pre.checkBox.setChecked(false);
-                    }
                     contact.checkBox.setChecked(true);
+                    if(mSelectedPos!=-1){
+                        notifyItemChanged(mSelectedPos,0);
+                    }
                     mSelectedPos=position;
                 }
             }

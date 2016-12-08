@@ -82,6 +82,4 @@ public class IntroductionActivity extends BaseActivity {
             mInput.setText(intent.getStringExtra(EditActivity.INTRO_REQUEST_STRING));
         }
     }
-
-
 }

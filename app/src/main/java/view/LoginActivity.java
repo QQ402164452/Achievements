@@ -79,8 +79,4 @@ public class LoginActivity extends BaseActivity implements Ilogin{
         }
     }
 
-    @Override
-    public void showToast(String str) {
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
-    }
 }

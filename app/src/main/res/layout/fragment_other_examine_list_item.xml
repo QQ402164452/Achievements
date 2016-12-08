@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="15dp"
+    android:paddingLeft="@dimen/examine_fragment_item_padding"
+    android:paddingRight="@dimen/examine_fragment_item_padding"
+    android:paddingBottom="@dimen/examine_fragment_item_padding">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/OtherExamineFragment_list_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="jason的假期申请"
+            android:maxWidth="180dp"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="@dimen/examine_fragment_item_padding"/>
+
+        <TextView
+            android:id="@+id/OtherExamineFragment_list_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9月19日16:48"
+            android:layout_alignParentRight="true"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/examine_fragment_item_padding"/>
+
+        <ImageView
+            android:id="@+id/OtherExamineFragment_Urge_Img"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@id/OtherExamineFragment_list_item_time"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/approval_img_remind_def"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/OtherExamineFragment_list_item_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="事假" />
+
+    <TextView
+        android:id="@+id/OtherExamineFragment_list_item_beginTime"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始时间:2016/09/09 上午 周五" />
+
+    <TextView
+        android:id="@+id/OtherExamineFragment_list_item_endTime"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束时间:2016/09/09 下午 周五" />
+
+    <TextView
+        android:id="@+id/OtherExamineFragment_list_item_reason"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_height="wrap_content"
+        android:text="请假原因:家里有点事" />
+
+</LinearLayout>

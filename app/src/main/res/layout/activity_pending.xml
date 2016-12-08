@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/PendingActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/Toolbar_textSize"
+            android:layout_gravity="center"
+            android:text="审批详情"/>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/PendingActivity_user_info"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_below="@id/PendingActivity_toolbar"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/PendingActivity_User_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/dayhr_userphoto_def"/>
+
+
+            <TextView
+                android:id="@+id/PendingActivity_title"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:text="的请假申请"
+                android:maxWidth="220dp"
+                android:singleLine="true"
+                android:layout_toRightOf="@id/PendingActivity_User_img"/>
+
+            <TextView
+                android:id="@+id/PendingActivity_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_alignLeft="@id/PendingActivity_title"
+                android:layout_below="@id/PendingActivity_title"
+                android:text="9月19日16:48"/>
+
+
+            <TextView
+                android:id="@+id/PendingActivity_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/PendingActivity_title"
+                android:layout_alignTop="@id/PendingActivity_title"
+                android:layout_marginLeft="10dp"
+                android:text="已通过"
+                android:drawableLeft="@drawable/list_icon_done_def"
+                android:drawablePadding="3dp"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/PendingActivity_type"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="事假" />
+
+        <TextView
+            android:id="@+id/PendingActivity_beginTime"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始时间:2016/09/09 上午 周五" />
+
+        <TextView
+            android:id="@+id/PendingActivity_endTime"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结束时间:2016/09/09 下午 周五" />
+
+        <TextView
+            android:id="@+id/PendingActivity_reason"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假原因:家里有点事" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/PendingActivity_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="审核人:"
+            android:textSize="15sp"/>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/PendingActivity_approver_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/dayhr_userphoto_def"
+                android:layout_centerVertical="true"/>
+
+
+            <TextView
+                android:id="@+id/PendingActivity_approver_state"
+                android:layout_toRightOf="@id/PendingActivity_approver_img"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:text="周杰伦审批完成"/>
+
+            <TextView
+                android:id="@+id/PendingActivity_approver_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/PendingActivity_approver_state"
+                android:layout_alignLeft="@id/PendingActivity_approver_state"
+                android:text="2016-09-19 16:58:16" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:showDividers="middle"
+        android:divider="@drawable/linearlayout_divider"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <customView.ImageTextView
+            android:id="@+id/PendingActivity_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/white_grey_btn_bg"
+            android:text="打回"
+            android:drawableLeft="@drawable/approval_icon_back_def"
+            android:textColor="@color/red_light"
+            android:textSize="15sp"
+            android:clickable="true"
+            android:drawablePadding="5dp"
+            android:padding="15dp"/>
+
+
+        <customView.ImageTextView
+            android:id="@+id/PendingActivity_pass"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/white_grey_btn_bg"
+            android:text="同意"
+            android:drawableLeft="@drawable/approval_icon_pass_def"
+            android:textColor="@color/green_light"
+            android:drawablePadding="5dp"
+            android:clickable="true"
+            android:textSize="15sp"
+            android:padding="15dp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

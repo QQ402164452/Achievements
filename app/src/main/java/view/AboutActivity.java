@@ -31,4 +31,5 @@ public class AboutActivity extends BaseActivity{
     public void initData() {
 
     }
+
 }

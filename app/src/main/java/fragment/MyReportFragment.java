@@ -49,7 +49,7 @@ public class MyReportFragment extends LazyFragment  {
 
     @Override
     protected void lazyLoad() {
-        if(isVisible&&isPrepared){
+        if(isVisible&&isPrepared&&isFirst){
             if(NetworkUtil.isNewWorkAvailable()){
                 AVQuery<AVObject> query=new AVQuery<>("report");
                 query.whereEqualTo("reporter", AVUser.getCurrentUser());
@@ -63,6 +63,7 @@ public class MyReportFragment extends LazyFragment  {
                             mList=list;
                             mAdapter.setDataSource(list);
                             mAdapter.notifyDataSetChanged();
+                            isFirst=false;
                             if(mList.size()==0){
                                 showEmptyView(true);
                             }else{

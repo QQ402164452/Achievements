@@ -129,6 +129,26 @@
                 android:value="view.ReportActivity"/>
         </activity>
 
+        <activity android:name="view.CheckActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.MainActivity"/>
+        </activity>
+
+        <activity android:name="view.ExamineActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.MainActivity"/>
+        </activity>
+
+        <activity android:name="view.ExamineDetailActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.ExamineActivity"/>
+        </activity>
+
+        <activity android:name="view.PendingActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.ExamineActivity"/>
+        </activity>
+
         <service android:name="com.amap.api.location.APSService"></service>
 
     </application>

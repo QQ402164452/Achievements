@@ -127,6 +127,7 @@ public class ReportActivity extends BaseActivity {
                 return tabList.get(position);
             }
         });
+        mTab.setTabStripIndicatorPadding(100);
         mTab.setCustomTabView(R.layout.slidingtablayout_custom_view,0);
         mTab.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mTab.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {

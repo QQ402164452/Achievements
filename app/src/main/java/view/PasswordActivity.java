@@ -95,11 +95,6 @@ public class PasswordActivity extends BaseActivity implements Ipassword{
     }
 
     @Override
-    public void showToast(String str) {
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void showErrorMessage(String str) {
         Toast.makeText(this, ErrorUtil.getErrorMessage(str),Toast.LENGTH_SHORT).show();
     }

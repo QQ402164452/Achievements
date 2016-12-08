@@ -87,5 +87,4 @@ public class ContactSelectActivity extends BaseActivity implements IcontactSelec
         mAdapter.setDataSource(list);
         mAdapter.notifyDataSetChanged();
     }
-
 }

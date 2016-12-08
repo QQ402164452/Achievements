@@ -99,14 +99,9 @@ public class SignActivity extends BaseActivity implements Isign {
     }
 
     @Override
-    public void showToast(String str) {
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void onError(String str) {
         hideBasePopup();
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+        showToast(str);
     }
 
     private static class SignHandler extends Handler{

@@ -65,6 +65,7 @@ public class EditActivity extends BaseActivity implements Iedit{
         setCustomToolbar(toolbar);
         mSave= (TextView) findViewById(R.id.EditActivity_btn_save);
         mRecyclerView= (RecyclerView) findViewById(R.id.EditActivity_recyclerView);
+        mBase=mRecyclerView;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
         mAdapter=new EditListAdapter(this);
@@ -195,11 +196,6 @@ public class EditActivity extends BaseActivity implements Iedit{
     }
 
     @Override
-    public void showToast(String str) {
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void onSaveResult(boolean isSuccess, String str) {
         hideBasePopup();
         if(isSuccess){
@@ -208,11 +204,6 @@ public class EditActivity extends BaseActivity implements Iedit{
         }else {
             showToast(ErrorUtil.getErrorMessage(str));
         }
-    }
-
-    @Override
-    public void showLoading() {
-        super.showLoading(mRecyclerView);
     }
 
     @Override

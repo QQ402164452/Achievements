@@ -1,9 +1,11 @@
 package utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Jason on 2016/12/2.
@@ -20,6 +22,13 @@ public class DateUtil {
     public static String getCurrentDay(){
         Calendar calendar=Calendar.getInstance();
         return getDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK));
+    }
+
+    public static String getDayOfDate(Date date){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        return getDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK));
+
     }
 
     public static String getDayOfWeek(int day){
@@ -81,5 +90,53 @@ public class DateUtil {
         months.add(String.valueOf(year));
         months.add(String.valueOf(month));
         return months;
+    }
+
+    public static ArrayList<String> getTotalDays(String time){
+        SimpleDateFormat format=new SimpleDateFormat("yyyy年MM月");
+        ArrayList<String> list=new ArrayList<>();
+        try {
+            Date date=format.parse(time);
+            Calendar calendar=Calendar.getInstance();
+            calendar.setTime(date);
+            int size=calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+            for(int i=1;i<=size;i++){
+                if(i<10){
+                    list.add("0"+i+"日");
+                }else{
+                    list.add(i+"日");
+                }
+            }
+            return list;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static String getNormal(Date date){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd日HH:mm", Locale.CHINA);
+        return simpleDateFormat.format(date);
+    }
+
+    public static String getNormalDetail(Date date){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss", Locale.CHINA);
+        return simpleDateFormat.format(date);
+    }
+
+    public static String getNoon(Date date){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd",Locale.CHINA);
+        return simpleDateFormat.format(date);
+    }
+
+    public static String getExtra(Date date){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm",Locale.CHINA);
+        return simpleDateFormat.format(date);
+    }
+
+    public static String getDetail(Date date){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",Locale.CHINA);
+        return simpleDateFormat.format(date);
     }
 }

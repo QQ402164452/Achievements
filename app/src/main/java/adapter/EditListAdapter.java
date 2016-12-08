@@ -84,12 +84,7 @@ public class EditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                 Object object=mList.get(position).getValue();
                 if(object==null){
-                    Glide.with(mContext).
-                            load(R.drawable.dayhr_userphoto_def).
-                            centerCrop().
-                            transform(new GlideCircleTransform(mContext)).
-                            dontAnimate().
-                            into(holder1.img);
+                    holder1.img.setImageResource(R.drawable.dayhr_userphoto_def);
                 }else {
                     if(object instanceof byte[]){
                         Glide.with(mContext).

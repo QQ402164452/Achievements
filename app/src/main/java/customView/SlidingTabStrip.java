@@ -27,6 +27,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 class SlidingTabStrip extends LinearLayout {
+    private int mIndicatorPadding=0;
+
+    public void setmIndicatorPadding(int padding){
+        this.mIndicatorPadding=padding;
+    }
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 2;
     //修改下划线透明度
@@ -148,7 +153,7 @@ class SlidingTabStrip extends LinearLayout {
             mSelectedIndicatorPaint.setColor(color);
 
             //修改下划线宽度
-            canvas.drawRect(left+100, height - mSelectedIndicatorThickness, right-100,
+            canvas.drawRect(left+mIndicatorPadding, height - mSelectedIndicatorThickness, right-mIndicatorPadding,
                     height, mSelectedIndicatorPaint);
         }
 

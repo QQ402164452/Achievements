@@ -8,4 +8,5 @@ public interface Ibase {
     void showToast(String str);
     void onError(String error);
     void onSuccess(String str);
+    void showLoading();
 }

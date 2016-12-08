@@ -7,7 +7,7 @@
         android:id="@+id/SignActivity_topGroup"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@drawable/content_bg_morning_def"
+        android:background="@drawable/activity_sign_top_bg"
         android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
