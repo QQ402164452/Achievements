@@ -63,7 +63,7 @@ public class ExamineDetailActivity extends BaseActivity implements ImyEmDt{
     @Override
     public void onCreate(Bundle savedInstanceState){
         setContentView(R.layout.activity_examine_detail);
-
+        
         Intent intent=getIntent();
         if(intent!=null){
             try {

@@ -21,6 +21,8 @@ import view.CheckActivity;
 import view.ExamineActivity;
 import view.ReportActivity;
 import view.SignActivity;
+import view.TaskActivity;
+import view.WageActivity;
 
 /**
  * Created by Jason on 2016/11/23.
@@ -85,8 +87,12 @@ public class AppFragment extends BaseFragment {
                         startActivity(intent);
                         break;
                     case 5:
+                        intent=new Intent(getActivity(), TaskActivity.class);
+                        startActivity(intent);
                         break;
                     case 6:
+                        intent=new Intent(getActivity(), WageActivity.class);
+                        startActivity(intent);
                         break;
                     case 7:
                         showToast("暂无更多");

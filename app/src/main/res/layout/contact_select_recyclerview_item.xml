@@ -3,6 +3,7 @@
     android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:paddingLeft="20dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
@@ -15,7 +16,7 @@
         android:layout_height="20dp"
         android:layout_centerVertical="true"
         android:button="@null"
-        android:enabled="false"
+        android:clickable="false"
         android:background="@drawable/contact_select_list_item_checkbox_bg"/>
 
     <ImageView

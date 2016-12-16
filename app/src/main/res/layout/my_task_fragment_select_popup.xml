@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/linearlayout_divider"
+    android:showDividers="beginning|end|middle"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/MyTaskFragment_select_popup_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pop_icon_retract_def"
+        android:gravity="center"
+        android:padding="10dp"/>
+
+</LinearLayout>

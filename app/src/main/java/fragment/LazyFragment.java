@@ -19,7 +19,7 @@ import com.example.jason.achievements.R;
 public abstract class LazyFragment extends Fragment {
     protected boolean isVisible;
     protected boolean isPrepared;
-    protected boolean isFirst=true;
+    public boolean isFirst=true;
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser){//判断Fragment可见

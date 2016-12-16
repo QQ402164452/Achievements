@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:showDividers="middle"
+    android:divider="@drawable/linearlayout_divider"
+    android:background="@color/default_background">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/MultiContactActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/Toolbar_textSize"
+            android:layout_gravity="center"
+            android:text="选择联系人"/>
+
+        <TextView
+            android:id="@+id/MultiContactActivity_btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:text="完成"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:paddingRight="20dp"
+            android:textSize="@dimen/MyActivity_default_textSize"/>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/MultiContactActivity_company_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="15dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:text="公司:" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/MultiContactActivity_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

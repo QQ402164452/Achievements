@@ -31,12 +31,10 @@ public class ContactSelectAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Context mContext;
     private LayoutInflater mInflater;
     private int mSelectedPos=-1;//保存当前选中的position
-    private RecyclerView mRv;
 
-    public ContactSelectAdapter(Context context,RecyclerView recyclerView){
+    public ContactSelectAdapter(Context context){
         this.mContext=context;
         this.mInflater=LayoutInflater.from(mContext);
-        this.mRv=recyclerView;
         mList=new ArrayList<>();
     }
 
@@ -101,13 +99,13 @@ public class ContactSelectAdapter extends RecyclerView.Adapter<RecyclerView.View
         return mSelectedPos;
     }
 
-    public class ContactHolder extends RecyclerView.ViewHolder{
-        public CheckBox checkBox;
-        public TextView userName;
-        public TextView userId;
-        public ImageView userImg;
+    class ContactHolder extends RecyclerView.ViewHolder{
+        CheckBox checkBox;
+        TextView userName;
+        TextView userId;
+        ImageView userImg;
 
-        public ContactHolder(View itemView) {
+        ContactHolder(View itemView) {
             super(itemView);
             checkBox= (CheckBox) itemView.findViewById(R.id.ContactSelect_list_item_checkBox);
             userName= (TextView) itemView.findViewById(R.id.ContactSelect_list_item_user_name);

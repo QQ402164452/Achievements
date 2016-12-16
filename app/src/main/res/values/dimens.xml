@@ -7,7 +7,7 @@
     <dimen name="MainActivity_Bottom_textSize">13sp</dimen>
     <dimen name="MainActivity_Bottom_drawableSizes">25dp</dimen>
     <dimen name="MainActivity_Bottom_drawablePadding">2dp</dimen>
-    <dimen name="Toolbar_textSize">20sp</dimen>
+    <dimen name="Toolbar_textSize">18sp</dimen>
     <dimen name="fitsSystemWindows_height">76dp</dimen>
     <dimen name="CenterFragment_divider_height">30dp</dimen>
     <dimen name="CenterFragment_item_height">60dp</dimen>
@@ -45,4 +45,14 @@
     <dimen name="check_fragment_textSize">14sp</dimen>
 
     <dimen name="examine_fragment_item_padding">15dp</dimen>
+
+    <dimen name="NewTaskActivity_margin">15dp</dimen>
+    <dimen name="NewTaskActivity_padding">15dp</dimen>
+
+    <dimen name="My_Task_Fragment_padding">15dp</dimen>
+
+    <dimen name="Task_Detail_Activity_padding">15dp</dimen>
+
+    <dimen name="Todo_Fragment_padding">15dp</dimen>
+    <dimen name="Todo_Fragment_margin">15dp</dimen>
 </resources>

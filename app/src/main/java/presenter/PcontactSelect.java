@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.IcontactSelect;
+import utils.NetworkUtil;
 
 /**
  * Created by Jason on 2016/12/3.
@@ -24,16 +25,22 @@ public class PcontactSelect  {
     }
 
     public void getUserData(){
-        AVQuery<AVUser> query=new AVQuery<>("_User");
-        query.findInBackground(new FindCallback<AVUser>() {
-            @Override
-            public void done(List<AVUser> list, AVException e) {
-                if(e==null){
-                    mList=list;
-                    mView.setAdapterData(mList);
+        if(NetworkUtil.isNewWorkAvailable()){
+            AVQuery<AVUser> query=new AVQuery<>("_User");
+            query.findInBackground(new FindCallback<AVUser>() {
+                @Override
+                public void done(List<AVUser> list, AVException e) {
+                    if(e==null){
+                        mList=list;
+                        mView.setAdapterData(mList);
+                    }else{
+                        mView.onError(e.getMessage());
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            mView.showToast(NetworkUtil.tip);
+        }
     }
 
     public AVUser getSelectAVUser(int pos){

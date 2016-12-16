@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background"
+    android:showDividers="middle"
+    android:divider="@drawable/linearlayout_divider">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/TaskDetailActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/Toolbar_textSize"
+            android:layout_gravity="center"
+            android:text="任务详情"/>
+
+        <TextView
+            android:id="@+id/TaskDetailActivity_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:layout_gravity="right"
+            android:paddingRight="20dp"
+            android:visibility="gone"
+            android:text="完成"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/Task_Detail_Activity_padding"
+        android:paddingBottom="@dimen/Task_Detail_Activity_padding"
+        android:paddingRight="@dimen/Task_Detail_Activity_padding"
+        >
+
+        <ImageView
+            android:id="@+id/TaskDetailActivity_User_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/Task_Detail_Activity_padding"
+            android:src="@drawable/dayhr_userphoto_def"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/TaskDetailActivity_User_img"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/Task_Detail_Activity_padding"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/TaskDetailActivity_User_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:text="暂无信息" />
+
+            <TextView
+                android:id="@+id/TaskDetailActivity_User_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="部门:暂无信息"/>
+
+            <TextView
+                android:id="@+id/TaskDetailActivity_User_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="职位:暂无信息"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/TaskDetailActivity_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改"
+            android:visibility="gone"
+            android:textColor="@color/grey_light"
+            android:gravity="center"
+            android:drawableRight="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/TaskDetailActivity_state_img"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_width="68dp"
+            android:layout_height="50dp"
+            android:src="@drawable/task_img_expire_def"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:padding="@dimen/My_Task_Fragment_padding">
+
+                <TextView
+                    android:id="@+id/TaskDetailActivity_Task_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:text="任务标题"/>
+
+                <TextView
+                    android:id="@+id/TaskDetailActivity_Task_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="暂无信息"/>
+
+                <TextView
+                    android:id="@+id/TaskDetailActivity_Task_CreateTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="发布时间:暂无信息"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
+                    android:id="@+id/TaskDetailActivity_Task_DeadTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="截止时间:暂无信息"
+                    android:textColor="@android:color/holo_green_light"/>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:padding="@dimen/Task_Detail_Activity_padding">
+
+                <TextView
+                    android:id="@+id/TaskDetailActivity_participant_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:text="参与人:"
+                    android:layout_centerVertical="true" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/TaskDetailActivity_participant_RecyclerView"
+                    android:layout_toRightOf="@id/TaskDetailActivity_participant_title"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/grey_light"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+
+            <RelativeLayout
+                android:id="@+id/TaskDetailActivity_principal"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/Task_Detail_Activity_padding">
+
+                <TextView
+                    android:id="@+id/TaskDetailActivity_principal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:text="负责人:"
+                    android:layout_centerVertical="true" />
+
+                <LinearLayout
+                    android:id="@+id/TaskDetailActivity_principal_User"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/TaskDetailActivity_principal_title">
+
+                    <ImageView
+                        android:id="@+id/TaskDetailActivity_principal_User_img"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/dayhr_userphoto_def" />
+
+                    <TextView
+                        android:id="@+id/TaskDetailActivity_principal_User_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="暂无信息"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/white"
+                android:padding="@dimen/Task_Detail_Activity_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="反馈"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/TaskDetailActivity_feedback_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:id="@+id/TaskDetailActivity_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
+
+                    <Button
+                        android:id="@+id/TaskDetailActivity_feedback_send"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="bottom"
+                        android:text="发送"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/chat_input_send_bg"/>
+
+                    <EditText
+                        android:id="@+id/TaskDetailActivity_feedback_input"
+                        android:layout_toLeftOf="@id/TaskDetailActivity_feedback_send"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/chat_input_marginLR"
+                        android:textSize="16sp"
+                        android:background="@drawable/chat_input_edittext_bg"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

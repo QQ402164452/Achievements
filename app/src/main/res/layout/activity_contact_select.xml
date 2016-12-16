@@ -40,9 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="20dp"
+        android:padding="15dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
         android:text="公司:阿里巴巴" />
 
     <android.support.v7.widget.RecyclerView

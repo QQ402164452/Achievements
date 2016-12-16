@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="15dp"
+    android:padding="@dimen/My_Task_Fragment_padding"
+    android:background="@android:color/white"
+    android:descendantFocusability="blocksDescendants">
+
+    <CheckBox
+        android:id="@+id/MyTaskFragment_list_item_checkBox"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:clickable="false"
+        android:layout_centerVertical="true"
+        android:button="@drawable/task_icon_box"/>
+
+    <LinearLayout
+        android:layout_toRightOf="@id/MyTaskFragment_list_item_checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/MyTaskFragment_list_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:text="哈喽哈喽"/>
+
+        <TextView
+            android:id="@+id/MyTaskFragment_list_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12-06 截止"
+            android:textSize="14sp"/>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

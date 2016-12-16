@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/WageActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/Toolbar_textSize"
+            android:layout_gravity="center"
+            android:text="工资条"/>
+
+        <ImageView
+            android:id="@+id/WageActivity_btn_Calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/calendar_white"
+            android:layout_gravity="right"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"/>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:padding="15dp">
+
+       <TextView
+           android:id="@+id/WageActivity_title_time"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:text="2016年1月"
+           android:textColor="@android:color/white"/>
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/WageActivity_title_time"
+            android:background="@drawable/banner_img_ticket_def"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="应发工资"/>
+
+            <TextView
+                android:id="@+id/WageActivity_text_totalWage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="实发工资"/>
+
+            <TextView
+                android:id="@+id/WageActivity_text_RealWage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/WageActivity_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/WageActivity_empty_View"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/blank_icon_wage_def"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/grey_light"
+            android:text="暂无数据"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

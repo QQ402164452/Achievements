@@ -64,6 +64,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void showAsDropDownPopup(View view,View parent,
+                              int layoutWidth,int layoutHeight){
+        if(mBasePopup==null||!mBasePopup.isShowing()){
+            setWindowAlpha(0.5f);
+            mBasePopup=new PopupWindow(view,layoutWidth,
+                    layoutHeight,true);
+            mBasePopup.setFocusable(false);
+            mBasePopup.setOutsideTouchable(false);
+            mBasePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    setWindowAlpha(1.0f);
+                }
+            });
+            mBasePopup.showAsDropDown(parent);
+        }
+    }
+
     public void hideBasePopup(){
         if(mBasePopup!=null&&mBasePopup.isShowing()){
             mBasePopup.dismiss();

@@ -35,7 +35,7 @@
         <Button
             android:id="@+id/SuggestActivity_send"
             android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_gravity="bottom"
             android:text="发送"

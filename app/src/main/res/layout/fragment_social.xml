@@ -34,12 +34,12 @@
                android:textSize="@dimen/Toolbar_textSize" />
 
            <ImageView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+               android:layout_width="25dp"
+               android:layout_height="25dp"
                android:layout_alignParentRight="true"
                android:layout_centerVertical="true"
-               android:padding="15dp"
-               android:src="@drawable/conference_icon_add_sel"/>
+               android:layout_marginRight="20dp"
+               android:src="@drawable/new_nav_icon_creat_def"/>
 
        </RelativeLayout>
 

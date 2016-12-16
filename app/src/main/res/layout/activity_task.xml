@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/TaskActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/TaskActivity_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/tab_icon_back"/>
+
+
+        <customView.SlidingTabLayout
+            android:id="@+id/TaskActivity_slidingTab"
+            android:layout_width="240dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"/>
+
+        <ImageView
+            android:id="@+id/TaskActivity_new_Task"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:padding="10dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/new_nav_icon_creat_def"/>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/TaskActivity_ViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/PrincipalActivity_list_item_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/dayhr_userphoto_def" />
+
+    <ImageView
+        android:id="@+id/PrincipalActivity_list_item_select"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/task_icon_select_def"
+        android:layout_alignRight="@id/PrincipalActivity_list_item_img"/>
+
+    <TextView
+        android:id="@+id/PrincipalActivity_list_item_name"
+        android:layout_below="@id/PrincipalActivity_list_item_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="陈嘉生"
+        android:textColor="@android:color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"/>
+
+</RelativeLayout>

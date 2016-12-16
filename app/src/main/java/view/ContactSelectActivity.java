@@ -77,7 +77,7 @@ public class ContactSelectActivity extends BaseActivity implements IcontactSelec
         }else{
             mCompany.setText("公司:暂无信息");
         }
-        mAdapter=new ContactSelectAdapter(this,mRecyclerView);
+        mAdapter=new ContactSelectAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mPresenter.getUserData();
     }
@@ -86,5 +86,10 @@ public class ContactSelectActivity extends BaseActivity implements IcontactSelec
     public void setAdapterData(List<AVUser> list) {
         mAdapter.setDataSource(list);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSuccess(String str) {
+
     }
 }

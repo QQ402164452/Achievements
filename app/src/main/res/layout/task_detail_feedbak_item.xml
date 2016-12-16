@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
+
+    <ImageView
+        android:id="@+id/TaskActivity_Feedback_item_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/dayhr_userphoto_def"/>
+
+    <TextView
+        android:id="@+id/TaskActivity_Feedback_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textSize="13sp"
+        android:text="12月3日20:42"/>
+
+    <LinearLayout
+        android:layout_toRightOf="@id/TaskActivity_Feedback_item_img"
+        android:layout_toLeftOf="@id/TaskActivity_Feedback_item_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TaskActivity_Feedback_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:text="任务组"/>
+
+        <TextView
+            android:id="@+id/TaskActivity_Feedback_item_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@android:color/black"
+            android:text="马云将任务设置为完成"/>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

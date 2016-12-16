@@ -149,6 +149,38 @@
                 android:value="view.ExamineActivity"/>
         </activity>
 
+        <activity android:name="view.WageActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.MainActivity"/>
+        </activity>
+
+        <activity android:name="view.TaskActivity"
+            android:launchMode="singleTask">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="view.MainActivity"/>
+        </activity>
+
+        <activity android:name="view.NewTaskActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+
+        <activity android:name="view.MultiContactActivity">
+
+        </activity>
+
+        <activity android:name="view.PrincipalActivity">
+
+        </activity>
+
+        <activity android:name="view.TaskDetailActivity">
+
+        </activity>
+
+        <activity android:name="view.DoneTaskActivity">
+
+        </activity>
+
         <service android:name="com.amap.api.location.APSService"></service>
 
     </application>
