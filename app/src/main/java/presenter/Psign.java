@@ -41,9 +41,6 @@ import view.SignActivity;
 public class Psign {
     private Isign mView;
     private Context mContext;
-    private ArrayList<SignBean> mList;
-    private SharedPreferences mType;
-    private long timeSpace=86400000;
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -81,18 +78,14 @@ public class Psign {
         mLocationOption.setOnceLocation(true);
         //给定位客户端对象设置定位参数
         mLocationClient.setLocationOption(mLocationOption);
-
-        mType=mContext.getSharedPreferences(SignActivity.SIGN_SHAR,Context.MODE_PRIVATE);
     }
 
     public void getLocation(){
-        long day=mType.getLong(SignActivity.SIGN_DAY,getStartTime()-timeSpace);
-        Date current=new Date();
-        if(current.getTime()-day>timeSpace){
+        if(NetworkUtil.isNewWorkAvailable()){
             //启动定位
             mLocationClient.startLocation();
         }else {
-            mView.onError("今天已经签到完成 无法继续签到！");
+            mView.showToast(NetworkUtil.tip);
         }
     }
 
@@ -101,47 +94,73 @@ public class Psign {
     }
 
     public void addItem(final AMapLocation aMapLocation){
-        final int type=mType.getInt(SignActivity.SIGN_TYPE,0);
-        Date current=new Date();
-        int sign=0;
-        final String typeStr=type==0?"上班":"下班";
-        final SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd hh:mm:ss");
+        final Date current=new Date();
+        Calendar calendar=Calendar.getInstance();
+        final int year=calendar.get(Calendar.YEAR);
+        final int month=calendar.get(Calendar.MONTH)+1;
+        final int day=calendar.get(Calendar.DAY_OF_MONTH);
         final String street=aMapLocation.getCity()+aMapLocation.getDistrict()+aMapLocation.getStreet()+aMapLocation.getStreetNum();
-        switch (type){
-            case 0:
-                saveIntSharePreference(SignActivity.SIGN_TYPE,1);
-                if(current.getHours()<=9){
-                    sign=0;
-                }else {
-                    sign=1;
-                }
-                break;
-            case 1:
-                saveIntSharePreference(SignActivity.SIGN_TYPE,0);
-                saveLongSharePreference(SignActivity.SIGN_DAY,getStartTime());
-                if(current.getHours()>=18){
-                    sign=0;
-                }else {
-                    sign=2;
-                }
-                break;
-        }
-
-        final int fSign=sign;
-        AVObject signObject=new AVObject("checkIn");
-        signObject.put("user_id", AVUser.getCurrentUser());
-        AVGeoPoint geo=new AVGeoPoint(aMapLocation.getLatitude(),aMapLocation.getLongitude());
-        signObject.put("coordinates",geo);
-        signObject.put("local",street);
-        signObject.put("type",type);
-        signObject.put("sign",sign);
-        signObject.saveInBackground(new SaveCallback() {
+        AVQuery<AVObject> avQuery=new AVQuery<>("checkIn");
+        avQuery.whereEqualTo("user",AVUser.getCurrentUser());
+        avQuery.whereEqualTo("year",year);
+        avQuery.whereEqualTo("month",month);
+        avQuery.whereEqualTo("day",day);
+        avQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
-            public void done(AVException e) {
+            public void done(List<AVObject> list, AVException e) {
                 if(e==null){
-                    mList.add(0,new SignBean(simpleDateFormat.format(aMapLocation.getTime())+"  "+typeStr,
-                            street,fSign));
-                    mView.notifyRecyclerView();
+                    if(list.size()==0){
+                        AVObject avObject=new AVObject("checkIn");
+                        avObject.put("year",year);
+                        avObject.put("month",month);
+                        avObject.put("day",day);
+                        avObject.put("user",AVUser.getCurrentUser());
+                        avObject.put("StartTime",current);
+                        AVGeoPoint geo=new AVGeoPoint(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                        avObject.put("StartCoordinates",geo);
+                        avObject.put("StartLocal",street);
+                        if(current.getHours()<=9){
+                            avObject.put("StartSign",1);
+                        }else{
+                            avObject.put("StartSign",2);
+                        }
+                        avObject.put("State",0);
+                        avObject.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(AVException e) {
+                                if(e==null){
+                                    setListData(1);
+                                }else{
+                                    mView.onError(e.getMessage());
+                                }
+                            }
+                        });
+                    }else{
+                        AVObject curDay=list.get(0);
+                        if(curDay.getInt("EndSign")==0){
+                            curDay.put("EndTime",current);
+                            AVGeoPoint geo=new AVGeoPoint(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                            curDay.put("EndCoordinate",geo);
+                            curDay.put("EndLocal",street);
+                            if(current.getHours()<=17){
+                                curDay.put("EndSign",2);
+                            }else{
+                                curDay.put("EndSign",1);
+                            }
+                            curDay.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(AVException e) {
+                                    if(e==null){
+                                        setListData(1);
+                                    }else{
+                                        mView.onError(e.getMessage());
+                                    }
+                                }
+                            });
+                        }else{
+                            mView.onResult(2,null);
+                        }
+                    }
                 }else{
                     mView.onError(e.getMessage());
                 }
@@ -149,27 +168,32 @@ public class Psign {
         });
     }
 
-    public void setListData(){
-        mList=new ArrayList<>();
+    public void setListData(final int type){
         if(NetworkUtil.isNewWorkAvailable()){
-            final SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd hh:mm:ss");
+            Calendar calendar=Calendar.getInstance();
             AVQuery<AVObject> query=new AVQuery<>("checkIn");
             query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
             query.setMaxCacheAge(120*3600);
             query.orderByDescending("createdAt");
-            query.whereEqualTo("user_id",AVUser.getCurrentUser());
+            query.whereEqualTo("month",calendar.get(Calendar.MONTH)+1);
+            query.whereEqualTo("year",calendar.get(Calendar.YEAR));
+            query.whereEqualTo("user",AVUser.getCurrentUser());
             query.findInBackground(new FindCallback<AVObject>() {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
                     if(e==null){
-                        if(list!=null){
-                            for(AVObject object:list){
-                                final String typeStr=object.getInt("type")==0?"上班":"下班";
-                                mList.add(new SignBean(simpleDateFormat.format(object.getCreatedAt().getTime())+"  "+typeStr,
-                                        object.getString("local"),object.getInt("sign")));
+                        ArrayList<SignBean> signList=new ArrayList<>();
+                        for(AVObject object:list){
+                            if(object.getInt("EndSign")!=0){
+                                SignBean end=new SignBean(object.getDate("EndTime"),object.getString("EndLocal"),object.getInt("EndSign"),1);
+                                signList.add(end);
                             }
-                            mView.setListAdapter(mList);
+                            if(object.getInt("StartSign")!=0){
+                                SignBean start=new SignBean(object.getDate("StartTime"),object.getString("StartLocal"),object.getInt("StartSign"),0);
+                                signList.add(start);
+                            }
                         }
+                        mView.onResult(type,signList);
                     }else{
                         mView.onError(e.getMessage());
                     }
@@ -178,29 +202,6 @@ public class Psign {
         }else{
             mView.showToast(NetworkUtil.tip);
         }
-        mView.setListAdapter(mList);
     }
 
-    public void saveIntSharePreference(String key,int value){
-        SharedPreferences.Editor editor=mType.edit();
-        editor.putInt(key,value);
-        editor.apply();
-    }
-
-    public void saveLongSharePreference(String key,long value){
-        SharedPreferences.Editor editor=mType.edit();
-        editor.putLong(key,value);
-        editor.commit();
-    }
-
-    //获取当天的开始时间
-    private long getStartTime(){
-        Calendar todayStart = new GregorianCalendar();
-        todayStart.set(Calendar.HOUR_OF_DAY, 0);
-        todayStart.set(Calendar.MINUTE, 0);
-        todayStart.set(Calendar.SECOND, 0);
-        todayStart.set(Calendar.MILLISECOND, 0);
-
-        return todayStart.getTime().getTime();
-    }
 }

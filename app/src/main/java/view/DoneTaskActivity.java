@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.avos.avoscloud.AVObject;
 import com.example.jason.achievements.R;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +26,10 @@ import customView.DividerItemDecoration;
 import customView.DividerItemExceptLastDecoration;
 import fragment.TodoFragment;
 import interfaces.IdoneTask;
+import interfaces.Irecy;
 import interfaces.OnCustomItemClickListener;
 import presenter.PdoneTask;
+import utils.WeakHandler;
 
 /**
  * Created by Jason on 2016/12/15.
@@ -45,15 +48,19 @@ public class DoneTaskActivity extends OtherBaseActivity implements IdoneTask{
     private int week=-1;
 
     private PdoneTask mPresenter;
-    private RecyclerView mRecy;
+    private XRecyclerView mRecy;
     private MyTaskAdapter mAdapter;
     private List<AVObject> mList;
+
+    private int mSkip=0;
+    private WeakHandler mHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         setContentView(R.layout.activity_done_task);
-        super.onCreate(savedInstanceState);
         mTimes=new ArrayList<>(Arrays.asList("全部","本周","上周","本月","上月"));
+        mList=new ArrayList<>();
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -64,15 +71,28 @@ public class DoneTaskActivity extends OtherBaseActivity implements IdoneTask{
         mTime= (TextView) findViewById(R.id.DoneTaskActivity_btn_time);
         mMask=findViewById(R.id.DoneTaskActivity_mask);
         mTop= (RelativeLayout) findViewById(R.id.DoneTaskActivity_top);
-        mRecy= (RecyclerView) findViewById(R.id.DoneTaskActivity_recyclerView);
+        mRecy= (XRecyclerView) findViewById(R.id.DoneTaskActivity_recyclerView);
         mEmptyView=findViewById(R.id.DoneTaskActivity_empty_view);
         mRecy.setLayoutManager(new LinearLayoutManager(this));
-        mRecy.setVisibility(View.GONE);
-        mEmptyView.setVisibility(View.VISIBLE);
+        mRecy.setEmptyView(mEmptyView);
     }
 
     @Override
     public void initListener() {
+        mHandler=new WeakHandler(new Irecy() {
+            @Override
+            public void doLoadData(int type) {
+                switch (type){
+                    case 0:
+                        mSkip=0;
+                        mPresenter.getData(year,month,week,mSkip);
+                        break;
+                    case 1:
+                        mPresenter.getData(year,month,week,mSkip);
+                        break;
+                }
+            }
+        });
         mTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,14 +113,25 @@ public class DoneTaskActivity extends OtherBaseActivity implements IdoneTask{
                 startActivity(intent);
             }
         });
+        mRecy.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                mHandler.sendEmptyMessageDelayed(0,1000);
+            }
+
+            @Override
+            public void onLoadMore() {
+                mHandler.sendEmptyMessageDelayed(1,1000);
+            }
+        });
     }
 
     @Override
     public void initData() {
         mPresenter=new PdoneTask(this);
-        mAdapter=new MyTaskAdapter(this);
+        mAdapter=new MyTaskAdapter(this,mList);
         mRecy.setAdapter(mAdapter);
-        mPresenter.getData(year,month,week);
+        mPresenter.getData(year,month,week,mSkip);
     }
 
     public void showSelectPopup(final TextView btn){
@@ -135,7 +166,8 @@ public class DoneTaskActivity extends OtherBaseActivity implements IdoneTask{
                         break;
 
                 }
-                mPresenter.getData(year,month,week);
+                mSkip=0;
+                mPresenter.getData(year,month,week,mSkip);
             }
         });
         mAdapter.setDataSource(mTimes);
@@ -159,15 +191,23 @@ public class DoneTaskActivity extends OtherBaseActivity implements IdoneTask{
 
     @Override
     public void setListData(List<AVObject> list) {
-        if(list.size()>0){
-            mList=list;
-            mAdapter.setDataSource(list);
+        if(mSkip==0){
+            mRecy.setNoMore(false);
+            mRecy.refreshComplete();
+            mList.clear();
+            mList.addAll(list);
             mAdapter.notifyDataSetChanged();
-            mRecy.setVisibility(View.VISIBLE);
-            mEmptyView.setVisibility(View.GONE);
+            mRecy.scrollToPosition(0);
+            mSkip=mList.size();
         }else{
-            mRecy.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
+            mRecy.loadMoreComplete();
+            if(list.size()>0){
+                mList.addAll(list);
+                mAdapter.notifyDataSetChanged();
+                mSkip=mList.size();
+            }else{
+                mRecy.setNoMore(true);
+            }
         }
     }
 

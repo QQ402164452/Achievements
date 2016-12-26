@@ -88,8 +88,7 @@ public class NewTaskActivity extends BaseActivity implements View.OnClickListene
     private int mType;//标志位 0-新建任务 1-修改任务
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_new_task);
+    protected void initPre() {
         Intent intent=getIntent();
         if(intent!=null){
             try {
@@ -98,11 +97,11 @@ public class NewTaskActivity extends BaseActivity implements View.OnClickListene
                 e.printStackTrace();
             }
         }
-        super.onCreate(savedInstanceState);
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_new_task);
         mCancel= (TextView) findViewById(R.id.NewTaskActivity_cancel);
         mConfirm= (TextView) findViewById(R.id.NewTaskActivity_confirm);
         mDetail= (EditText) findViewById(R.id.NewTaskActivity_detail_input);

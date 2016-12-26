@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <RelativeLayout
+
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="@dimen/fitsSystemWindows_height"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
         android:background="@color/colorPrimary">
 
-        <android.support.v7.widget.Toolbar
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/toolbar">
+            android:gravity="center"
+            android:text="我"
+            android:textColor="@android:color/white"
+            android:fitsSystemWindows="true"
+            android:textSize="@dimen/Toolbar_textSize" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="我"
-                android:textSize="@dimen/Toolbar_textSize"
-                android:textColor="@android:color/white"
-                />
+    </android.support.v7.widget.Toolbar>
 
-        </android.support.v7.widget.Toolbar>
 
-    </RelativeLayout>
-
-    <include
-        layout="@layout/center_listview_item_divider"/>
+    <include layout="@layout/center_listview_item_divider" />
 
     <RelativeLayout
         android:id="@+id/centerFragment_user"
@@ -54,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/centerFragment_user_img"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/centerFragment_user_img"
             android:text="某某某"
             android:textColor="@android:color/black"
-            android:layout_marginTop="5dp"
             android:textSize="16sp" />
 
         <TextView
@@ -78,8 +71,7 @@
 
     </RelativeLayout>
 
-    <include
-        layout="@layout/center_listview_item_divider"/>
+    <include layout="@layout/center_listview_item_divider" />
 
     <ListView
         android:id="@+id/centerFragment_ListView"

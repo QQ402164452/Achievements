@@ -3,25 +3,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="@dimen/fitsSystemWindows_height"
-        android:background="@color/colorPrimaryDark">
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:background="@color/colorPrimary">
 
-        <android.support.v7.widget.Toolbar
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentBottom="true">
+            android:gravity="center"
+            android:text="消息"
+            android:textColor="@android:color/white"
+            android:fitsSystemWindows="true"
+            android:textSize="@dimen/Toolbar_textSize" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="消息"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/Toolbar_textSize"
-                android:gravity="center"/>
-
-        </android.support.v7.widget.Toolbar>
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
 </LinearLayout>

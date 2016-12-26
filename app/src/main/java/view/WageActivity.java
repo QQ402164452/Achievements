@@ -47,14 +47,15 @@ public class WageActivity extends BaseActivity{
     private TextView mRealWage;
     private LinearLayout mEmptyView;
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_wage);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_wage);
         mToolbar= (Toolbar) findViewById(R.id.WageActivity_toolbar);
         setCustomToolbar(mToolbar);
 
@@ -178,18 +179,6 @@ public class WageActivity extends BaseActivity{
         };
         left.setOnClickListener(onClickListener);
         right.setOnClickListener(onClickListener);
-//        showBasePopup(view,mToolbar, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-//                , Gravity.TOP,0,0);
-        mBasePopup=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
-        setWindowAlpha(0.5F);
-        mBasePopup.setFocusable(false);
-        mBasePopup.setOutsideTouchable(false);
-        mBasePopup.showAsDropDown(mToolbar);
-        mBasePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                setWindowAlpha(1.0f);
-            }
-        });
+        showAsDropDownPopup(view,mToolbar, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 }

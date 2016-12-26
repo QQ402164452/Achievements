@@ -1,19 +1,15 @@
 package view;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.example.jason.achievements.R;
 
-import bean.ErrorBean;
 import interfaces.Ilogin;
 import presenter.Plogin;
 import utils.ErrorUtil;
@@ -30,12 +26,12 @@ public class LoginActivity extends BaseActivity implements Ilogin{
     private EditText mPassWord;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_login);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     public void initView(){
+        setContentView(R.layout.activity_login);
         Toolbar toolbar= (Toolbar) findViewById(R.id.LoginActivity_toolbar);
         setCustomToolbar(toolbar);
 
@@ -75,7 +71,7 @@ public class LoginActivity extends BaseActivity implements Ilogin{
             Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
             this.finish();
         }else{
-            Toast.makeText(this, ErrorUtil.getErrorMessage(result),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, result,Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -8,4 +8,12 @@
         <attr name="drawableBottom" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="AttendanceView">
+        <attr name="beginTime" format="string"/>
+        <attr name="endTime" format="string"/>
+        <attr name="beginStateColor" format="color"/>
+        <attr name="endStateColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+    </declare-styleable>
+
 </resources>

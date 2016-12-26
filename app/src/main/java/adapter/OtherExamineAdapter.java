@@ -33,17 +33,13 @@ public class OtherExamineAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private OnCustomItemClickListener mListener;
 
 
-    public OtherExamineAdapter(Context context) {
+    public OtherExamineAdapter(Context context,List<AVObject> list) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
-        mList = new ArrayList<>();
+        mList = list;
         mTypes = ExamineUtil.getInstance().getTypes();
         mType = ExamineUtil.getInstance().getType();
         mMon = ExamineUtil.getInstance().getMon();
-    }
-
-    public void setDataSource(List<AVObject> list) {
-        this.mList = list;
     }
 
     public void setListener(OnCustomItemClickListener onCustomItemClickListener) {

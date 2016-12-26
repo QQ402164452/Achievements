@@ -3,7 +3,6 @@ package fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,17 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.example.jason.achievements.R;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import adapter.OtherExamineAdapter;
-import bean.ErrorBean;
+import interfaces.Irecy;
 import interfaces.OnCustomItemClickListener;
 import utils.NetworkUtil;
-import view.ExamineDetailActivity;
+import utils.WeakHandler;
 import view.PendingActivity;
 
 import static android.app.Activity.RESULT_OK;
@@ -34,13 +35,38 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class OtherExamineFragment extends LazyFragment {
-    private RecyclerView mRecyclerView;
+    private XRecyclerView mRecyclerView;
+    private View mEmptyView;
     private OtherExamineAdapter mAdapter;
     private List<AVObject> mList;
+
+    private WeakHandler mHandler;
+    private int mSkip=0;
 
     public static int OTHER_EXAMINE_REQUEST_CODE=220;
     public static String OTHER_EXAMINE_BACK="OTHER_EXAMINE_BACK";
     public static String OTHER_EXAMINE_PASS="OTHER_EXAMINE_PASS";
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        mList=new ArrayList<>();
+        mHandler=new WeakHandler(new Irecy() {
+            @Override
+            public void doLoadData(int type) {
+                switch (type){
+                    case 0:
+                        mSkip=0;
+                        getData();
+                        break;
+                    case 1:
+                        getData();
+                        break;
+                }
+            }
+        });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
@@ -54,12 +80,9 @@ public class OtherExamineFragment extends LazyFragment {
     @Override
     protected void lazyLoad() {
         if(isPrepared&&isVisible&&isFirst){
-            if(NetworkUtil.isNewWorkAvailable()){
-                getData();
-                isFirst=false;
-            }else{
-                showToast(NetworkUtil.tip);
-            }
+            mSkip=0;
+            getData();
+            isFirst=false;
         }
     }
 
@@ -68,32 +91,56 @@ public class OtherExamineFragment extends LazyFragment {
     }
 
     public void getData(){
-        AVQuery<AVObject> query=new AVQuery<>("approval");
-        query.orderByDescending("createdAt");
-        query.whereEqualTo("approver", AVUser.getCurrentUser());
-        query.whereContainedIn("sign", Arrays.asList(0,3));
-        query.include("approver");
-        query.include("user");
-        query.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if(e==null){
-                    mList=list;
-                    mAdapter.setDataSource(mList);
-                    mAdapter.notifyDataSetChanged();
-                }else{
-                    ErrorBean errorBean= JSON.parseObject(e.getMessage(),ErrorBean.class);
-                    showToast(errorBean.getError());
+        if(NetworkUtil.isNewWorkAvailable()){
+            AVQuery<AVObject> query=new AVQuery<>("approval");
+            query.orderByDescending("createdAt");
+            query.whereEqualTo("approver", AVUser.getCurrentUser());
+            query.whereContainedIn("sign", Arrays.asList(0,3));
+            query.include("approver");
+            query.include("user");
+            query.limit(10);
+            query.skip(mSkip);
+            query.findInBackground(new FindCallback<AVObject>() {
+                @Override
+                public void done(List<AVObject> list, AVException e) {
+                    if(e==null){
+                        if(mSkip==0){
+                            mRecyclerView.setNoMore(false);
+                            mRecyclerView.refreshComplete();
+                            mList.clear();
+                            mList.addAll(list);
+                            mAdapter.notifyDataSetChanged();
+                            mRecyclerView.scrollToPosition(0);
+                            mSkip=mList.size();
+                        }else{
+                            mRecyclerView.loadMoreComplete();
+                            if(list.size()>0){
+                                mList.addAll(list);
+                                mAdapter.notifyDataSetChanged();
+                                mSkip=mList.size();
+                            }else{
+                                mRecyclerView.setNoMore(true);
+                            }
+                        }
+                    }else{
+                        showToast(e.getMessage());
+                    }
+
                 }
-            }
-        });
+            });
+        }else{
+            showToast(NetworkUtil.tip);
+        }
+
     }
 
     @Override
     protected void initView(View view) {
-        mRecyclerView= (RecyclerView) view.findViewById(R.id.OtherExamineFragment_RecycleView);
+        mRecyclerView= (XRecyclerView) view.findViewById(R.id.OtherExamineFragment_RecycleView);
+        mEmptyView=view.findViewById(R.id.OtherExamineFragment_empty_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter=new OtherExamineAdapter(getActivity());
+        mRecyclerView.setEmptyView(mEmptyView);
+        mAdapter=new OtherExamineAdapter(getActivity(),mList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -107,6 +154,17 @@ public class OtherExamineFragment extends LazyFragment {
                 intent.putExtra("PendingDetail",object);
                 intent.putExtra("PendingDetail_Position",position);
                 startActivityForResult(intent,OTHER_EXAMINE_REQUEST_CODE);
+            }
+        });
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                mHandler.sendEmptyMessageDelayed(0,1000);
+            }
+
+            @Override
+            public void onLoadMore() {
+                mHandler.sendEmptyMessageDelayed(1,1000);
             }
         });
     }

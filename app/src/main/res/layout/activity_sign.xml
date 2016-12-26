@@ -50,13 +50,21 @@
     </RelativeLayout>
 
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/SignActivity_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/SignActivity_topGroup">
 
-    </android.support.v7.widget.RecyclerView>
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+    <include
+        android:id="@+id/SignActivity_empty_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SignActivity_topGroup"
+        layout="@layout/empty_data_view"/>
 
     <View
         android:layout_below="@id/SignActivity_topGroup"

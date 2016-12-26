@@ -3,36 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/OtherFragment_child_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <RelativeLayout
-        android:id="@+id/OtherFragment_child_emptyView"
+    <include
+        android:id="@+id/OtherFragment_child_empty_view"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/emptyView_img"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="60dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/content_icon_nothing_def"
-            />
-
-        <TextView
-            android:layout_below="@id/emptyView_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:textSize="15sp"
-            android:textColor="@color/text_grey"
-            android:text="你尚未收到工作汇报"/>
-
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        layout="@layout/empty_data_view"/>
 
 </LinearLayout>

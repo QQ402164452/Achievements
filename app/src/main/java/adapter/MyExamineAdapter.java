@@ -34,17 +34,13 @@ public class MyExamineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private OnCustomItemClickListener mListener;
 
 
-    public MyExamineAdapter(Context context){
+    public MyExamineAdapter(Context context,List<AVObject> list){
         this.mContext=context;
         this.mInflater=LayoutInflater.from(mContext);
-        mList=new ArrayList<>();
+        this.mList=list;
         mTypes= ExamineUtil.getInstance().getTypes();
         mType=ExamineUtil.getInstance().getType();
         mMon=ExamineUtil.getInstance().getMon();
-    }
-
-    public void setDataSource(List<AVObject> list){
-        this.mList=list;
     }
 
     public void setListener(OnCustomItemClickListener onCustomItemClickListener){

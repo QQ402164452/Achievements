@@ -26,13 +26,13 @@ public class AccountActivity extends BaseActivity {
     private SettingListAdapter mAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_account);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_account);
         Toolbar toolbar= (Toolbar) findViewById(R.id.AccountActivity_toolbar);
         setCustomToolbar(toolbar);
 

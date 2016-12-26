@@ -52,18 +52,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/MyTaskFragment_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
 
         <include
             android:id="@+id/MyTaskFragment_empty_view"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/empty_date_view"/>
+            layout="@layout/empty_data_view"/>
 
         <View
             android:id="@+id/MyTaskFragment_mask"

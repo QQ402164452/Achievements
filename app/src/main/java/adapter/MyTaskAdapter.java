@@ -35,15 +35,11 @@ public class MyTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private OnCustomItemClickListener mListener;
     private SimpleDateFormat mFormat;
 
-    public MyTaskAdapter(Context context){
+    public MyTaskAdapter(Context context,List<AVObject> list){
         this.mContext=context;
         this.mInflater=LayoutInflater.from(mContext);
-        mList=new ArrayList<>();
+        mList=list;
         mFormat=new SimpleDateFormat("yy-MM-DD HH:mm", Locale.CHINA);
-    }
-
-    public void setDataSource(List<AVObject> list){
-        this.mList=list;
     }
 
     public void setListener(OnCustomItemClickListener listener){

@@ -33,13 +33,13 @@ public class ReportDetailActivity extends BaseActivity {
     private TextView mArText;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_report_detail);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_report_detail);
         Toolbar toolbar= (Toolbar) findViewById(R.id.ReportDetailActivity_toolbar);
         setCustomToolbar(toolbar);
 

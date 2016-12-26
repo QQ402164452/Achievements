@@ -75,8 +75,7 @@ public class TaskDetailActivity extends BaseActivity implements ItaskDetail {
     public final static int TASK_DETAIL_UPDATE_REQUEST=301;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_task_detail);
+    protected void initPre() {
         Intent intent = getIntent();
         if (intent != null) {
             try {
@@ -85,15 +84,11 @@ public class TaskDetailActivity extends BaseActivity implements ItaskDetail {
                 e.printStackTrace();
             }
         }
-        super.onCreate(savedInstanceState);
-        mPresenter = new PtaskDetail(this);
-        if (mObject != null) {
-            mPresenter.getTaskDetail(mObject);
-        }
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_task_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.TaskDetailActivity_toolbar);
         setCustomToolbar(toolbar);
 
@@ -153,6 +148,11 @@ public class TaskDetailActivity extends BaseActivity implements ItaskDetail {
         mParRecy.setAdapter(mParAdapter);
         mFbAdapter = new TaskFbAdapter(this);
         mFeedBackRecy.setAdapter(mFbAdapter);
+
+        mPresenter = new PtaskDetail(this);
+        if (mObject != null) {
+            mPresenter.getTaskDetail(mObject);
+        }
     }
 
     public void setText(TextView view, String str, String title) {

@@ -13,7 +13,7 @@ import com.example.jason.achievements.R;
  * 引导页
  */
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanced){
@@ -32,18 +32,4 @@ public class SplashActivity extends BaseActivity {
         },3000);
     }
 
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initListener() {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
 }

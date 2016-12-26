@@ -23,12 +23,14 @@ public class PdoneTask {
         this.mView=idoneTask;
     }
 
-    public void getData(int year,int month,int week){
+    public void getData(int year,int month,int week,int skip){
         if(NetworkUtil.isNewWorkAvailable()){
             AVQuery<AVObject> query=new AVQuery<>("task");
             query.whereEqualTo("participant", AVUser.getCurrentUser());
             query.orderByDescending("createdAt");
             query.whereEqualTo("sign",1);
+            query.limit(20);
+            query.skip(skip);
             if(year!=-1){
                 query.whereEqualTo("year",year);
             }

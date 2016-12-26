@@ -1,11 +1,15 @@
 package view;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -24,6 +28,7 @@ import fragment.CenterFragment;
 import fragment.ContactFragment;
 import fragment.PersonalFragemnt;
 import fragment.SocialFragment;
+import utils.PermissionCodes;
 
 /**
  * Created by Jason on 2016/11/22.
@@ -44,13 +49,14 @@ public class MainActivity extends BaseActivity{
     private boolean isShowConfirn=false;//标志位 判断是否确认退出
 
     @Override
-    public void onCreate(Bundle savedInstancedState){
-        setContentView(R.layout.activity_main);
-        super.onCreate(savedInstancedState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    protected void initPre() {
+
     }
 
     public void initView(){
+        setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
         mAppBtn= (RadioButton) findViewById(R.id.MainActivity_btn_app);
         mRadioGroup= (RadioGroup) findViewById(R.id.MainActivity_radioGroup);
     }
@@ -62,6 +68,8 @@ public class MainActivity extends BaseActivity{
         mPersonalFragment=new PersonalFragemnt();
         mSocialFragment=new SocialFragment();
         mContactFragment=new ContactFragment();
+
+        checkAllPermission(PermissionCodes.perArr,PermissionCodes.PERMISSIONS_REQUEST_ALL);
     }
 
     public void initListener(){
@@ -148,4 +156,5 @@ public class MainActivity extends BaseActivity{
                 , Gravity.CENTER,0,0);
         isShowConfirn=true;
     }
+
 }

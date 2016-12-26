@@ -92,7 +92,6 @@ public class EditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 centerCrop().
                                 transform(new GlideCircleTransform(mContext)).
                                 dontAnimate().
-                                placeholder(R.drawable.dayhr_userphoto_def).
                                 into(holder1.img);
                     }
                     if(object instanceof String){

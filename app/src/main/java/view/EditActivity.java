@@ -55,9 +55,8 @@ public class EditActivity extends BaseActivity implements Iedit{
     public static int EDIT_USER_REQUEST_CODE=100;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    protected void initPre() {
         setContentView(R.layout.activity_edit);
-        super.onCreate(savedInstanceState);
     }
 
     public void initView(){
@@ -202,7 +201,7 @@ public class EditActivity extends BaseActivity implements Iedit{
             showToast(str);
             finish();
         }else {
-            showToast(ErrorUtil.getErrorMessage(str));
+            showToast(str);
         }
     }
 

@@ -3,27 +3,27 @@ package fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.example.jason.achievements.R;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import adapter.ReportAdapter;
-import bean.ErrorBean;
+import interfaces.Irecy;
 import interfaces.OnCustomItemClickListener;
 import utils.NetworkUtil;
+import utils.WeakHandler;
 import view.ReportDetailActivity;
 
 /**
@@ -31,16 +31,33 @@ import view.ReportDetailActivity;
  */
 
 public class OtherReportChildFragment extends BaseFragment {
-    private RecyclerView mRecyclerView;
+    private XRecyclerView mRecyclerView;
+    private View mEmptyView;
     private ReportAdapter mAdapter;
     private List<AVObject> mList;
     private int mType;
-    private RelativeLayout mEmptyView;
+    private WeakHandler mHandler;
+    private int mSkip=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mType= (int) getArguments().getSerializable("type");
+        mList=new ArrayList<>();
+        mHandler=new WeakHandler(new Irecy() {
+            @Override
+            public void doLoadData(int type) {
+                switch (type){
+                    case 0:
+                        mSkip=0;
+                        initData();
+                        break;
+                    case 1:
+                        initData();
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -52,19 +69,11 @@ public class OtherReportChildFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        mEmptyView= (RelativeLayout) view.findViewById(R.id.OtherFragment_child_emptyView);
-        mRecyclerView= (RecyclerView) view.findViewById(R.id.OtherFragment_child_recyclerView);
+        mEmptyView=view.findViewById(R.id.OtherFragment_child_empty_view);
+        mRecyclerView= (XRecyclerView) view.findViewById(R.id.OtherFragment_child_recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter=new ReportAdapter(getActivity());
-        mAdapter.setClickListener(new OnCustomItemClickListener() {
-            @Override
-            public void onItemClickListener(View view, int position) {
-                Intent intent=new Intent(getActivity(), ReportDetailActivity.class);
-                String serializedString=mList.get(position).toString();
-                intent.putExtra("REPORT_DETAIL_STRING",serializedString);
-                startActivity(intent);
-            }
-        });
+        mRecyclerView.setEmptyView(mEmptyView);
+        mAdapter=new ReportAdapter(getActivity(),mList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -85,7 +94,26 @@ public class OtherReportChildFragment extends BaseFragment {
 
     @Override
     public void initListener() {
+        mAdapter.setClickListener(new OnCustomItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+                Intent intent=new Intent(getActivity(), ReportDetailActivity.class);
+                String serializedString=mList.get(position).toString();
+                intent.putExtra("REPORT_DETAIL_STRING",serializedString);
+                startActivity(intent);
+            }
+        });
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                mHandler.sendEmptyMessageDelayed(0,1000);
+            }
 
+            @Override
+            public void onLoadMore() {
+                mHandler.sendEmptyMessageDelayed(1,1000);
+            }
+        });
     }
 
     public void setAdapterData(final int type){
@@ -96,40 +124,40 @@ public class OtherReportChildFragment extends BaseFragment {
             query.orderByDescending("createdAt");
             query.include("reporter");// 关键代码，用 include 告知服务端需要返回的关联属性对应的对象的详细信息，而不仅仅是 objectId
             query.include("approver");
+            query.limit(10);
+            query.skip(mSkip);
             query.findInBackground(new FindCallback<AVObject>() {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
                     if(e==null){
-                        mList=list;
-                        mAdapter.setDataSource(list);
-                        mAdapter.notifyDataSetChanged();
-                        if(mList.size()==0){
-                            showEmptyView(true);
+                        if(mSkip==0){
+                            mRecyclerView.setNoMore(false);
+                            mRecyclerView.refreshComplete();
+                            mList.clear();
+                            mList.addAll(list);
+                            mAdapter.notifyDataSetChanged();
+                            mRecyclerView.scrollToPosition(0);
+                            mSkip=mList.size();
                         }else{
-                            showEmptyView(false);
+                            mRecyclerView.loadMoreComplete();
+                            if(list.size()>0){
+                                mList.addAll(list);
+                                mAdapter.notifyDataSetChanged();
+                                mSkip=mList.size();
+                            }else{
+                                mRecyclerView.setNoMore(true);
+                            }
                         }
                     }else{
-                        ErrorBean error= JSON.parseObject(e.getMessage(),ErrorBean.class);
-                        Toast.makeText(getActivity(),error.getError(),Toast.LENGTH_SHORT).show();
-                        showEmptyView(true);
+                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }else {
-            showEmptyView(true);
             Toast.makeText(getActivity(),NetworkUtil.tip,Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void showEmptyView(boolean isShow){
-        if(isShow){
-            mEmptyView.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        }else{
-            mEmptyView.setVisibility(View.GONE);
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
-    }
 
     public static OtherReportChildFragment newInstance(int type){
         Bundle bundle=new Bundle();

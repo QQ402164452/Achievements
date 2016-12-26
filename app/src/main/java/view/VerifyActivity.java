@@ -1,6 +1,5 @@
 package view;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.example.jason.achievements.R;
 
-import bean.ErrorBean;
 import interfaces.Iverify;
 import presenter.Pverify;
 
@@ -28,13 +26,13 @@ public class VerifyActivity extends BaseActivity implements Iverify{
     private Pverify mPv;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_verify);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_verify);
         Toolbar toolbar= (Toolbar) findViewById(R.id.VerifyActivity_toolbar);
         setCustomToolbar(toolbar);
 
@@ -76,8 +74,7 @@ public class VerifyActivity extends BaseActivity implements Iverify{
 
     @Override
     public void showErrorMessage(String str) {
-        ErrorBean error= JSON.parseObject(str,ErrorBean.class);
-        Toast.makeText(this,error.getError(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,16 +26,9 @@ import com.example.wheelview.OnWheelChangedListener;
 import com.example.wheelview.WheelView;
 import com.example.wheelview.adapters.ListWheelAdapter;
 
-import org.w3c.dom.Text;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
-import bean.ErrorBean;
 import customView.GlideCircleTransform;
 import interfaces.Icheck;
 import presenter.Pcheck;
@@ -44,7 +36,6 @@ import utils.DateUtil;
 import utils.ExamineUtil;
 import view.CheckActivity;
 import view.ContactSelectActivity;
-import view.WriteReportActivity;
 
 import static android.app.Activity.RESULT_OK;
 import static view.WriteReportActivity.CONTACT_SELECT_REQUEST;
@@ -333,8 +324,7 @@ public class CheckFragment extends LazyFragment implements View.OnClickListener,
 
     @Override
     public void onError(String error) {
-        ErrorBean errorBean= JSON.parseObject(error,ErrorBean.class);
-        showToast(errorBean.getError());
+        showToast(error);
     }
 
     @Override

@@ -28,13 +28,13 @@ public class ExamineActivity extends BaseActivity {
     private ArrayList<Fragment> mFragments;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_examine);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_examine);
         Toolbar toolbar= (Toolbar) findViewById(R.id.ExamineActivity_toolbar);
         setCustomToolbar(toolbar);
 

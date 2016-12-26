@@ -28,14 +28,14 @@ public class CheckActivity extends BaseActivity {
     private ArrayList<Fragment> mFragment;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_check);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_check);
         Toolbar toolbar= (Toolbar) findViewById(R.id.CheckActivity_toolbar);
         setCustomToolbar(toolbar);
 

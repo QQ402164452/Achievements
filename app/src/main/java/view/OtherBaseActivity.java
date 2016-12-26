@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -16,8 +15,6 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.jason.achievements.R;
-
-import bean.ErrorBean;
 
 /**
  * Created by Jason on 2016/12/12.
@@ -134,8 +131,7 @@ public abstract class OtherBaseActivity extends AppCompatActivity{
     }
 
     public void onError(String error) {
-        ErrorBean errorBean= JSON.parseObject(error,ErrorBean.class);
-        showToast(errorBean.getError());
+        showToast(error);
     }
 
     public void showLoading(){

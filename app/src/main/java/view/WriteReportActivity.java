@@ -1,7 +1,6 @@
 package view;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,9 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVUser;
 import com.bumptech.glide.Glide;
@@ -27,7 +24,6 @@ import com.example.jason.achievements.R;
 import java.util.ArrayList;
 
 import adapter.SelectTimeAdapter;
-import bean.ErrorBean;
 import customView.DividerItemExceptLastDecoration;
 import customView.GlideCircleTransform;
 import interfaces.Iwritereport;
@@ -64,14 +60,14 @@ public class WriteReportActivity extends BaseActivity implements Iwritereport{
     public static String SELECT_USER="SelectUser";
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_write_report);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_write_report);
         Toolbar toolbar= (Toolbar) findViewById(R.id.WriteReportActivity_Toolbar);
         setCustomToolbar(toolbar);
         mSave= (TextView) findViewById(R.id.WriteReportActivity_btn_save);

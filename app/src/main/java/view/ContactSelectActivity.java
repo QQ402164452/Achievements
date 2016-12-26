@@ -29,14 +29,14 @@ public class ContactSelectActivity extends BaseActivity implements IcontactSelec
     private TextView mSave;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_contact_select);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_contact_select);
         Toolbar toolbar= (Toolbar) findViewById(R.id.ContactSelectActivity_toolbar);
         setCustomToolbar(toolbar);
         mCompany= (TextView) findViewById(R.id.ContactSelectActivity_company_name);

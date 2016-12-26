@@ -24,13 +24,13 @@ public class IntroductionActivity extends BaseActivity {
     private TextView mConfirm;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_introduction);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_introduction);
         Toolbar toolbar= (Toolbar) findViewById(R.id.IntroductionActivity_Toolbar);
         setCustomToolbar(toolbar);
         mInput= (EditText) findViewById(R.id.IntroductionActivity_input);

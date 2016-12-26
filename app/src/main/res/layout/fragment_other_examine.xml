@@ -4,9 +4,16 @@
     android:layout_height="match_parent"
     android:background="@color/default_background">
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/OtherExamineFragment_RecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <include
+        android:id="@+id/OtherExamineFragment_empty_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/empty_data_view"/>
 
 </LinearLayout>

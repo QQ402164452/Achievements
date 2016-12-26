@@ -35,9 +35,7 @@ public class MultiContactActivity extends BaseActivity implements ImultiContact 
     public static final String MULTI_CONTACT_SELECT_BUNDLE="MULTI_CONTACT_SELECT_BUNDLE";
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_multi_contact);
-
+    protected void initPre() {
         Intent intent=getIntent();
         if(intent!=null){
             ArrayList<AVUser> pars= (ArrayList<AVUser>) intent.getSerializableExtra(MULTI_CONTACT_SELECT_BUNDLE);
@@ -45,12 +43,12 @@ public class MultiContactActivity extends BaseActivity implements ImultiContact 
                 mSelectPar=pars;
             }
         }
-        super.onCreate(savedInstanceState);
     }
 
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_multi_contact);
         Toolbar toolbar= (Toolbar) findViewById(R.id.MultiContactActivity_toolbar);
         setCustomToolbar(toolbar);
 

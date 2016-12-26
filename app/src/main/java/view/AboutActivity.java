@@ -12,12 +12,14 @@ import com.example.jason.achievements.R;
 public class AboutActivity extends BaseActivity{
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_about);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
+
     @Override
     public void initView() {
+        setContentView(R.layout.activity_about);
+
         Toolbar toolbar= (Toolbar) findViewById(R.id.AboutActivity_toolbar);
         setCustomToolbar(toolbar);
     }

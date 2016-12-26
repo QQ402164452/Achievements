@@ -30,9 +30,7 @@ public class PrincipalActivity extends BaseActivity {
     public static final String PRINCIPAL_USER_SELECT="PRINCIPAL_USER_SELECT";
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_principal);
-
+    protected void initPre() {
         Intent intent=getIntent();
         if(intent!=null){
             ArrayList<AVUser> list= (ArrayList<AVUser>) intent.getSerializableExtra(PRINCIPAL_USER_LISR);
@@ -40,12 +38,12 @@ public class PrincipalActivity extends BaseActivity {
                 mParList=list;
             }
         }
-        super.onCreate(savedInstanceState);
     }
 
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_principal);
         Toolbar toolbar= (Toolbar) findViewById(R.id.PrincipalActivity_toolbar);
         setCustomToolbar(toolbar);
 

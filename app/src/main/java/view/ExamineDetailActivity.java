@@ -1,7 +1,6 @@
 package view;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Gravity;
@@ -11,9 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
@@ -22,7 +19,6 @@ import com.example.jason.achievements.R;
 
 import java.util.ArrayList;
 
-import bean.ErrorBean;
 import customView.GlideCircleTransform;
 import fragment.MyExamineFragment;
 import interfaces.ImyEmDt;
@@ -61,9 +57,7 @@ public class ExamineDetailActivity extends BaseActivity implements ImyEmDt{
     private PmyEmDt mPresenter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_examine_detail);
-        
+    protected void initPre() {
         Intent intent=getIntent();
         if(intent!=null){
             try {
@@ -77,12 +71,12 @@ public class ExamineDetailActivity extends BaseActivity implements ImyEmDt{
         mType=ExamineUtil.getInstance().getType();
         mMon=ExamineUtil.getInstance().getMon();
 
-        super.onCreate(savedInstanceState);
         mPresenter=new PmyEmDt(this);
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_examine_detail);
         Toolbar toolbar= (Toolbar) findViewById(R.id.ExamineDetailActivity_toolbar);
         setCustomToolbar(toolbar);
 

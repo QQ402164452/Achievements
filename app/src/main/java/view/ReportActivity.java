@@ -37,13 +37,13 @@ public class ReportActivity extends BaseActivity {
     public static String REPORT_TYPE="REPORT_TYPE";
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_report);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_report);
         mToolbar= (Toolbar) findViewById(R.id.ReportActivity_toolbar);
         setCustomToolbar(mToolbar);
         mAdd= (ImageView) findViewById(R.id.ReportActivity_btn_add);

@@ -22,11 +22,13 @@ public class PmyTask  {
         this.mView=imyTask;
     }
 
-    public void getData(int year,int month,int week,int sign){
+    public void getData(int year, int month, int week, int sign, final int skip){
         if(NetworkUtil.isNewWorkAvailable()){
             AVQuery<AVObject> query=new AVQuery<>("task");
             query.whereEqualTo("user", AVUser.getCurrentUser());
             query.orderByDescending("createdAt");
+            query.limit(20);
+            query.skip(skip);
             if(year!=-1){
                 query.whereEqualTo("year",year);
             }
@@ -43,7 +45,11 @@ public class PmyTask  {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
                     if(e==null){
-                        mView.onSuccess(list);
+                        if(skip==0){
+                            mView.onSuccess(list,0);
+                        }else{
+                            mView.onSuccess(list,1);
+                        }
                     }else{
                         mView.onError(e.getMessage());
                     }

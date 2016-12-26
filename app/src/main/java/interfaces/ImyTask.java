@@ -11,5 +11,5 @@ import java.util.List;
 public interface ImyTask {
     void showToast(String str);
     void onError(String error);
-    void onSuccess(List<AVObject> list);
+    void onSuccess(List<AVObject> list,int type);
 }

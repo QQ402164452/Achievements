@@ -1,20 +1,15 @@
 package view;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.avos.avoscloud.AVUser;
 import com.example.jason.achievements.R;
 
-import bean.ErrorBean;
 import interfaces.Iregister;
 import presenter.Pregister;
 
@@ -30,12 +25,12 @@ public class RegisterActivity extends BaseActivity implements Iregister{
     private Pregister mPregister;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_register);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     public void initView(){
+        setContentView(R.layout.activity_register);
         Toolbar toolbar= (Toolbar) findViewById(R.id.RegisterActivity_toolbar);
         setCustomToolbar(toolbar);
 
@@ -65,8 +60,7 @@ public class RegisterActivity extends BaseActivity implements Iregister{
     @Override
     public void onResult(boolean isSuccess, String result) {
         if(!isSuccess){
-            ErrorBean error= JSON.parseObject(result,ErrorBean.class);
-            Toast.makeText(this,error.getError(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this,"注册成功！",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this,MainActivity.class));

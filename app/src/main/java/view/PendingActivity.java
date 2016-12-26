@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVFile;
@@ -64,9 +65,7 @@ public class PendingActivity extends BaseActivity implements Ipending{
     private Ppending mPresenter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_pending);
-
+    protected void initPre() {
         Intent intent=getIntent();
         if(intent!=null){
             try {
@@ -79,13 +78,12 @@ public class PendingActivity extends BaseActivity implements Ipending{
         mTypes= ExamineUtil.getInstance().getTypes();
         mType=ExamineUtil.getInstance().getType();
         mMon=ExamineUtil.getInstance().getMon();
-
-        super.onCreate(savedInstanceState);
     }
 
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_pending);
         Toolbar toolbar= (Toolbar) findViewById(R.id.PendingActivity_toolbar);
         setCustomToolbar(toolbar);
 
@@ -262,11 +260,15 @@ public class PendingActivity extends BaseActivity implements Ipending{
             }
         });
         input.setText(mRemarks);
-        showBasePopup(view,mBack, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        ,Gravity.CENTER,0,0);
-        mBasePopup.setFocusable(true);
-        mBasePopup.update();
-
+        mBasePopup=new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
+        setWindowAlpha(0.5f);
+        mBasePopup.showAtLocation(mTitle,Gravity.CENTER,0,0);
+        mBasePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setWindowAlpha(1.0f);
+            }
+        });
     }
 
     @Override

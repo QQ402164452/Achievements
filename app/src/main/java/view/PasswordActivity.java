@@ -1,20 +1,13 @@
 package view;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.example.jason.achievements.R;
 
-import bean.ErrorBean;
 import interfaces.Ipassword;
 import presenter.Ppassword;
 import utils.ErrorUtil;
@@ -31,13 +24,13 @@ public class PasswordActivity extends BaseActivity implements Ipassword{
     private EditText mVerifyCode;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_password);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_password);
         Toolbar toolbar= (Toolbar) findViewById(R.id.PasswordActivity_toolbar);
         setCustomToolbar(toolbar);
 
@@ -96,7 +89,7 @@ public class PasswordActivity extends BaseActivity implements Ipassword{
 
     @Override
     public void showErrorMessage(String str) {
-        Toast.makeText(this, ErrorUtil.getErrorMessage(str),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, str,Toast.LENGTH_SHORT).show();
     }
 
     @Override

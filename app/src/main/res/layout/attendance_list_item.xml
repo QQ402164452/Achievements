@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="15dp"
+    android:padding="@dimen/examine_fragment_item_padding">
+
+    <TextView
+        android:id="@+id/AttendanceActivity_list_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:text="11月5号 星期一"/>
+
+    <customView.AttendanceView
+        android:id="@+id/AttendanceActivity_list_item_attendanceView"
+        android:layout_below="@id/AttendanceActivity_list_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:textSize="14sp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/AttendanceActivity_list_item_weekend"
+        android:layout_below="@id/AttendanceActivity_list_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="周末休息~"
+        android:textSize="15sp"
+        android:visibility="gone"
+        android:textColor="@color/green_light"/>
+
+    <TextView
+        android:id="@+id/AttendanceActivity_list_item_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/approval_icon_pass_def"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/green_light"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="正常" />
+
+
+</RelativeLayout>

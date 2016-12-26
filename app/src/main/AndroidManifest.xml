@@ -3,14 +3,15 @@
     package="com.example.jason.achievements">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/><!--d-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/><!--d-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
+
     <!--用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/><!--d-->
     <!--用于访问GPS定位-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
@@ -178,6 +179,28 @@
         </activity>
 
         <activity android:name="view.DoneTaskActivity">
+
+        </activity>
+
+        <activity android:name="view.AttendanceActivity">
+
+        </activity>
+
+        <activity android:name="view.NewBlogActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            android:launchMode="singleTask">
+
+        </activity>
+
+        <activity android:name="view.PhotoPickActivity">
+
+        </activity>
+
+        <activity android:name="view.PhotoSeeActivity">
+
+        </activity>
+
+        <activity android:name="view.PreviewActivity">
 
         </activity>
 

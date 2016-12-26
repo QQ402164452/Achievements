@@ -32,13 +32,13 @@ public class MyCardActivity extends UserBaseActivity{
     private TextView mEmail;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_mycard);
-        super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    protected void initPre() {
+
     }
 
     public void initView(){
+        setContentView(R.layout.activity_mycard);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         Toolbar toolbar= (Toolbar) findViewById(R.id.MyCardActivity_toolbar);
         setCustomToolbar(toolbar);
 

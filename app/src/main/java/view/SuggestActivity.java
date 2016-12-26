@@ -34,13 +34,13 @@ public class SuggestActivity extends BaseActivity implements Isuggest,View.OnLay
     private boolean isFirstStart=true;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_suggest);
-        super.onCreate(savedInstanceState);
+    protected void initPre() {
+
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_suggest);
         Toolbar toolbar= (Toolbar) findViewById(R.id.SuggestActivity_toolbar);
         setCustomToolbar(toolbar);
 
@@ -86,6 +86,7 @@ public class SuggestActivity extends BaseActivity implements Isuggest,View.OnLay
     public void showToast(String str) {
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onResume(){

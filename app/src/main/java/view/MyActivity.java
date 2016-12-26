@@ -39,10 +39,8 @@ public class MyActivity extends UserBaseActivity implements Imy{
     private ImageView mUserImg;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_my);
-        super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    protected void initPre() {
+
     }
 
     @Override
@@ -68,6 +66,8 @@ public class MyActivity extends UserBaseActivity implements Imy{
     }
 
     public void initView(){
+        setContentView(R.layout.activity_my);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         Toolbar toolbar= (Toolbar) findViewById(R.id.MyActivity_toolbar);
         setCustomToolbar(toolbar);
 

@@ -33,14 +33,10 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private LayoutInflater mInflater;
     private OnCustomItemClickListener mListener;
 
-    public ReportAdapter(Context context){
+    public ReportAdapter(Context context,List<AVObject> list){
         mContext=context;
         mInflater=LayoutInflater.from(mContext);
-        mList=new ArrayList<>();
-    }
-
-    public void setDataSource(List<AVObject> list){
-        this.mList=list;
+        mList=list;
     }
 
     public void setClickListener(OnCustomItemClickListener onCustomItemClickListener){

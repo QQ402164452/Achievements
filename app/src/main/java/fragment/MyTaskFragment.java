@@ -3,22 +3,23 @@ package fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVObject;
 import com.example.jason.achievements.R;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,12 +30,12 @@ import adapter.MyTaskSelAdapter;
 import customView.DividerItemDecoration;
 import customView.DividerItemExceptLastDecoration;
 import interfaces.ImyTask;
+import interfaces.Irecy;
 import interfaces.OnCustomItemClickListener;
 import presenter.PmyTask;
+import utils.WeakHandler;
 import view.TaskActivity;
 import view.TaskDetailActivity;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Jason on 2016/12/9.
@@ -42,7 +43,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class MyTaskFragment extends LazyFragment implements ImyTask {
     private TaskActivity mParent;
-    private RecyclerView mRecycler;
+    private XRecyclerView mRecycler;
     private MyTaskAdapter mAdapter;
     private View mEmptyView;
     private TextView mRadTime;
@@ -64,11 +65,29 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
     public final static String TASK_DETAIL_SERIZALIZE="TASK_DETAIL_SERIZALIZE";
     public final static int TASK_DETAIL_RESULT_UPDATE=302;
 
+    private int mSkip=0;
+    private WeakHandler mHandler;
+
 
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
         mParent= (TaskActivity) getActivity();
+        mList=new ArrayList<>();
+        mHandler=new WeakHandler(new Irecy() {
+            @Override
+            public void doLoadData(int type) {
+                switch (type){
+                    case 0:
+                        mSkip=0;
+                        mPresenter.getData(year,month,week,mCurType,mSkip);
+                        break;
+                    case 1:
+                        mPresenter.getData(year,month,week,mCurType,mSkip);
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -91,7 +110,8 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
     @Override
     public void lazyLoad() {
         if(isVisible&&isPrepared&&isFirst){
-            mPresenter.getData(year,month,week,mCurType);
+            mSkip=0;
+            mPresenter.getData(year,month,week,mCurType,mSkip);
             isFirst=false;
         }
     }
@@ -100,17 +120,18 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
     protected void initView(View view) {
         mRadType= (TextView) view.findViewById(R.id.MyTaskFragment_btn_type);
         mRadTime= (TextView) view.findViewById(R.id.MyTaskFragment_btn_time);
-        mRecycler= (RecyclerView) view.findViewById(R.id.MyTaskFragment_recyclerView);
+        mRecycler= (XRecyclerView) view.findViewById(R.id.MyTaskFragment_recyclerView);
+        mEmptyView=view.findViewById(R.id.MyTaskFragment_empty_view);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mParent);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycler.setLayoutManager(linearLayoutManager);
         mTop= (LinearLayout) view.findViewById(R.id.MyTaskFragment_top);
-        mEmptyView=view.findViewById(R.id.MyTaskFragment_empty_view);
         mMask=view.findViewById(R.id.MyTaskFragment_mask);
         mMask.setVisibility(View.GONE);
 
-        mAdapter=new MyTaskAdapter(mParent);
+        mAdapter=new MyTaskAdapter(mParent,mList);
         mRecycler.setAdapter(mAdapter);
+        mRecycler.setEmptyView(mEmptyView);
     }
 
     @Override
@@ -148,6 +169,17 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
                 Intent intent=new Intent(mParent, TaskDetailActivity.class);
                 intent.putExtra(TASK_DETAIL_SERIZALIZE,mList.get(position).toString());
                 startActivityForResult(intent,TASK_DETAIL_RESULT_UPDATE);
+            }
+        });
+        mRecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                mHandler.sendEmptyMessageDelayed(0,1000);
+            }
+
+            @Override
+            public void onLoadMore() {
+                mHandler.sendEmptyMessageDelayed(1,1000);
             }
         });
     }
@@ -190,9 +222,9 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
                     case 4:
                         month=calendar.get(Calendar.MONTH);
                         break;
-
                 }
-                mPresenter.getData(year,month,week,mCurType);
+                mSkip=0;
+                mPresenter.getData(year,month,week,mCurType,mSkip);
             }
         });
         switch (type){
@@ -233,16 +265,27 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
     }
 
     @Override
-    public void onSuccess(List<AVObject> list) {
-        if(list.size()>0){
-            mEmptyView.setVisibility(View.GONE);
-            mRecycler.setVisibility(View.VISIBLE);
-            mList=list;
-            mAdapter.setDataSource(list);
-            mAdapter.notifyDataSetChanged();
-        }else {
-            mEmptyView.setVisibility(View.VISIBLE);
-            mRecycler.setVisibility(View.GONE);
+    public void onSuccess(List<AVObject> list,int type) {
+        switch (type){
+            case 0://下拉刷新
+                mList.clear();
+                mRecycler.setNoMore(false);
+                mRecycler.refreshComplete();
+                mList.addAll(list);
+                mAdapter.notifyDataSetChanged();
+                mRecycler.scrollToPosition(0);
+                mSkip=mList.size();
+                break;
+            case 1://上拉加载
+                mRecycler.loadMoreComplete();
+                if(list.size()>0){
+                    mList.addAll(list);
+                    mAdapter.notifyDataSetChanged();
+                    mSkip=mList.size();
+                }else{
+                    mRecycler.setNoMore(true);
+                }
+                break;
         }
     }
 

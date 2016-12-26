@@ -55,4 +55,6 @@
 
     <dimen name="Todo_Fragment_padding">15dp</dimen>
     <dimen name="Todo_Fragment_margin">15dp</dimen>
+
+    <dimen name="SocialFragment_list_item_padding">15dp</dimen>
 </resources>

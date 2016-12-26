@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/AttendanceActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="考勤"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/Toolbar_textSize" />
+
+        <ImageView
+            android:id="@+id/AttendanceActivity_btn_Calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:src="@drawable/calendar_white" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/AttendanceActivity_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:text="考勤数据:2016年8月"
+        android:textColor="@android:color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp">
+
+        <ImageView
+            android:id="@+id/AttendanceActivity_User_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/dayhr_userphoto_def" />
+
+        <LinearLayout
+            android:id="@+id/AttendanceActivity_Count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/AttendanceActivity_Count_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总工时:0小时"
+                android:textSize="13sp"
+                android:textColor="@color/green_light"/>
+
+            <TextView
+                android:id="@+id/AttendanceActivity_Count_absence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="缺勤:0次"
+                android:textSize="13sp"
+                android:textColor="@color/red_light"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/AttendanceActivity_User"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="@dimen/Task_Detail_Activity_padding"
+            android:layout_toRightOf="@id/AttendanceActivity_User_img"
+            android:layout_toLeftOf="@id/AttendanceActivity_Count"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/AttendanceActivity_User_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无信息"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/AttendanceActivity_User_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="部门:暂无信息"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/AttendanceActivity_User_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="职位:暂无信息"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/AttendanceActivity_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <include
+        android:id="@+id/AttendanceActivity_empty_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/empty_data_view"/>
+
+</LinearLayout>

@@ -1,12 +1,21 @@
 package fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.view.CollapsibleActionView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.jason.achievements.R;
@@ -17,6 +26,7 @@ import adapter.AppAdapter;
 import bean.AppBean;
 import customView.DividerGridItemDecoration;
 import interfaces.OnCustomItemClickListener;
+import view.AttendanceActivity;
 import view.CheckActivity;
 import view.ExamineActivity;
 import view.ReportActivity;
@@ -31,6 +41,9 @@ import view.WageActivity;
 public class AppFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private AppAdapter mAdapter;
+    private  CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private AppBarLayout mAppBarLayout;
+    private Toolbar mToolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState){
@@ -42,7 +55,6 @@ public class AppFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -72,7 +84,8 @@ public class AppFragment extends BaseFragment {
                         startActivity(intent);
                         break;
                     case 1:
-
+                        intent=new Intent(getActivity(), AttendanceActivity.class);
+                        startActivity(intent);
                         break;
                     case 2:
                         intent=new Intent(getActivity(), ExamineActivity.class);
@@ -100,6 +113,13 @@ public class AppFragment extends BaseFragment {
                 }
             }
         });
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                mToolbar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.colorPrimary),Math.abs(verticalOffset*1.0f)/appBarLayout.getTotalScrollRange()));
+            }
+        });
+
     }
 
     public void showToast(String str){
@@ -110,6 +130,19 @@ public class AppFragment extends BaseFragment {
     public void initView(View view) {
         mRecyclerView= (RecyclerView) view.findViewById(R.id.AppFragment_recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),4));
-        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity(),R.drawable.list_divider_bg));
+        mCollapsingToolbarLayout= (CollapsingToolbarLayout) view.findViewById(R.id.AppFragment_CollapsingToolbarLayout);
+        mAppBarLayout= (AppBarLayout) view.findViewById(R.id.AppFragment_AppBarLayout);
+        mToolbar= (Toolbar) view.findViewById(R.id.AppFragment_Toolbar);
+        mCollapsingToolbarLayout.setTitle("应用");
+    }
+
+    /** 根据百分比改变颜色透明度 */
+    public int changeAlpha(int color, float fraction) {
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        int alpha = (int) (Color.alpha(color) * fraction);// 0~255透明度值 ，0为完全透明，255为不透明（00 到 ff）
+        return Color.argb(alpha, red, green, blue);
     }
 }
