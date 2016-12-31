@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            app:layout_scrollFlags="scroll">
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/SocialFragment_list_item_padding"
+                android:layout_marginRight="@dimen/SocialFragment_list_item_padding">
+
+                <ImageView
+                    android:id="@+id/SocialDetailActivity_User_Img"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/dayhr_userphoto_def"/>
+
+
+                <TextView
+                    android:id="@+id/SocialDetailActivity_User_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/SocialDetailActivity_User_Img"
+                    android:layout_marginLeft="15dp"
+                    android:text="用户"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/SocialDetailActivity_Time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/SocialDetailActivity_User_Name"
+                    android:layout_below="@id/SocialDetailActivity_User_Name"
+                    android:textSize="14sp"
+                    android:text="20分钟前"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/SocialDetailActivity_Content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Happy TAIWAN"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="@dimen/SocialFragment_list_item_padding"
+                android:visibility="gone"
+                android:layout_marginRight="@dimen/SocialFragment_list_item_padding"/>
+
+            <ImageView
+                android:id="@+id/SocialDetailActivity_Photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/temp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/SocialFragment_list_item_padding"
+                android:layout_marginRight="@dimen/SocialFragment_list_item_padding" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/SocialDetailActivity_Photo_RecyclerView"
+                android:layout_width="254dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/SocialFragment_list_item_padding"
+                android:layout_marginRight="@dimen/SocialFragment_list_item_padding" />
+
+            <LinearLayout
+                android:id="@+id/SocialDetailActivity_TransmitItem"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/transmit_item_bg"
+                android:layout_marginLeft="@dimen/SocialFragment_list_item_padding"
+                android:layout_marginRight="@dimen/SocialFragment_list_item_padding">
+
+                <TextView
+                    android:id="@+id/SocialDetailActivity_TransmitItem_Content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\@测试  Test"
+                    android:textColor="@color/grey"
+                    android:textSize="13sp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/SocialDetailActivity_TransmitItem_RecyclerView"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:layout_width="254dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            app:layout_scrollFlags="scroll"
+            android:background="@color/grey_light"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:divider="@drawable/linearlayout_divider"
+            android:baselineAligned="false"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_scrollFlags="exitUntilCollapsed">
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/SocialDetailActivity_Indicate_Comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:drawablePadding="5dp"
+                    android:text="评论"
+                    android:textColor="@color/activity_social_radiobutton_text_color"
+                    android:drawableLeft="@drawable/report_comment_normal"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/SocialDetailActivity_Indicate_Like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:drawablePadding="5dp"
+                    android:text="喜欢"
+                    android:textColor="@color/activity_social_radiobutton_text_color"
+                    android:drawableLeft="@drawable/report_like_not"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:background="@color/grey_light"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/SocialDetailActivity_RecyclerView"
+        android:overScrollMode="never"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="95dp"/> <!--防止被下面bottom挡住-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/SocialDetailActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_gravity="top"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/Toolbar_textSize"
+            android:layout_gravity="center"
+            android:text="内容"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:showDividers="beginning"
+        android:divider="@drawable/linearlayout_divider"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:divider="@drawable/linearlayout_divider"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/SocialDetailActivity_Bottom_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:drawablePadding="5dp"
+                    android:text="评论"
+                    android:drawableLeft="@drawable/report_comment_normal"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/SocialDetailActivity_Bottom_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:drawablePadding="5dp"
+                    android:text="喜欢"
+                    android:drawableLeft="@drawable/social_list_item_like"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

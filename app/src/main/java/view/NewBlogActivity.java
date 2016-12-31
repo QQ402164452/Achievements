@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.jason.achievements.R;
@@ -12,25 +14,29 @@ import com.example.jason.achievements.R;
 import java.util.ArrayList;
 
 import adapter.SelectAdapter;
+import interfaces.InewBlog;
 import interfaces.OnSelectItemClickListener;
+import presenter.PnewBlog;
 
 /**
  * Created by Jason on 2016/12/20.
  */
 
-public class NewBlogActivity extends BaseActivity implements View.OnClickListener{
+public class NewBlogActivity extends BaseActivity implements View.OnClickListener, InewBlog{
     private TextView mCancel;
     private TextView mConfirm;
+    private EditText mContent;
     private ArrayList<String> mSelect;//当前选择的图片数组
     private RecyclerView mRecyclerView;
     private SelectAdapter mAdapter;
+    private PnewBlog mPresenter;
 
     public final static int PHOTO_PICK_REQUEST = 300;
     public final static int PREVIEW_PHOTO_REQUEST = 301;
 
     @Override
     protected void initPre() {
-
+        mPresenter=new PnewBlog(this);
     }
 
     @Override
@@ -39,7 +45,9 @@ public class NewBlogActivity extends BaseActivity implements View.OnClickListene
         mCancel= (TextView) findViewById(R.id.NewBlogActivity_cancel);
         mConfirm= (TextView) findViewById(R.id.NewBlogActivity_confirm);
         mRecyclerView = (RecyclerView) findViewById(R.id.NewBlogActivity_RecyclerView);
+        mContent= (EditText) findViewById(R.id.NewBlogActivity_content);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        mBase=mConfirm;
     }
 
     @Override
@@ -147,8 +155,33 @@ public class NewBlogActivity extends BaseActivity implements View.OnClickListene
                 finish();
             break;
             case R.id.NewBlogActivity_confirm:
-                finish();
+                if(mSelect.size()==9){
+                    mPresenter.submitBlog(mContent.getText().toString(),mSelect);
+                }else{
+                    ArrayList<String> temp=new ArrayList<>();
+                    temp.addAll(mSelect.subList(0,mSelect.size()-1));
+                    mPresenter.submitBlog(mContent.getText().toString(),temp);
+                }
             break;
         }
+    }
+
+    @Override
+    public void onSuccess(final String str) {
+        hideBasePopup();
+        showToast(str);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void onError(final String str){
+        hideBasePopup();
+        showToast(str);
+    }
+
+    @Override
+    public void onLoadingDismiss(){
+        mPresenter.cancel();
     }
 }

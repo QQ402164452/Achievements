@@ -5,13 +5,13 @@
     android:background="@color/default_background">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/NewTaskActivity_toolbar"
+        android:id="@+id/TransmitActivity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark">
 
         <TextView
-            android:id="@+id/NewBlogActivity_cancel"
+            android:id="@+id/TransmitActivity_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -21,7 +21,7 @@
             android:text="取消"/>
 
         <TextView
-            android:id="@+id/NewBlogActivity_toolbar_title"
+            android:id="@+id/TransmitActivity_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -30,7 +30,7 @@
             android:text="编辑"/>
 
         <TextView
-            android:id="@+id/NewBlogActivity_confirm"
+            android:id="@+id/TransmitActivity_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -49,23 +49,41 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/NewBlogActivity_content"
+            android:id="@+id/TransmitActivity_content"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:gravity="top"
-            android:hint="这一刻的心情"
+            android:hint="转发微博"
             android:textColor="@android:color/black"
             android:background="@null"
             android:textSize="14sp"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/NewBlogActivity_RecyclerView"
-            android:layout_width="320dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:background="@drawable/transmit_item_bg">
+
+            <TextView
+                android:id="@+id/TransmitActivity_Other_Content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\@测试  Test"
+                android:textSize="13sp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/TransmitActivity_Other_RecyclerView"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_width="254dp"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
 
 </LinearLayout>

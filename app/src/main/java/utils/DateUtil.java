@@ -13,6 +13,26 @@ import java.util.Locale;
 
 public class DateUtil {
 
+    public static String calTime(Date date){
+        int disparity= (int) ((System.currentTimeMillis()-date.getTime())/1000);//距离当前时间 多少秒
+        if(disparity==0){
+            return "刚刚";
+        }else if(disparity>0&&disparity<60){
+            return disparity+"秒前";
+        }else if(disparity>=60&&disparity<3600){
+            return Math.max(disparity/60,1)+"分钟前";
+        }else if(disparity>=3600&&disparity<86400){
+            return disparity/3600+"小时前";
+        }else if(disparity>=86400&&disparity<2592000){
+            int day=disparity/86400;
+            return day+"天前";
+        }else if(disparity>=2592000&&disparity<31104000){
+            return disparity/2592000+"月前";
+        }else{
+            return disparity/31104000+"年前";
+        }
+    }
+
     public static String getCurrentDate(){
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
         Date date=new Date();

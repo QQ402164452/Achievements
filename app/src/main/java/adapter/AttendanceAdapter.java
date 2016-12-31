@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVObject;
@@ -53,7 +55,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 0:
                 attendance.attendanceView.setVisibility(View.VISIBLE);
                 attendance.weekend.setVisibility(View.GONE);
-                attendance.state.setVisibility(View.VISIBLE);
+                attendance.stateViewGroup.setVisibility(View.VISIBLE);
 
                 AVObject object=bean.getAvObject();
                 if(object!=null){
@@ -62,11 +64,11 @@ public class AttendanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     if(startSign==1&&endSign==1){
                         attendance.state.setText("正常");
                         attendance.state.setTextColor(mContext.getResources().getColor(R.color.green_light));
-                        attendance.state.setCompoundDrawablesWithIntrinsicBounds(mContext.getDrawable(R.drawable.approval_icon_pass_def),null,null,null);
+                        attendance.stateImg.setImageResource(R.drawable.approval_icon_pass_def);
                     }else{
                         attendance.state.setText("异常");
                         attendance.state.setTextColor(mContext.getResources().getColor(R.color.red_light));
-                        attendance.state.setCompoundDrawablesWithIntrinsicBounds(mContext.getDrawable(R.drawable.approval_icon_back_def),null,null,null);
+                        attendance.stateImg.setImageResource(R.drawable.approval_icon_back_def);
                     }
                     attendance.attendanceView.setDefaultColor(0xff99cc00);
                     switch (startSign){
@@ -133,13 +135,13 @@ public class AttendanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     attendance.attendanceView.setDefaultColor(0xffFF7223);
                     attendance.state.setText("异常");
                     attendance.state.setTextColor(mContext.getResources().getColor(R.color.red_light));
-                    attendance.state.setCompoundDrawablesWithIntrinsicBounds(mContext.getDrawable(R.drawable.approval_icon_back_def),null,null,null);
+                    attendance.stateImg.setImageResource(R.drawable.approval_icon_back_def);
                 }
                 break;
             case 1:
                 attendance.attendanceView.setVisibility(View.GONE);
                 attendance.weekend.setVisibility(View.VISIBLE);
-                attendance.state.setVisibility(View.GONE);
+                attendance.stateViewGroup.setVisibility(View.GONE);
                 break;
         }
 
@@ -156,6 +158,8 @@ public class AttendanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         AttendanceView attendanceView;
         TextView weekend;
         TextView state;
+        ImageView stateImg;
+        LinearLayout stateViewGroup;
 
         public AttendanceHolder(View itemView) {
             super(itemView);
@@ -163,6 +167,8 @@ public class AttendanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             attendanceView= (AttendanceView) itemView.findViewById(R.id.AttendanceActivity_list_item_attendanceView);
             weekend= (TextView) itemView.findViewById(R.id.AttendanceActivity_list_item_weekend);
             state= (TextView) itemView.findViewById(R.id.AttendanceActivity_list_item_state);
+            stateImg= (ImageView) itemView.findViewById(R.id.AttendanceActivity_list_item_state_img);
+            stateViewGroup= (LinearLayout) itemView.findViewById(R.id.AttendanceActivity_list_item_state_ViewGroup);
         }
     }
 }

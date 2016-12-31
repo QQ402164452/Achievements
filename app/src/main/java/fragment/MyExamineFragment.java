@@ -31,7 +31,7 @@ import view.ExamineDetailActivity;
  * Created by Jason on 2016/12/6.
  */
 
-public class MyExamineFragment extends LazyFragment {
+public class MyExamineFragment extends LazyFragment{
     private XRecyclerView mRecyclerView;
     private MyExamineAdapter mAdapter;
     private List<AVObject> mList;
@@ -180,4 +180,5 @@ public class MyExamineFragment extends LazyFragment {
         }
 
     }
+
 }

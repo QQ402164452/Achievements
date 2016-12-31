@@ -106,6 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mBasePopup.dismiss();
+                onLoadingDismiss();
             }
         });
         showBasePopup(view, root, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -117,6 +118,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         layoutParams.alpha = alpha;
         getWindow().setAttributes(layoutParams);
     }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent e) {
@@ -270,6 +272,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void onPermissionSuccess(){
+
+    }
+
+    public void onLoadingDismiss(){
 
     }
 }

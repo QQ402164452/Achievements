@@ -46,7 +46,7 @@ import utils.WeakHandler;
  * Created by Jason on 2016/12/17.
  */
 
-public class AttendanceActivity extends BaseActivity {
+public class AttendanceActivity extends BaseActivity implements Irecy{
     private Toolbar mToolbar;
     private ImageView mCalendar;
     private ArrayList<String> mYears;
@@ -115,13 +115,7 @@ public class AttendanceActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mHandler=new WeakHandler(new Irecy() {
-            @Override
-            public void doLoadData(int type) {
-                mRecy.refreshComplete();
-                updateList();
-            }
-        });
+        mHandler=new WeakHandler(this);
         mYears=new ArrayList<>(Arrays.asList("2013","2014","2015","2016","2017","2018","2019","2020"));
         mTime.setText(String.format(Locale.CHINA,"考勤数据:%s年%d月",mYears.get(mCurrentYear),mCurrentMonth+1));
         AVUser user = AVUser.getCurrentUser();
@@ -164,8 +158,7 @@ public class AttendanceActivity extends BaseActivity {
             public void onItemClickListener(View view, int position) {
                 mCurrentMonth=position;
                 hideBasePopup();
-                mTime.setText(String.format("考勤数据:%s年%d月",mYears.get(mCurrentYear),position+1));
-//                getData();
+                mTime.setText(String.format(Locale.CHINA,"考勤数据:%s年%d月",mYears.get(mCurrentYear),position+1));
                 updateList();
             }
         });
@@ -278,11 +271,13 @@ public class AttendanceActivity extends BaseActivity {
 
                             int totalHour= (int) (totalTime/60);
                             int totalMin= (int) (totalTime%60);
-                            mTotalTime.setText(String.format("总工时:%d小时%d分钟",totalHour,totalMin));
-                            mAbsenceCount.setText(String.format("缺勤:%d次",absenceCount));
+                            mTotalTime.setText(String.format(Locale.CHINA,"总工时:%d小时%d分钟",totalHour,totalMin));
+                            mAbsenceCount.setText(String.format(Locale.CHINA,"缺勤:%d次",absenceCount));
                         }else{
                             mTotalTime.setText("总工时:0小时");
                             mAbsenceCount.setText("缺勤:0次");
+                            mList.clear();
+                            mAdapter.notifyDataSetChanged();
                         }
 
                     }else{
@@ -301,5 +296,11 @@ public class AttendanceActivity extends BaseActivity {
         } else {
             view.setText(String.format("%s:%s", title, str));
         }
+    }
+
+    @Override
+    public void doLoadData(int type) {
+        mRecy.refreshComplete();
+        updateList();
     }
 }

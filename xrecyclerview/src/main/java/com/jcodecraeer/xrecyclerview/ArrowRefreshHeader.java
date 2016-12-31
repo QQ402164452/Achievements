@@ -109,13 +109,16 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 			mArrowImageView.clearAnimation();
 			mArrowImageView.setVisibility(View.INVISIBLE);
 			mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.getChildAt(0).setVisibility(View.VISIBLE);//结束动画  防止内存泄漏
             smoothScrollTo(mMeasuredHeight);
 		} else if(state == STATE_DONE) {
             mArrowImageView.setVisibility(View.INVISIBLE);
-            mProgressBar.setVisibility(View.INVISIBLE);
+            mProgressBar.setVisibility(View.GONE);
+            mProgressBar.getChildAt(0).setVisibility(View.GONE);
         } else {	// 显示箭头图片
-			mArrowImageView.setVisibility(View.VISIBLE);
-			mProgressBar.setVisibility(View.INVISIBLE);
+			mArrowImageView.setVisibility(View.VISIBLE);//箭头图片
+			mProgressBar.setVisibility(View.GONE);
+            mProgressBar.getChildAt(0).setVisibility(View.GONE);
 		}
 		
 		switch(state){

@@ -5,13 +5,13 @@
     android:background="@color/default_background">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/NewTaskActivity_toolbar"
+        android:id="@+id/CommentActivity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark">
 
         <TextView
-            android:id="@+id/NewBlogActivity_cancel"
+            android:id="@+id/CommentActivity_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -21,16 +21,16 @@
             android:text="取消"/>
 
         <TextView
-            android:id="@+id/NewBlogActivity_toolbar_title"
+            android:id="@+id/CommentActivity_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:textSize="@dimen/Toolbar_textSize"
             android:layout_gravity="center"
-            android:text="编辑"/>
+            android:text="写评论"/>
 
         <TextView
-            android:id="@+id/NewBlogActivity_confirm"
+            android:id="@+id/CommentActivity_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -41,31 +41,15 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/CommentActivity_Input_Comment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:layout_height="250dp"
         android:background="@android:color/white"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/NewBlogActivity_content"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:gravity="top"
-            android:hint="这一刻的心情"
-            android:textColor="@android:color/black"
-            android:background="@null"
-            android:textSize="14sp"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/NewBlogActivity_RecyclerView"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
-
-    </LinearLayout>
-
-
+        android:gravity="top"
+        android:padding="15dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:hint="写评论..."/>
 
 </LinearLayout>

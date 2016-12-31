@@ -59,6 +59,7 @@ public class MainActivity extends BaseActivity{
 
         mAppBtn= (RadioButton) findViewById(R.id.MainActivity_btn_app);
         mRadioGroup= (RadioGroup) findViewById(R.id.MainActivity_radioGroup);
+        mBase=mRadioGroup;
     }
 
     public void initData(){

@@ -204,6 +204,24 @@
 
         </activity>
 
+        <activity android:name="view.PhotoActivity">
+
+        </activity>
+
+        <activity android:name="view.SocialDetailActivity">
+
+        </activity>
+
+        <activity android:name="view.CommentActivity">
+
+        </activity>
+
+        <activity android:name="view.TransmitActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+        </activity>
+
+
         <service android:name="com.amap.api.location.APSService"></service>
 
     </application>

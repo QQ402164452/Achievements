@@ -35,16 +35,33 @@
         android:visibility="gone"
         android:textColor="@color/green_light"/>
 
-    <TextView
-        android:id="@+id/AttendanceActivity_list_item_state"
+
+    <LinearLayout
+        android:id="@+id/AttendanceActivity_list_item_state_ViewGroup"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/approval_icon_pass_def"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/green_light"
-        android:drawablePadding="5dp"
-        android:gravity="center"
-        android:text="正常" />
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:id="@+id/AttendanceActivity_list_item_state_img"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/approval_icon_pass_def"/>
+
+        <TextView
+            android:id="@+id/AttendanceActivity_list_item_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green_light"
+            android:layout_marginLeft="2dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:text="正常" />
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>

@@ -15,6 +15,7 @@ public class WeakHandler extends Handler {
     private WeakReference<Irecy> weakReference;
 
     public WeakHandler(Irecy object){
+        super();
         weakReference=new WeakReference<>(object);
     }
 
