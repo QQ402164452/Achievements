@@ -14,15 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/SocialFragment_User_img"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@drawable/dayhr_userphoto_def"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"

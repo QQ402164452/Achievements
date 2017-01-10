@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.ReportAdapter;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.OnCustomItemClickListener;
 import utils.NetworkUtil;
 import utils.WeakHandler;
@@ -31,7 +30,7 @@ import view.ReportDetailActivity;
  * Created by Jason on 2016/12/2.
  */
 
-public class MyReportFragment extends LazyFragment  {
+public class MyReportFragment extends LazyFragment implements WeakObject {
     private XRecyclerView mRecyclerView;
     private View mEmptyView;
     private ReportAdapter mAdapter;
@@ -44,20 +43,7 @@ public class MyReportFragment extends LazyFragment  {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mList=new ArrayList<>();
-        mHandler=new WeakHandler(new Irecy() {
-            @Override
-            public void doLoadData(int type) {
-                switch (type){
-                    case 0:
-                        mSkip=0;
-                        getData();
-                        break;
-                    case 1:
-                        getData();
-                        break;
-                }
-            }
-        });
+        mHandler=new WeakHandler(this);
     }
 
     @Override
@@ -152,5 +138,18 @@ public class MyReportFragment extends LazyFragment  {
                 mHandler.sendEmptyMessageDelayed(1,1000);
             }
         });
+    }
+
+    @Override
+    public void doLoadData(int type) {
+        switch (type){
+            case 0:
+                mSkip=0;
+                getData();
+                break;
+            case 1:
+                getData();
+                break;
+        }
     }
 }

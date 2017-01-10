@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/ContactFragment_List_Head_Item_Indicate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_light"
+        android:text="A"
+        android:textSize="16sp"
+        android:paddingLeft="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ContactFragment_List_Head_Item_img"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/dayhr_userphoto_def"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ContactFragment_List_Head_Item_img">
+
+            <TextView
+                android:id="@+id/ContactFragment_List_Head_Item_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="马云"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/ContactFragment_List_Head_Item_Job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="职位:Ceo" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

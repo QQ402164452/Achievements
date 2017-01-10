@@ -7,7 +7,7 @@
     <dimen name="MainActivity_Bottom_textSize">13sp</dimen>
     <dimen name="MainActivity_Bottom_drawableSizes">25dp</dimen>
     <dimen name="MainActivity_Bottom_drawablePadding">2dp</dimen>
-    <dimen name="Toolbar_textSize">18sp</dimen>
+    <dimen name="Toolbar_textSize">16sp</dimen>
     <dimen name="fitsSystemWindows_height">76dp</dimen>
     <dimen name="CenterFragment_divider_height">30dp</dimen>
     <dimen name="CenterFragment_item_height">60dp</dimen>
@@ -27,7 +27,7 @@
     <dimen name="PasswordActivity_margin_tb">20dp</dimen>
 
     <dimen name="chat_marginTopBottom">10dp</dimen>
-    <dimen name="chat_marginLeftRight">20dp</dimen>
+    <dimen name="chat_marginLeftRight">10dp</dimen>
     <dimen name="chat_margin">10dp</dimen>
     <dimen name="chat_textSize">16sp</dimen>
     <dimen name="chat_padding">10dp</dimen>

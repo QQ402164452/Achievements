@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
@@ -22,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import adapter.OtherExamineAdapter;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.OnCustomItemClickListener;
 import utils.NetworkUtil;
 import utils.WeakHandler;
@@ -34,7 +33,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by Jason on 2016/12/6.
  */
 
-public class OtherExamineFragment extends LazyFragment {
+public class OtherExamineFragment extends LazyFragment implements WeakObject {
     private XRecyclerView mRecyclerView;
     private View mEmptyView;
     private OtherExamineAdapter mAdapter;
@@ -52,20 +51,7 @@ public class OtherExamineFragment extends LazyFragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mList=new ArrayList<>();
-        mHandler=new WeakHandler(new Irecy() {
-            @Override
-            public void doLoadData(int type) {
-                switch (type){
-                    case 0:
-                        mSkip=0;
-                        getData();
-                        break;
-                    case 1:
-                        getData();
-                        break;
-                }
-            }
-        });
+        mHandler=new WeakHandler(this);
     }
 
     @Override
@@ -177,6 +163,19 @@ public class OtherExamineFragment extends LazyFragment {
             mList.remove(position);
             mAdapter.notifyItemRemoved(position);
             mAdapter.notifyItemRangeChanged(position,mList.size()-position+1,1);
+        }
+    }
+
+    @Override
+    public void doLoadData(int code) {
+        switch (code){
+            case 0:
+                mSkip=0;
+                getData();
+                break;
+            case 1:
+                getData();
+                break;
         }
     }
 }

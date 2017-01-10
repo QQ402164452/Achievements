@@ -1,12 +1,10 @@
 package view;
 
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.ArrayMap;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,13 +20,10 @@ import com.bumptech.glide.Glide;
 import com.example.jason.achievements.R;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,7 +31,7 @@ import adapter.AttendanceAdapter;
 import adapter.CalendarAdapter;
 import bean.AttendanceBean;
 import customView.GlideCircleTransform;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.OnCustomItemClickListener;
 import utils.DateUtil;
 import utils.NetworkUtil;
@@ -46,7 +41,7 @@ import utils.WeakHandler;
  * Created by Jason on 2016/12/17.
  */
 
-public class AttendanceActivity extends BaseActivity implements Irecy{
+public class AttendanceActivity extends BaseActivity implements WeakObject {
     private Toolbar mToolbar;
     private ImageView mCalendar;
     private ArrayList<String> mYears;

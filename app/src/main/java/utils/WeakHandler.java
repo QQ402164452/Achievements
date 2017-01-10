@@ -5,24 +5,24 @@ import android.os.Message;
 
 import java.lang.ref.WeakReference;
 
-import interfaces.Irecy;
+import interfaces.WeakObject;
 
 /**
  * Created by Jason on 2016/12/16.
  */
 
 public class WeakHandler extends Handler {
-    private WeakReference<Irecy> weakReference;
+    private WeakReference<WeakObject> weakObject;
 
-    public WeakHandler(Irecy object){
+    public WeakHandler(WeakObject object){
         super();
-        weakReference=new WeakReference<>(object);
+        weakObject = new WeakReference<WeakObject>(object);
     }
 
     @Override
     public void handleMessage(Message msg){
         super.handleMessage(msg);
-        Irecy object=weakReference.get();
+        WeakObject object=weakObject.get();
         if(object!=null){
             object.doLoadData(msg.what);
         }

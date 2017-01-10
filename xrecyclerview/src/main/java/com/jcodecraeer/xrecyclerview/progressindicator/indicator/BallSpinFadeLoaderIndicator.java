@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,15 +67,30 @@ public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
     }
 
     @Override
-    public List<Animator> createAnimation() {
-        List<Animator> animators=new ArrayList<>();
+    public void createAnimation() {
+        mAnimators=new ArrayList<>();
         int[] delays= {0, 120, 240, 360, 480, 600, 720, 780, 840};
         for (int i = 0; i < 8; i++) {
-            final int index=i;
             ValueAnimator scaleAnim=ValueAnimator.ofFloat(1,0.4f,1);
             scaleAnim.setDuration(1000);
             scaleAnim.setRepeatCount(-1);
             scaleAnim.setStartDelay(delays[i]);
+
+            ValueAnimator alphaAnim=ValueAnimator.ofInt(255, 77, 255);
+            alphaAnim.setDuration(1000);
+            alphaAnim.setRepeatCount(-1);
+            alphaAnim.setStartDelay(delays[i]);
+            mAnimators.add(scaleAnim);
+            mAnimators.add(alphaAnim);
+        }
+    }
+
+    @Override
+    public void addAllListener() {
+        int size=mAnimators.size();
+        for(int i=0;i<size/2;i++){
+            final int index=i;
+            ValueAnimator scaleAnim= (ValueAnimator) mAnimators.get(2*i);
             scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
@@ -82,12 +98,7 @@ public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
                     postInvalidate();
                 }
             });
-            scaleAnim.start();
-
-            ValueAnimator alphaAnim=ValueAnimator.ofInt(255, 77, 255);
-            alphaAnim.setDuration(1000);
-            alphaAnim.setRepeatCount(-1);
-            alphaAnim.setStartDelay(delays[i]);
+            ValueAnimator alphaAnim= (ValueAnimator) mAnimators.get(2*i+1);
             alphaAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
@@ -95,11 +106,15 @@ public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
                     postInvalidate();
                 }
             });
-            alphaAnim.start();
-            animators.add(scaleAnim);
-            animators.add(alphaAnim);
         }
-        return animators;
+    }
+
+    @Override
+    public void removeAllListener() {
+        int size=mAnimators.size();
+        for(int i=0;i<size;i++){
+            mAnimators.get(i).removeAllListeners();
+        }
     }
 
     final class Point{

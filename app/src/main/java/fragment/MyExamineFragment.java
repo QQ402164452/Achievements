@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.MyExamineAdapter;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.OnCustomItemClickListener;
 import utils.NetworkUtil;
 import utils.WeakHandler;
@@ -31,7 +30,7 @@ import view.ExamineDetailActivity;
  * Created by Jason on 2016/12/6.
  */
 
-public class MyExamineFragment extends LazyFragment{
+public class MyExamineFragment extends LazyFragment implements WeakObject {
     private XRecyclerView mRecyclerView;
     private MyExamineAdapter mAdapter;
     private List<AVObject> mList;
@@ -48,20 +47,7 @@ public class MyExamineFragment extends LazyFragment{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mList=new ArrayList<>();
-        mHandler=new WeakHandler(new Irecy() {
-            @Override
-            public void doLoadData(int type) {
-                switch (type){
-                    case 0:
-                        mSkip=0;
-                        getData();
-                        break;
-                    case 1:
-                        getData();
-                        break;
-                }
-            }
-        });
+        mHandler=new WeakHandler(this);
     }
 
     @Override
@@ -181,4 +167,16 @@ public class MyExamineFragment extends LazyFragment{
 
     }
 
+    @Override
+    public void doLoadData(int code) {
+        switch (code){
+            case 0:
+                mSkip=0;
+                getData();
+                break;
+            case 1:
+                getData();
+                break;
+        }
+    }
 }

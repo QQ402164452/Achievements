@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.ReportAdapter;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.OnCustomItemClickListener;
 import utils.NetworkUtil;
 import utils.WeakHandler;
@@ -30,7 +30,7 @@ import view.ReportDetailActivity;
  * Created by Jason on 2016/12/4.
  */
 
-public class OtherReportChildFragment extends BaseFragment {
+public class OtherReportChildFragment extends BaseFragment implements WeakObject {
     private XRecyclerView mRecyclerView;
     private View mEmptyView;
     private ReportAdapter mAdapter;
@@ -44,20 +44,7 @@ public class OtherReportChildFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         mType= (int) getArguments().getSerializable("type");
         mList=new ArrayList<>();
-        mHandler=new WeakHandler(new Irecy() {
-            @Override
-            public void doLoadData(int type) {
-                switch (type){
-                    case 0:
-                        mSkip=0;
-                        initData();
-                        break;
-                    case 1:
-                        initData();
-                        break;
-                }
-            }
-        });
+        mHandler=new WeakHandler(this);
     }
 
     @Override
@@ -165,5 +152,18 @@ public class OtherReportChildFragment extends BaseFragment {
         OtherReportChildFragment fragment=new OtherReportChildFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void doLoadData(int code) {
+        switch (code){
+            case 0:
+                mSkip=0;
+                initData();
+                break;
+            case 1:
+                initData();
+                break;
+        }
     }
 }

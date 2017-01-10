@@ -1,30 +1,22 @@
 package view;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.avos.avoscloud.AVObject;
 import com.example.jason.achievements.R;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.SignAdapter;
 import bean.SignBean;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.Isign;
 import presenter.Psign;
 import utils.DateUtil;
@@ -104,7 +96,7 @@ public class SignActivity extends BaseActivity implements Isign {
         mTime.setText(DateUtil.getCurrentDate());
         mDay.setText(DateUtil.getCurrentDay());
         mPresenter=new Psign(this,this);
-        mHandler=new WeakHandler(new Irecy() {
+        mHandler=new WeakHandler(new WeakObject() {
             @Override
             public void doLoadData(int type) {
                 mPresenter.setListData(0);

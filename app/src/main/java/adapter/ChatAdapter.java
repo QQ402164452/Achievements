@@ -97,12 +97,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         return mList.size();
     }
 
-    class MeHolder extends RecyclerView.ViewHolder{
+    private static class MeHolder extends RecyclerView.ViewHolder{
         ImageView img;
         TextView content;
         ImageView error;
 
-        public MeHolder(View itemView) {
+        private MeHolder(View itemView) {
             super(itemView);
             img= (ImageView) itemView.findViewById(R.id.Chat_me_img);
             content= (TextView) itemView.findViewById(R.id.Chat_me_content);
@@ -110,12 +110,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
-    class OtherHolder extends RecyclerView.ViewHolder{
+    private static class OtherHolder extends RecyclerView.ViewHolder{
         ImageView img;
         TextView content;
         ImageView error;
 
-        public OtherHolder(View itemView) {
+        private OtherHolder(View itemView) {
             super(itemView);
             img= (ImageView) itemView.findViewById(R.id.Chat_other_img);
             content= (TextView) itemView.findViewById(R.id.Chat_other_content);

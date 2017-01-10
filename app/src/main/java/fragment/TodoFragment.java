@@ -3,16 +3,11 @@ package fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +17,6 @@ import com.avos.avoscloud.AVObject;
 import com.example.jason.achievements.R;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,16 +24,12 @@ import java.util.List;
 import java.util.Locale;
 
 import adapter.MyTaskAdapter;
-import interfaces.Irecy;
 import interfaces.ItodoTask;
 import interfaces.OnCustomItemClickListener;
 import presenter.PtodoTask;
-import utils.WeakHandler;
 import view.DoneTaskActivity;
 import view.TaskActivity;
 import view.TaskDetailActivity;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Jason on 2016/12/9.

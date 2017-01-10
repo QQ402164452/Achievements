@@ -3,11 +3,7 @@ package fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +16,13 @@ import com.bumptech.glide.Glide;
 import com.example.jason.achievements.R;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import adapter.SocialAdapter;
 import customView.GlideCircleTransform;
-import interfaces.Irecy;
 import interfaces.Isocial;
 import interfaces.OnSocialItemClickListener;
 import presenter.Psocial;
-import utils.WeakHandler;
 import view.CommentActivity;
 import view.MainActivity;
 import view.NewBlogActivity;
@@ -45,7 +38,6 @@ public class SocialFragment extends BaseFragment implements Isocial {
     private XRecyclerView mRecyclerView;
     private MainActivity mParent;
     private SocialAdapter mAdapter;
-    private ImageView mUserImg;
     private ImageView mNewBtn;
     private Psocial mPresenter;
 
@@ -78,21 +70,6 @@ public class SocialFragment extends BaseFragment implements Isocial {
 
     @Override
     public void initData() {
-        AVUser user = AVUser.getCurrentUser();
-        if (user != null) {
-            AVFile img = user.getAVFile("portrait");
-            if (img != null) {
-                Glide.with(mParent).load(img.getUrl())
-                        .dontAnimate()
-                        .centerCrop()
-                        .placeholder(R.drawable.dayhr_userphoto_def)
-                        .bitmapTransform(new GlideCircleTransform(mParent))
-                        .into(mUserImg);
-
-            } else {
-                mUserImg.setImageResource(R.drawable.dayhr_userphoto_def);
-            }
-        }
         mAdapter = new SocialAdapter(mParent);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -141,7 +118,6 @@ public class SocialFragment extends BaseFragment implements Isocial {
     @Override
     public void initView(View view) {
         mRecyclerView = (XRecyclerView) view.findViewById(R.id.SocialFragment_recyclerView);
-        mUserImg = (ImageView) view.findViewById(R.id.SocialFragment_User_img);
         mNewBtn = (ImageView) view.findViewById(R.id.SocialFragment_new_Item);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mParent));
     }

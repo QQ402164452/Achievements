@@ -3,7 +3,10 @@ package com.jcodecraeer.xrecyclerview.progressindicator.indicator;
 import android.animation.Animator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +17,7 @@ public abstract class BaseIndicatorController {
 
     private View mTarget;
 
-    private List<Animator> mAnimators;
+    protected List<Animator> mAnimators;
 
 
     public void setTarget(View target){
@@ -35,7 +38,7 @@ public abstract class BaseIndicatorController {
     }
 
     public void postInvalidate(){
-        mTarget.postInvalidate();
+        mTarget.invalidate();//直接刷新 11
     }
 
     /**
@@ -48,10 +51,10 @@ public abstract class BaseIndicatorController {
     /**
      * create animation or animations
      */
-    public abstract List<Animator> createAnimation();
+    public abstract void createAnimation();
 
     public void initAnimation(){
-        mAnimators=createAnimation();
+        createAnimation();
     }
 
     /**
@@ -66,26 +69,37 @@ public abstract class BaseIndicatorController {
             return;
         }
         int count=mAnimators.size();
-        for (int i = 0; i < count; i++) {
-            Animator animator=mAnimators.get(i);
-            boolean isRunning=animator.isRunning();
-            switch (animStatus){
-                case START:
+        switch (animStatus){
+            case START:
+                addAllListener();
+                for (int i = 0; i < count; i++) {
+                    Animator animator=mAnimators.get(i);
+                    boolean isRunning=animator.isRunning();
                     if (!isRunning){
                         animator.start();
                     }
-                    break;
-                case END:
+                }
+                break;
+            case END:
+                removeAllListener();
+                for (int i = 0; i < count; i++) {
+                    Animator animator=mAnimators.get(i);
+                    boolean isRunning=animator.isRunning();
                     if (isRunning){
                         animator.end();
                     }
-                    break;
-                case CANCEL:
+                }
+                break;
+            case CANCEL:
+                removeAllListener();
+                for (int i = 0; i < count; i++) {
+                    Animator animator=mAnimators.get(i);
+                    boolean isRunning=animator.isRunning();
                     if (isRunning){
                         animator.cancel();
                     }
-                    break;
-            }
+                }
+                break;
         }
     }
 
@@ -93,6 +107,10 @@ public abstract class BaseIndicatorController {
     public enum AnimStatus{
         START,END,CANCEL
     }
+
+    public abstract void addAllListener();
+    public abstract void removeAllListener();
+
 
 
 

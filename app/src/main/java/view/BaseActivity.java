@@ -177,7 +177,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initListener();
 
-    protected void checkPermission(String permission, int requestCode) {
+    protected boolean checkPermission(String permission, int requestCode) {//申请单个权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
@@ -185,11 +185,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                 } else {
                     ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
                 }
+                return false;
+            }else{
+                return true;
             }
         }
+        return true;
     }
 
-    protected void checkAllPermission(String[] perArray, int requestCode) {
+    protected void checkAllPermission(String[] perArray, int requestCode) {//申请多个权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             List<String> deniedPers = new ArrayList<>();
             for (int i = 0; i < perArray.length; i++) {//获取批量请求中 被拒绝的权限列表
@@ -204,7 +208,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void onRequestAllResult(String[] permission, int[] grantResults) {
+    protected void onRequestAllResult(String[] permission, int[] grantResults) {//检查多个权限申请的结果
         int grantedNum = 0;
         for (int i = 0; i < grantResults.length; i++) {
             if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
@@ -223,29 +227,26 @@ public abstract class BaseActivity extends AppCompatActivity {
                 onRequestAllResult(permission, grantResults);
                 break;
             case PermissionCodes.PERMISSIONS_REQUEST_LOCATION:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    onPermissionSuccess();
-                }else{
-                    showAlertDialog("位置信息权限被禁止，将导致定位失败。是否开启该权限？(步骤：应用信息->权限->'勾选'位置信息)");
-                }
+                onRequestResult(PermissionCodes.PERMISSIONS_REQUEST_LOCATION,
+                        grantResults,"位置信息权限被禁止，将导致定位失败。是否开启该权限？(步骤：应用信息->权限->'勾选'位置信息)");
                 break;
             case PermissionCodes.PERMISSIONS_REQUEST_PHONE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    onPermissionSuccess();
-                }else {
-                    showAlertDialog("拨打电话权限被禁止，无法使用拨打电话功能。是否开启该权限？(步骤：应用信息->权限->'勾选'电话)");
-                }
+                onRequestResult(PermissionCodes.PERMISSIONS_REQUEST_PHONE,
+                        grantResults,"拨打电话权限被禁止，无法使用拨打电话功能。是否开启该权限？(步骤：应用信息->权限->'勾选'电话)");
                 break;
             case PermissionCodes.PERMISSIONS_REQUEST_STORAGE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    onPermissionSuccess();
-                }else {
-                    showAlertDialog("存储空间权限被禁止，无法使用读取存储空间。是否开启该权限？(步骤：应用信息->权限->'勾选'存储空间)");
-                }
+                onRequestResult(PermissionCodes.PERMISSIONS_REQUEST_STORAGE,
+                        grantResults,"存储空间权限被禁止，无法使用读取存储空间。是否开启该权限？(步骤：应用信息->权限->'勾选'存储空间)");
                 break;
+        }
+    }
+
+    public void onRequestResult(int requestCode,int[] grantResults,String warning){
+        if (grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            onPermissionSuccess(requestCode);
+        }else {
+            showAlertDialog(warning);
         }
     }
 
@@ -271,7 +272,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }).create().show();
     }
 
-    public void onPermissionSuccess(){
+    public void onPermissionSuccess(int requestCode){//空方法 子类覆写该类来做业务逻辑
 
     }
 

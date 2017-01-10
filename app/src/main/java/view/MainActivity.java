@@ -1,16 +1,8 @@
 package view;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,7 +18,7 @@ import com.example.jason.achievements.R;
 import fragment.AppFragment;
 import fragment.CenterFragment;
 import fragment.ContactFragment;
-import fragment.PersonalFragemnt;
+import fragment.PersonalFragment;
 import fragment.SocialFragment;
 import utils.PermissionCodes;
 
@@ -42,7 +34,7 @@ public class MainActivity extends BaseActivity{
 
     private AppFragment mAppFragment;
     private CenterFragment mCenterFragment;
-    private PersonalFragemnt mPersonalFragment;
+    private PersonalFragment mPersonalFragment;
     private SocialFragment mSocialFragment;
     private ContactFragment mContactFragment;
 
@@ -66,7 +58,7 @@ public class MainActivity extends BaseActivity{
         mFragmentManager=getSupportFragmentManager();
         mAppFragment=new AppFragment();
         mCenterFragment=new CenterFragment();
-        mPersonalFragment=new PersonalFragemnt();
+        mPersonalFragment=new PersonalFragment();
         mSocialFragment=new SocialFragment();
         mContactFragment=new ContactFragment();
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+
+    <RelativeLayout
+        android:id="@+id/PersonalFragment_List_Item_Img_Group"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/PersonalFragment_List_Item_Img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/dayhr_userphoto_def"/>
+
+        <ImageView
+            android:id="@+id/PersonalFragment_List_Item_NewIndicator"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/red_circle"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/PersonalFragment_List_Item_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/PersonalFragment_List_Item_Img_Group"
+        android:layout_toLeftOf="@id/PersonalFragment_List_Item_Time">
+
+        <TextView
+            android:id="@+id/PersonalFragment_List_Item_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/PersonalFragment_List_Item_Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+</RelativeLayout>

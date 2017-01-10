@@ -9,38 +9,12 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.jcodecraeer.xrecyclerview.R;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallBeatIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallClipRotateIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallClipRotateMultipleIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallClipRotatePulseIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallGridBeatIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallGridPulseIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallPulseIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallPulseRiseIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallPulseSyncIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallRotateIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallScaleIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallScaleMultipleIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallScaleRippleIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallScaleRippleMultipleIndicator;
 import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallSpinFadeLoaderIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallTrianglePathIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallZigZagDeflectIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallZigZagIndicator;
 import com.jcodecraeer.xrecyclerview.progressindicator.indicator.BaseIndicatorController;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.CubeTransitionIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.LineScaleIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.LineScalePartyIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.LineScalePulseOutIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.LineScalePulseOutRapidIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.LineSpinFadeLoaderIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.PacmanIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.SemiCircleSpinIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.SquareSpinIndicator;
-import com.jcodecraeer.xrecyclerview.progressindicator.indicator.TriangleSkewSpinIndicator;
 
 
 /**
@@ -152,8 +126,6 @@ public class AVLoadingIndicatorView extends View{
 
     BaseIndicatorController mIndicatorController;
 
-    private boolean mHasAnimation;
-
     public AVLoadingIndicatorView(Context context) {
         super(context);
         init(null, 0);
@@ -174,6 +146,7 @@ public class AVLoadingIndicatorView extends View{
     public AVLoadingIndicatorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs, defStyleAttr);
+
     }
 
     private void init(AttributeSet attrs, int defStyle) {
@@ -185,12 +158,12 @@ public class AVLoadingIndicatorView extends View{
         mPaint.setColor(mIndicatorColor);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setAntiAlias(true);
-        applyIndicator();
+        initIndicator();
     }
 
     public void setIndicatorId(int  indicatorId){
         mIndicatorId = indicatorId;
-        applyIndicator();
+        initIndicator();
     }
 
     public void setIndicatorColor(int color){
@@ -199,94 +172,10 @@ public class AVLoadingIndicatorView extends View{
         this.invalidate();
     }
 
-    private void applyIndicator(){
-        switch (mIndicatorId){
-            case BallPulse:
-                mIndicatorController=new BallPulseIndicator();
-                break;
-            case BallGridPulse:
-                mIndicatorController=new BallGridPulseIndicator();
-                break;
-            case BallClipRotate:
-                mIndicatorController=new BallClipRotateIndicator();
-                break;
-            case BallClipRotatePulse:
-                mIndicatorController=new BallClipRotatePulseIndicator();
-                break;
-            case SquareSpin:
-                mIndicatorController=new SquareSpinIndicator();
-                break;
-            case BallClipRotateMultiple:
-                mIndicatorController=new BallClipRotateMultipleIndicator();
-                break;
-            case BallPulseRise:
-                mIndicatorController=new BallPulseRiseIndicator();
-                break;
-            case BallRotate:
-                mIndicatorController=new BallRotateIndicator();
-                break;
-            case CubeTransition:
-                mIndicatorController=new CubeTransitionIndicator();
-                break;
-            case BallZigZag:
-                mIndicatorController=new BallZigZagIndicator();
-                break;
-            case BallZigZagDeflect:
-                mIndicatorController=new BallZigZagDeflectIndicator();
-                break;
-            case BallTrianglePath:
-                mIndicatorController=new BallTrianglePathIndicator();
-                break;
-            case BallScale:
-                mIndicatorController=new BallScaleIndicator();
-                break;
-            case LineScale:
-                mIndicatorController=new LineScaleIndicator();
-                break;
-            case LineScaleParty:
-                mIndicatorController=new LineScalePartyIndicator();
-                break;
-            case BallScaleMultiple:
-                mIndicatorController=new BallScaleMultipleIndicator();
-                break;
-            case BallPulseSync:
-                mIndicatorController=new BallPulseSyncIndicator();
-                break;
-            case BallBeat:
-                mIndicatorController=new BallBeatIndicator();
-                break;
-            case LineScalePulseOut:
-                mIndicatorController=new LineScalePulseOutIndicator();
-                break;
-            case LineScalePulseOutRapid:
-                mIndicatorController=new LineScalePulseOutRapidIndicator();
-                break;
-            case BallScaleRipple:
-                mIndicatorController=new BallScaleRippleIndicator();
-                break;
-            case BallScaleRippleMultiple:
-                mIndicatorController=new BallScaleRippleMultipleIndicator();
-                break;
-            case BallSpinFadeLoader:
-                mIndicatorController=new BallSpinFadeLoaderIndicator();
-                break;
-            case LineSpinFadeLoader:
-                mIndicatorController=new LineSpinFadeLoaderIndicator();
-                break;
-            case TriangleSkewSpin:
-                mIndicatorController=new TriangleSkewSpinIndicator();
-                break;
-            case Pacman:
-                mIndicatorController=new PacmanIndicator();
-                break;
-            case BallGridBeat:
-                mIndicatorController=new BallGridBeatIndicator();
-                break;
-            case SemiCircleSpin:
-                mIndicatorController=new SemiCircleSpinIndicator();
-                break;
-        }
+    private void initIndicator(){
+        mIndicatorController=new BallSpinFadeLoaderIndicator();
         mIndicatorController.setTarget(this);
+        mIndicatorController.initAnimation();
     }
 
     @Override
@@ -319,21 +208,15 @@ public class AVLoadingIndicatorView extends View{
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (!mHasAnimation){
-            mHasAnimation=true;
-            applyAnimation();
-        }
     }
 
     @Override
     public void setVisibility(int v) {
-        if (getVisibility() != v) {
-            super.setVisibility(v);
-            if (v == GONE || v == INVISIBLE) {
-                mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.END);
-            } else {
-                mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.START);
-            }
+        super.setVisibility(v);
+        if (v == GONE || v == INVISIBLE) {
+            mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.END);
+        } else {
+            mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.START);
         }
     }
 
@@ -346,20 +229,13 @@ public class AVLoadingIndicatorView extends View{
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mIndicatorController.setAnimationStatus(BaseIndicatorController.AnimStatus.START);
     }
 
     void drawIndicator(Canvas canvas){
         mIndicatorController.draw(canvas, mPaint);
     }
 
-    void applyAnimation(){
-        mIndicatorController.initAnimation();
-    }
-
     private int dp2px(int dpValue) {
         return (int) getContext().getResources().getDisplayMetrics().density * dpValue;
     }
-
-
 }

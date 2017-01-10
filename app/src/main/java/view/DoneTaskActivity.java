@@ -26,7 +26,7 @@ import customView.DividerItemDecoration;
 import customView.DividerItemExceptLastDecoration;
 import fragment.TodoFragment;
 import interfaces.IdoneTask;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.OnCustomItemClickListener;
 import presenter.PdoneTask;
 import utils.WeakHandler;
@@ -79,7 +79,7 @@ public class DoneTaskActivity extends OtherBaseActivity implements IdoneTask{
 
     @Override
     public void initListener() {
-        mHandler=new WeakHandler(new Irecy() {
+        mHandler=new WeakHandler(new WeakObject() {
             @Override
             public void doLoadData(int type) {
                 switch (type){

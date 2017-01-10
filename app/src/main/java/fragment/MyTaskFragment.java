@@ -3,8 +3,6 @@ package fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,10 +14,8 @@ import android.widget.TextView;
 
 import com.avos.avoscloud.AVObject;
 import com.example.jason.achievements.R;
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -30,7 +26,7 @@ import adapter.MyTaskSelAdapter;
 import customView.DividerItemDecoration;
 import customView.DividerItemExceptLastDecoration;
 import interfaces.ImyTask;
-import interfaces.Irecy;
+import interfaces.WeakObject;
 import interfaces.OnCustomItemClickListener;
 import presenter.PmyTask;
 import utils.WeakHandler;
@@ -41,7 +37,7 @@ import view.TaskDetailActivity;
  * Created by Jason on 2016/12/9.
  */
 
-public class MyTaskFragment extends LazyFragment implements ImyTask {
+public class MyTaskFragment extends LazyFragment implements ImyTask, WeakObject {
     private TaskActivity mParent;
     private XRecyclerView mRecycler;
     private MyTaskAdapter mAdapter;
@@ -74,20 +70,7 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
         super.onAttach(context);
         mParent= (TaskActivity) getActivity();
         mList=new ArrayList<>();
-        mHandler=new WeakHandler(new Irecy() {
-            @Override
-            public void doLoadData(int type) {
-                switch (type){
-                    case 0:
-                        mSkip=0;
-                        mPresenter.getData(year,month,week,mCurType,mSkip);
-                        break;
-                    case 1:
-                        mPresenter.getData(year,month,week,mCurType,mSkip);
-                        break;
-                }
-            }
-        });
+        mHandler=new WeakHandler(this);
     }
 
     @Override
@@ -262,6 +245,7 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
     @Override
     public void onError(String error) {
         mParent.onError(error);
+        mRecycler.refreshComplete();
     }
 
     @Override
@@ -296,5 +280,18 @@ public class MyTaskFragment extends LazyFragment implements ImyTask {
 //        if(resultId==RESULT_OK){
 //            mPresenter.getData(year,month,week,mCurType);
 //        }
+    }
+
+    @Override
+    public void doLoadData(int type) {
+        switch (type){
+            case 0:
+                mSkip=0;
+                mPresenter.getData(year,month,week,mCurType,mSkip);
+                break;
+            case 1:
+                mPresenter.getData(year,month,week,mCurType,mSkip);
+                break;
+        }
     }
 }

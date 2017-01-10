@@ -8,8 +8,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.example.jason.achievements.R;
 
+import application.MyApplication;
+import im.AVIMClientManager;
 import interfaces.Ilogin;
 import presenter.Plogin;
 import utils.ErrorUtil;
@@ -69,7 +75,19 @@ public class LoginActivity extends BaseActivity implements Ilogin{
     public void onResult(boolean isSuccess, String result) {
         if(isSuccess){
             Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
-            this.finish();
+            if(AVIMClientManager.getInstance().getClient()!=null){
+                AVIMClientManager.getInstance().getClient().close(null);
+            }
+            AVIMClientManager.getInstance().open(AVUser.getCurrentUser().getObjectId(), new AVIMClientCallback() {
+                @Override
+                public void done(AVIMClient avimClient, AVIMException e) {
+                    if(e==null){
+                        finish();
+                    }else {
+                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }else{
             Toast.makeText(this, result,Toast.LENGTH_SHORT).show();
         }
