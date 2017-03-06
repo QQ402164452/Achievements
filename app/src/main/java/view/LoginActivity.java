@@ -1,8 +1,11 @@
 package view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import com.example.jason.achievements.R;
 
 import application.MyApplication;
 import im.AVIMClientManager;
+import im.RealmUtils;
 import interfaces.Ilogin;
 import presenter.Plogin;
 import utils.ErrorUtil;
@@ -54,6 +58,8 @@ public class LoginActivity extends BaseActivity implements Ilogin{
             public void onClick(View v) {
                 String phone=mPhone.getText().toString();
                 String password=mPassWord.getText().toString();
+                InputMethodManager inputMethodManager= (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);//强制关闭输入法
+                inputMethodManager.hideSoftInputFromWindow(mBase.getWindowToken(),0);
                 mPlogin.LoginIn(phone,password);
             }
         });
@@ -72,9 +78,9 @@ public class LoginActivity extends BaseActivity implements Ilogin{
     }
 
     @Override
-    public void onResult(boolean isSuccess, String result) {
+    public void onResult(boolean isSuccess, final String result) {
+        hideBasePopup();
         if(isSuccess){
-            Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
             if(AVIMClientManager.getInstance().getClient()!=null){
                 AVIMClientManager.getInstance().getClient().close(null);
             }
@@ -82,15 +88,23 @@ public class LoginActivity extends BaseActivity implements Ilogin{
                 @Override
                 public void done(AVIMClient avimClient, AVIMException e) {
                     if(e==null){
+                        RealmUtils.getInstance().insertRealmUser();
+                        showToast(result);
+                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
                         finish();
                     }else {
-                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        showToast(e.getMessage());
                     }
                 }
             });
         }else{
-            Toast.makeText(this, result,Toast.LENGTH_SHORT).show();
+            showToast(result);
         }
     }
 
+    @Override
+    public void onSuccess(String str) {
+
+    }
 }

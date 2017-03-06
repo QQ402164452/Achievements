@@ -17,6 +17,7 @@ import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import im.AVIMClientManager;
 import im.MessageHandler;
+import im.RealmUtils;
 import io.realm.Realm;
 
 /**
@@ -70,6 +71,7 @@ public class MyApplication extends Application {
     public void onTerminate(){
         super.onTerminate();
         messageHandler.onDestroy();
+        RealmUtils.getInstance().closeRealm();
     }
 
     public static MyApplication getInstance(){

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.avos.avoscloud.AVUser;
 import com.example.jason.achievements.R;
 
 /**
@@ -25,7 +26,12 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(SplashActivity.this,MainActivity.class);
+                Intent intent;
+                if(AVUser.getCurrentUser()!=null){
+                    intent=new Intent(SplashActivity.this,MainActivity.class);
+                }else{
+                    intent=new Intent(SplashActivity.this,LoginActivity.class);
+                }
                 startActivity(intent);
                 finish();
             }

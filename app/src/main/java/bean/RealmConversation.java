@@ -10,12 +10,13 @@ import io.realm.annotations.RealmClass;
  */
 @RealmClass
 public class RealmConversation implements RealmModel {
-    @PrimaryKey
+
     private String id;
+    private String creator;
 
     private String name;
-    private String creator;
     private RealmUser toTarget;
+    private String toTargetId;
     private long time;
     private boolean isNew;
     private boolean isHaveMsg;
@@ -83,5 +84,14 @@ public class RealmConversation implements RealmModel {
 
     public void setToTarget(RealmUser toTarget) {
         this.toTarget = toTarget;
+        this.toTargetId=toTarget.getId();
+    }
+
+    public String getToTargetId() {
+        return toTargetId;
+    }
+
+    public void setToTargetId(String toTargetId) {
+        this.toTargetId = toTargetId;
     }
 }

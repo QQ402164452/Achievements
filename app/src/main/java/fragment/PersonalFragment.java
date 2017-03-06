@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVUser;
 import com.example.jason.achievements.R;
 
 import java.util.Collections;
@@ -59,8 +60,11 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        results=realm.where(RealmConversation.class).equalTo("isHaveMsg",true).findAll()
-                .sort("time", Sort.DESCENDING);
+        results=realm.where(RealmConversation.class).
+                equalTo("isHaveMsg",true).
+                equalTo("creator",AVUser.getCurrentUser().getObjectId()).
+                findAll().
+                sort("time", Sort.DESCENDING);
         mAdapter=new PersonalAdapter(mParent,results,true);
         mRecyclerView.setAdapter(mAdapter);
         NotificationUtil.addAllTag(results);

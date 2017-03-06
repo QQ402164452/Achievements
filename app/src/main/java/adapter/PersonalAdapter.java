@@ -33,7 +33,7 @@ public class PersonalAdapter extends RealmRecyclerViewAdapter<RealmConversation,
 
     public PersonalAdapter(@NonNull Context context, @Nullable OrderedRealmCollection<RealmConversation> data, boolean autoUpdate) {
         super(context, data, autoUpdate);
-        simpleDateFormat=new SimpleDateFormat("MM-DD HH:mm", Locale.CHINA);
+        simpleDateFormat=new SimpleDateFormat("MM-dd HH:mm", Locale.CHINA);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){

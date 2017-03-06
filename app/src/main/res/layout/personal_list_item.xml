@@ -8,8 +8,8 @@
 
     <RelativeLayout
         android:id="@+id/PersonalFragment_List_Item_Img_Group"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_centerVertical="true">
 
         <ImageView
@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/PersonalFragment_List_Item_NewIndicator"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:src="@drawable/red_circle"
             android:layout_alignParentRight="true" />
 
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/PersonalFragment_List_Item_Content"

@@ -2,7 +2,6 @@ package im;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -24,9 +23,10 @@ import bean.RealmMessage;
 import bean.RealmUser;
 import im.event.ImTypeMessageEvent;
 import io.realm.Realm;
-import io.realm.RealmList;
-import io.realm.RealmObject;
+import utils.Constants;
 import utils.NetworkUtil;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Jason on 2017/1/4.
@@ -50,7 +50,8 @@ public class MessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage> {
             if (client.getClientId().equals(clientId)) {
                 if (!message.getFrom().equals(clientId)) {//过滤掉自己发的消息
                     saveMsgAndSendEvent(message, conversation);
-                    if (NotificationUtil.isShowNotification(conversation.getConversationId())) {
+                    if (mContext.getSharedPreferences(Constants.SYS_SETTING_SHAREPREFERENCE,MODE_PRIVATE).getBoolean(Constants.NOTIFICATION_SWITCH,true)&&
+                            NotificationUtil.isShowNotification(conversation.getConversationId())) {
                         sendNotification(message, conversation);
                     }
                 }
@@ -63,33 +64,22 @@ public class MessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage> {
     }
 
     private void saveMsgAndSendEvent(final AVIMTypedMessage msg, final AVIMConversation conversation) {
-        final RealmConversation realmConversation = realm.where(RealmConversation.class).equalTo("id", conversation.getConversationId()).findFirst();
+        final RealmConversation realmConversation = realm.
+                where(RealmConversation.class).
+                equalTo("id", conversation.getConversationId()).
+                equalTo("creator",AVUser.getCurrentUser().getObjectId()).
+                findFirst();
+
         if (realmConversation == null) {
             getConversation(conversation,msg);
         }else{
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-                    RealmMessage realmMsg = realm.createObject(RealmMessage.class, msg.getMessageId());
-                    realmMsg.setContent(((AVIMTextMessage) msg).getText());
-                    realmMsg.setConversationId(msg.getConversationId());
-                    realmMsg.setDate(msg.getTimestamp());
-                    realmMsg.setSenderId(msg.getFrom());
-                    if (msg.getFrom().equals(AVUser.getCurrentUser().getObjectId())) {
-                        realmMsg.setType(0);
-                    } else {
-                        realmMsg.setType(1);
-                    }
-                    realmConversation.setTime(msg.getTimestamp());
-                    realmConversation.setNew(true);
-                    realmConversation.getMsgList().add(realmMsg);
+                    saveMsg(realmConversation,msg);
                 }
             });
-
-            ImTypeMessageEvent event = new ImTypeMessageEvent();
-            event.message = msg;
-            event.conversation = conversation;
-            EventBus.getDefault().post(event);
+            sendEvent(msg,conversation);
         }
     }
 
@@ -106,41 +96,56 @@ public class MessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage> {
                            realm.executeTransaction(new Realm.Transaction() {
                                @Override
                                public void execute(Realm realm) {
-                                   RealmMessage realmMsg = realm.createObject(RealmMessage.class, msg.getMessageId());
-                                   RealmList<RealmMessage> realmList=new RealmList<>();
-                                   realmMsg.setContent(((AVIMTextMessage) msg).getText());
-                                   realmMsg.setConversationId(msg.getConversationId());
-                                   realmMsg.setDate(msg.getTimestamp());
-                                   realmMsg.setSenderId(msg.getFrom());
-                                   if (msg.getFrom().equals(AVUser.getCurrentUser().getObjectId())) {
-                                       realmMsg.setType(0);
-                                   } else {
-                                       realmMsg.setType(1);
-                                   }
-
-                                   final RealmConversation newConversation = realm.createObject(RealmConversation.class, avObject.getObjectId());
-                                   newConversation.setName(avObject.getString("name"));
-                                   newConversation.setNew(true);
-                                   newConversation.setCreator(avObject.getString("c"));
-                                   newConversation.setHaveMsg(true);
-                                   RealmUser realmUser=realm.where(RealmUser.class).equalTo("id",msg.getFrom()).findFirst();
-                                   newConversation.setToTarget(realmUser);
-
-                                   realmList.add(realmMsg);
-                                   newConversation.setMsgList(realmList);
-                                   newConversation.setNew(true);
-                                   newConversation.setTime(msg.getTimestamp());
+                                   insertNewConversation(avObject,msg);
                                }
                            });
-                           ImTypeMessageEvent event = new ImTypeMessageEvent();
-                           event.message = msg;
-                           event.conversation = conversation;
-                           EventBus.getDefault().post(event);
+                           sendEvent(msg,conversation);
                        }
                    }
                }
            });
        }
+    }
+
+    private void insertNewConversation(final AVObject avObject, final AVIMTypedMessage msg){
+        final RealmConversation newConversation = realm.
+                createObject(RealmConversation.class);
+        newConversation.setId(avObject.getObjectId());
+        newConversation.setName(avObject.getString("name"));
+        newConversation.setNew(true);
+        newConversation.setCreator(AVUser.getCurrentUser().getObjectId());
+        newConversation.setHaveMsg(true);
+
+        RealmUser realmUser=realm.
+                where(RealmUser.class).
+                equalTo("id",msg.getFrom()).
+                findFirst();
+        newConversation.setToTarget(realmUser);
+        saveMsg(newConversation,msg);
+    }
+
+    private void saveMsg(final RealmConversation conversation,final AVIMTypedMessage msg){
+        RealmMessage realmMsg = new RealmMessage();
+        realmMsg.setId(msg.getMessageId());
+        realmMsg.setContent(((AVIMTextMessage) msg).getText());
+        realmMsg.setConversationId(msg.getConversationId());
+        realmMsg.setDate(msg.getTimestamp());
+        realmMsg.setSenderId(msg.getFrom());
+        if (msg.getFrom().equals(AVUser.getCurrentUser().getObjectId())) {
+            realmMsg.setType(0);
+        } else {
+            realmMsg.setType(1);
+        }
+        conversation.getMsgList().add(realm.copyToRealmOrUpdate(realmMsg));
+        conversation.setTime(msg.getTimestamp());
+        conversation.setNew(true);
+    }
+
+    private void sendEvent(final AVIMTypedMessage msg, final AVIMConversation conversation){
+        ImTypeMessageEvent event = new ImTypeMessageEvent();
+        event.message = msg;
+        event.conversation = conversation;
+        EventBus.getDefault().post(event);
     }
 
     private void sendNotification(AVIMTypedMessage message, AVIMConversation conversation) {

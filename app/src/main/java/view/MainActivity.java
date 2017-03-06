@@ -1,8 +1,10 @@
 package view;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.example.jason.achievements.R;
 
 import fragment.AppFragment;
@@ -20,6 +23,7 @@ import fragment.CenterFragment;
 import fragment.ContactFragment;
 import fragment.PersonalFragment;
 import fragment.SocialFragment;
+import utils.CleanLeakUtils;
 import utils.PermissionCodes;
 
 /**
@@ -42,7 +46,6 @@ public class MainActivity extends BaseActivity{
 
     @Override
     protected void initPre() {
-
     }
 
     public void initView(){
@@ -148,6 +151,22 @@ public class MainActivity extends BaseActivity{
         showBasePopup(view,mAppBtn, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
                 , Gravity.CENTER,0,0);
         isShowConfirn=true;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(AVUser.getCurrentUser()==null){
+            Intent intent=new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onDestroy(){
+        CleanLeakUtils.fixInputMethodManagerLeak(MainActivity.this);
+        super.onDestroy();
     }
 
 }

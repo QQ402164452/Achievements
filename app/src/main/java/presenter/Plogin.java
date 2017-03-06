@@ -21,6 +21,7 @@ public class Plogin  {
 
     public void LoginIn(String phone,String password){
         if(NetworkUtil.isNewWorkAvailable()){
+            mIlogin.showLoading();
             if(phone.isEmpty()){
                 mIlogin.onResult(false,"手机号不能为空");
                 return;

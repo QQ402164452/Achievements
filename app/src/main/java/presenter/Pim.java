@@ -1,13 +1,10 @@
 package presenter;
 
-import android.util.Log;
-
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.AVIMMessage;
-import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMMessagesQueryCallback;
@@ -24,7 +21,6 @@ import im.NotificationUtil;
 import interfaces.Iim;
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmResults;
 import utils.NetworkUtil;
 
 /**
@@ -42,7 +38,9 @@ public class Pim {
     }
 
     public RealmUser getToUser(String toUserId){
-        return realm.where(RealmUser.class).equalTo("id",toUserId).findFirst();
+        return realm.where(RealmUser.class).
+                equalTo("id",toUserId).
+                findFirst();
     }
 
     public void createConversation(final AVUser me, final RealmUser toUser){
@@ -55,14 +53,19 @@ public class Pim {
                             if(e==null){
                                 mConversation=avimConversation;
                                 NotificationUtil.addTag(mConversation.getConversationId());
-                                final RealmConversation conversation=realm.where(RealmConversation.class).equalTo("id",mConversation.getConversationId()).findFirst();
+                                final RealmConversation conversation=realm.
+                                        where(RealmConversation.class).
+                                        equalTo("id",mConversation.getConversationId()).
+                                        equalTo("creator",me.getObjectId()).
+                                        findFirst();
+
                                 if(conversation==null){
                                     final RealmConversation newConversation=new RealmConversation();
                                     newConversation.setId(mConversation.getConversationId());
                                     newConversation.setName(mConversation.getName());
                                     newConversation.setNew(false);
                                     newConversation.setTime(mConversation.getCreatedAt().getTime());
-                                    newConversation.setCreator(mConversation.getCreator());
+                                    newConversation.setCreator(me.getObjectId());
                                     newConversation.setToTarget(toUser);
                                     newConversation.setHaveMsg(false);
                                     realm.executeTransaction(new Realm.Transaction() {
@@ -87,7 +90,9 @@ public class Pim {
                     });
         }else{
             mView.showToast(NetworkUtil.tip);
-            RealmConversation conversation=realm.where(RealmConversation.class).equalTo("toTargetId",toUser.getId()).findFirst();
+            RealmConversation conversation=realm.where(RealmConversation.class).
+                    equalTo("toTargetId",toUser.getId()).
+                    findFirst();
             if(conversation!=null){
                 mView.setCacheMsgList(conversation.getMsgList());
             }
@@ -105,8 +110,14 @@ public class Pim {
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
-                                RealmConversation conversation=realm.where(RealmConversation.class).equalTo("id",mConversation.getConversationId()).findFirst();
-                                RealmMessage realmMsg=realm.createObject(RealmMessage.class,msg.getMessageId());
+                                RealmConversation conversation=realm.
+                                        where(RealmConversation.class).
+                                        equalTo("id",mConversation.getConversationId()).
+                                        equalTo("creator",AVUser.getCurrentUser().getObjectId()).
+                                        findFirst();
+
+                                RealmMessage realmMsg=new RealmMessage();
+                                realmMsg.setId(msg.getMessageId());
                                 realmMsg.setContent(msg.getText());
                                 realmMsg.setConversationId(msg.getConversationId());
                                 realmMsg.setDate(msg.getTimestamp());
@@ -116,9 +127,9 @@ public class Pim {
                                 }else{
                                     realmMsg.setType(1);
                                 }
+                                conversation.getMsgList().add(realm.copyToRealmOrUpdate(realmMsg));
                                 conversation.setHaveMsg(true);
                                 conversation.setTime(msg.getTimestamp());
-                                conversation.getMsgList().add(realmMsg);
                                 mView.onSendSuccess(msg);
                             }
                         });
@@ -133,7 +144,13 @@ public class Pim {
     }
 
     public void getCacheMsg(){
-        RealmList<RealmMessage> msgList=realm.where(RealmConversation.class).equalTo("id",mConversation.getConversationId()).findFirst().getMsgList();
+        RealmList<RealmMessage> msgList=realm.
+                where(RealmConversation.class).
+                equalTo("id",mConversation.getConversationId()).
+                equalTo("creator",AVUser.getCurrentUser().getObjectId()).
+                findFirst().
+                getMsgList();
+
         if(msgList.size()>0){
             mView.setCacheMsgList(msgList);
         }else {
@@ -150,14 +167,19 @@ public class Pim {
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
-//                                realm.where(RealmMessage.class).findAll().deleteAllFromRealm();
-                                RealmConversation conversation=realm.where(RealmConversation.class).equalTo("id",mConversation.getConversationId()).findFirst();
+                                RealmConversation conversation=realm.
+                                        where(RealmConversation.class).
+                                        equalTo("id",mConversation.getConversationId()).
+                                        equalTo("creator",AVUser.getCurrentUser().getObjectId()).
+                                        findFirst();
+
                                 RealmList<RealmMessage> msgList=new RealmList<>();
                                 if(list.size()>0){
                                     conversation.setHaveMsg(true);
                                     for(int i=0;i<list.size();i++){
                                         AVIMMessage msg=list.get(i);
-                                        RealmMessage realmMsg=realm.createObject(RealmMessage.class,msg.getMessageId());
+                                        RealmMessage realmMsg=new RealmMessage();
+                                        realmMsg.setId(msg.getMessageId());
                                         if(msg instanceof AVIMTextMessage){
                                             realmMsg.setContent(((AVIMTextMessage)msg).getText());
                                         }
@@ -169,15 +191,14 @@ public class Pim {
                                         }else{
                                             realmMsg.setType(1);
                                         }
-                                        msgList.add(realmMsg);
+                                        msgList.add(realm.copyToRealmOrUpdate(realmMsg));
                                     }
                                     conversation.setTime(list.get(list.size()-1).getTimestamp());
                                 }
                                 conversation.setMsgList(msgList);
+                                mView.setNewMsgList(conversation.getMsgList());
                             }
                         });
-                        RealmConversation conversation=realm.where(RealmConversation.class).equalTo("id",mConversation.getConversationId()).findFirst();
-                        mView.setNewMsgList(conversation.getMsgList());
                     }else{
                         mView.onError(e.getMessage());
                     }

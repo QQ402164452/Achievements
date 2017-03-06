@@ -43,7 +43,10 @@ public class Pcontact {
     }
 
     public void getCacheMsg(){
-        RealmResults<RealmUser> realmResults=realm.where(RealmUser.class).findAll();
+        RealmResults<RealmUser> realmResults=realm.
+                where(RealmUser.class).
+                notEqualTo("id",AVUser.getCurrentUser().getObjectId()).
+                findAll();
         mView.setCacheUserList(realmResults);
     }
 
@@ -55,17 +58,14 @@ public class Pcontact {
                 public void done(final List<AVUser> list, AVException e) {
                     if(e==null){
                         if(list.size()>0){
-                            list.remove(AVUser.getCurrentUser());
                             Collections.sort(list,new PinYinComparator());
-
                             realm.executeTransaction(new Realm.Transaction() {
                                 @Override
                                 public void execute(Realm realm) {
-                                    RealmResults<RealmUser> realmResults=realm.where(RealmUser.class).findAll();
-                                    realmResults.deleteAllFromRealm();
                                     for(int i=0;i<list.size();i++){
                                         AVUser user=list.get(i);
-                                        RealmUser realmUser=realm.createObject(RealmUser.class,user.getObjectId());
+                                        RealmUser realmUser=new RealmUser();
+                                        realmUser.setId(user.getObjectId());
                                         realmUser.setName(user.getString("name"));
                                         realmUser.setCompany(user.getString("company"));
                                         realmUser.setDepartment(user.getString("department"));
@@ -83,8 +83,12 @@ public class Pcontact {
                                         }else{
                                             realmUser.setPortrait("null");
                                         }
+                                        realm.copyToRealmOrUpdate(realmUser);
                                     }
-                                    realmResults=realm.where(RealmUser.class).findAll();
+                                    RealmResults<RealmUser> realmResults=realm.
+                                            where(RealmUser.class).
+                                            notEqualTo("id",AVUser.getCurrentUser().getObjectId()).
+                                            findAll();
                                     mView.updateUserDate(realmResults);
                                 }
                             });

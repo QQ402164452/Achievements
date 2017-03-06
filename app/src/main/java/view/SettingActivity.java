@@ -2,6 +2,7 @@ package view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -73,8 +74,11 @@ public class SettingActivity extends BaseActivity {
                 Intent intent;
                 switch (position){
                     case 0:
+                        intent=new Intent(SettingActivity.this,SysSettingActivity.class);
+                        startActivity(intent);
                         break;
                     case 1:
+                        Toast.makeText(SettingActivity.this, "暂未最新版本", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
                         intent=new Intent(SettingActivity.this,AboutActivity.class);
